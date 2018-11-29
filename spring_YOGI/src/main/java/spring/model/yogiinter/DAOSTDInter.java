@@ -1,6 +1,7 @@
 package spring.model.yogiinter;
  
 import java.util.List;
+
 import java.util.Map;
  
 public interface DAOSTDInter {

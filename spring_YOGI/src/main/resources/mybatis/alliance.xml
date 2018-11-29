@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="alliance">
+	<insert id="create" parameterType="AllianceDTO">
+		insert into alliance(anum,content,aname,fname,sname,hname)
+		values(seq_anum.nextval,#{content},#{aname},#{fname},#{sname},#{hname})
+
+	</insert>
+
+	<select id="read" parameterType="int" resultType="AllianceDTO">
+		select
+		anum,content,aname,fname,hname
+		from alliance
+		where anum=#{anum}
+
+		
+	</select>
+
+	<update id="update" parameterType="AllianceDTO">
+		update Alliance
+		set 
+		content= #{content} ,
+		aname= #{aname}	
+		where anum=#{anum}
+	</update>
+
+	<delete id="delete">
+		delete from alliance
+		where anum = #{anum}
+	</delete>
+	
+	<select id="list" resultType="AllianceDTO" parameterType="Map">
+		select fname, content, aname, hname, r
+		from(
+			select fname, content,aname, hname,rownum as r
+			from(
+				select fname, content, aname, hname
+				from alliance
+				<where>
+					<choose>
+						<when test="col=='hname'">
+							hname like '%'||#{word}||'%'
+						</when>
+					</choose>
+				</where>
+		ORDER BY anum DESC
+				)	
+			)                                                                            
+   <![CDATA[                                                                        
+   where r>=#{sno} and r<=#{eno}  
+   ]]>
+	</select>	
+	
+	
+	<select id="total" parameterType="Map" resultType="int">
+		select count(*) cnt from alliance
+		<where>
+			<choose>
+				<when test="col=='aname'">
+					aname like '%'||#{word}||'%'
+				</when>
+				
+			</choose>
+		</where>
+	</select>
+		
+	
+</mapper>
+

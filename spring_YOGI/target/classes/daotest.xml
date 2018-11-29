@@ -41,6 +41,9 @@
 	<bean id= "member" class="spring.model.member.MemberDAO"
 		p:mybatis-ref="sqlSession"
 	/>
+	<bean id= "alliance" class="spring.model.alliance.AllianceDAO"
+		p:mybatis-ref="sqlSession"
+	/>
 	
 
 
