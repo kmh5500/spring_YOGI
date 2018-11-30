@@ -15,7 +15,7 @@
         <description>New이미지 출력</description> 
         <name>newImg</name>  <!-- <name>태그는 EL에서 사용할 함수의 이름 --> 
         <function-class>
-        spring.utility.webtest.Utility
+        spring.utility.yogi.Utility
         </function-class> 
         <function-signature>boolean compareDay(java.lang.String) 
         </function-signature> 
@@ -23,7 +23,7 @@
      <function>
     	<description>직업명 출력</description>
     	<name>jobName</name>
-    	<function-class>spring.utility.webtest.Utility</function-class>
+    	<function-class>spring.utility.yogi.Utility</function-class>
     	<function-signature>java.lang.String getCodeValue(java.lang.String)</function-signature>
     
     </function>
@@ -33,7 +33,7 @@
         <description>댓글수 보여주기</description> 
         <name>rcount</name>
         <function-class>
-            spring.utility.webtest.Utility
+            spring.utility.yogi.Utility
         </function-class> 
         <function-signature>
             int rcount(int,spring.model.bbs.ReplyDAO ) 

@@ -24,7 +24,7 @@ public class InfoDAO implements IInfoDAO {
 	}
 
 	@Override
-	public List list(Map map) throws Exception {
+	public List list(Map map) {
 		// TODO Auto-generated method stub
 		return mysql.selectList("info.list", map);
 	}
