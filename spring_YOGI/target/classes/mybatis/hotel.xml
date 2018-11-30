@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hotel">
+	<insert id="create" parameterType="HotelDTO">
+		insert into hotel(hnum, hname,
+		hphone, hemail, hzipcode, haddress1, haddress2, hfname, hinfo, hcheckin, hcheckout, hstar)
+		values(seq_hnum.nextval, #{hname},
+		#{hphone}, #{hemail}, #{hzipcode},
+		#{haddress1}, #{haddress2}, #{hfname}, #{hinfo}, #{hcheckin}, #{hcheckout}, #{hstar})
+	</insert>
+
+	<select id="read" parameterType="HotelDTO">
+		select hnum, hname, hphone,
+		hemail, hzipcode, haddress1, haddress2, hfname, hinfo
+		from hotel
+		where
+		hnum = #{hnum}
+	</select>
+
+	<update id="update" parameterType="HotelDTO">
+		update hotel
+		set hphone = #{hphone},
+		hemail = #{hemail},
+		hzipcode = #{hzipcode},
+		haddress1 = #{haddress1},
+		haddress2 = #{haddress2},
+		hfname = #{hfname},
+		hinfo = #{hinfo},
+		hcheckin = #{hcheckin},
+		hcheckout = #{hcheckout}
+		where hnum = #{hnum}
+	</update>
+
+	<delete id="delete">
+		delete from hotel
+		where hnum = #{hnum}
+	</delete>
+	
+	<select id="list" resultType="HotelDTO" parameterType="Map">
+		select hnum, hname, hfname, r
+		from(
+			select hnum, hname, hfname, rownum as r
+			from(
+				select hnum, hname, hfname
+				from hotel
+				<where>
+					<choose>
+						<when test="col=='hname'">
+							name like '%'||#{word}||'%'
+						</when>
+					</choose>
+				</where>
+		ORDER BY hnum DESC
+				)	
+			)                                                                            
+   <![CDATA[                                                                        
+   where r>=#{sno} and r<=#{eno}  
+   ]]>
+	</select>	
+	
+	
+	<select id="total" parameterType="Map" resultType="int">
+		select count(*) cnt from hotel
+		<where>
+			<choose>
+				<when test="col=='name'">
+					name like '%'||#{word}||'%'
+				</when>
+				<when test="col=='subject'">
+					subject like '%'||#{word}||'%'
+				</when>
+				<when test="col=='content'">
+					content like '%'||#{word}||'%'
+				</when>
+				<otherwise>
+					subject like '%'||#{word}||'%'
+					or
+					content like '%'||#{word}||'%'
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+		
+	
+</mapper>
+

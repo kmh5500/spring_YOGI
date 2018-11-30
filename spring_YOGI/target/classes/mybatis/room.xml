@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="room">
+	<insert id="create" parameterType="RoomDTO">
+		insert into room(rnum, rtype,
+		rprice, rrate, acperson, adperson, rfname, rinfo, hnum)
+		values(seq_rnum.nextval, #{rtype},
+		#{rprice}, #{rrate}, #{acperson},
+		#{adperson}, #{rfname}, #{rinfo}, #{hnum})
+	</insert>
+
+	<select id="read" parameterType="RoomDTO">
+		select rnum, rtype, rprice, rrate,
+		acperson, adperson, rfname, rinfo
+		from room
+		where hnum = #{hnum} and rnum = #{rnum}
+	</select>
+
+	<update id="update" parameterType="RoomDTO">
+		update room
+		set rtype = #{rtype},
+			rprice = #{rprice},
+			rrate = #{rrate},
+			acperson = #{acperson},
+			adperson = #{adperson},
+			rfname = #{rfname},
+			rinfo = #{rinfo}
+		where hnum = #{hnum} and rnum = #{rnum}
+	</update>
+
+	<select id="list" resultType="Map" parameterType="Map">
+		select rty, rpr, rra, rfn, hna, rn
+		from(
+			select rty, rpr, rra, rfn, hna, rownum as rn
+			from (
+				select r.rtype as rty, r.rprice as rpr, r.rrate as rra, r.rfname as rfn, h.hname as hna
+				from room r, hotel h
+				<where> r.hnum=h.hnum
+		        and r.rnum not in(
+		                select rnum
+		                from room r , booking_room b
+		                where r.rnum = b.rnum_FK
+		                <![CDATA[ 
+		                and ( to_date(b.endDate)>to_date(#{sdate}) and to_date(b.startDate)<=to_date(#{edate}))
+		                ]]>
+		        ) 
+	            and
+				<choose>
+					<when test="type=='스탠다드룸'">
+						r.rtype = #{type}
+					</when>
+					<when test="type=='디럭스룸'">
+						r.rtype = #{type}
+					</when>
+					<when test="type=='패밀리룸'">
+						r.rtype = #{type}
+					</when>
+					<when test="type=='스위트룸'">
+						r.rtype = #{type}
+					</when>
+				</choose>
+				<![CDATA[ 
+				and r.rprice * (1 - r.rrate) >= #{srprice}  
+	            and r.rprice * (1 - r.rrate) <= #{erprice}
+           		and r.acperson + r.adperson >= #{rperson}
+           		]]>
+           		</where>
+			ORDER BY r.rnum DESC
+			)
+		)                                                                            
+   <![CDATA[                                                                        
+   where r>=#{sno} and r<=#{eno}  
+   ]]>
+	</select>
+
+
+
+
+	<select id="total" parameterType="Map" resultType="int">
+		select count(*) cnt from room r, hotel h
+		<where> r.hnum=h.hnum
+		        and r.rnum not in(
+		                select rnum
+		                from room r , booking_room b
+		                where r.rnum = b.rnum_FK
+		                <![CDATA[ 
+		                and ( to_date(b.endDate)>to_date(#{sdate}) and to_date(b.startDate)<=to_date(#{edate}))
+		                ]]>
+		        ) 
+	            and
+				<choose>
+					<when test="type=='스탠다드룸'">
+						r.rtype = #{type}
+					</when>
+					<when test="type=='디럭스룸'">
+						r.rtype = #{type}
+					</when>
+					<when test="type=='패밀리룸'">
+						r.rtype = #{type}
+					</when>
+					<when test="type=='스위트룸'">
+						r.rtype = #{type}
+					</when>
+				</choose>
+				<![CDATA[ 
+				and r.rprice >= #{srprice}  
+	            and r.rprice <= #{erprice}
+           		and r.acperson = #{rperson}
+           		]]>
+           		</where>
+	</select>
+
+
+</mapper>
+
