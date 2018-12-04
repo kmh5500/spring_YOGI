@@ -12,8 +12,8 @@
 
 <script type="text/javascript">
 function infoRead(informnum){
-	var url = "read";
-	url = url + "?informnum=" informnum;
+	var url = "info/read";
+	url = url + "?informnum="+ informnum;
 	url = url + "&col=${col}";
 	url = url + "&word=${word}";
 	url = url + "&nowPage=${nowPage}";
@@ -45,7 +45,7 @@ function infoRead(informnum){
 			</select> <input type="text" name="word" value="${word}">
 
 			<button>검색</button>
-			<button type="button" onclick="location.href='./create'">등록</button>
+			<button type="button" onclick="location.href='./info/create'">등록</button>
 		</form>
 
 	</div>

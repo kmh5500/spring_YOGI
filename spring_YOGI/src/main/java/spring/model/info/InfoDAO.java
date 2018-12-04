@@ -15,7 +15,7 @@ public class InfoDAO implements IInfoDAO {
 	private SqlSessionTemplate mysql;
 	
 	@Override
-	public boolean create(Object dto) throws Exception {
+	public boolean create(Object dto)  {
 		// TODO Auto-generated method stub
 		boolean flag=false;
 		int cnt = mysql.insert("info.create", dto);
@@ -30,14 +30,14 @@ public class InfoDAO implements IInfoDAO {
 	}
 
 	@Override
-	public Object read(Object pk) throws Exception {
+	public Object read(Object pk)  {
 		// TODO Auto-generated method stub
 		
 		return mysql.selectOne("info.read", pk);
 	}
 
 	@Override
-	public boolean update(Object dto) throws Exception {
+	public boolean update(Object dto)  {
 		// TODO Auto-generated method stub
 		boolean flag=false;
 		int cnt = mysql.update("info.update", dto);
@@ -47,7 +47,7 @@ public class InfoDAO implements IInfoDAO {
 	}
 
 	@Override
-	public boolean delete(Object pk) throws Exception {
+	public boolean delete(Object pk)  {
 		// TODO Auto-generated method stub
 		boolean flag= false;
 		int cnt = mysql.delete("info.delete", pk);
@@ -56,7 +56,7 @@ public class InfoDAO implements IInfoDAO {
 	}
 
 	@Override
-	public int total(Map map) throws Exception {
+	public int total(Map map) {
 		// TODO Auto-generated method stub
 		return mysql.selectOne("info.total", map);
 	}

@@ -14,7 +14,7 @@
     </definition>   
     <definition name="/info/create" extends="main"> 
         <put-attribute name="title" value=" info생성" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/info/createForm.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/info/create.jsp" /> 
     </definition>   
     <definition name="/info/read" extends="main"> 
         <put-attribute name="title" value=" info조회" ></put-attribute> 
@@ -28,12 +28,12 @@
     
       <definition name="/info/update" extends="main"> 
         <put-attribute name="title" value="info 수정" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/info/updateForm.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/info/update.jsp" /> 
     </definition> 
       
         <definition name="/info/delete" extends="main"> 
         <put-attribute name="title" value="board 삭제" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/info/deleteForm.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/info/delete.jsp" /> 
     </definition> 
     
     

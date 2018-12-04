@@ -16,8 +16,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<update id="update" parameterType="infoDTO" >
 	update info 
-    set title=#{name}, 
-		content= #{content}           
+    set title=#{title}, 
+		content= #{content}         
+		wname= #{wname}  
 		
 		where informnum= #{informnum}                             
 

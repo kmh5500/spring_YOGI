@@ -26,10 +26,10 @@
 
 
 
-<!-- 	<!-- 하단 메뉴 시작 --> -->
+	<!-- 하단 메뉴 시작 --> 
 <%-- 	<tiles:insertAttribute name="footer"> --%>
 <%-- 	</tiles:insertAttribute> --%>
-<!-- 	<!-- 하단 메뉴 끝 --> -->
+ 	<!-- 하단 메뉴 끝 -->
 
 
 </body>

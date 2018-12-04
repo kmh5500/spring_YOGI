@@ -7,9 +7,11 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import spring.model.info.InfoDAO;
 import spring.model.info.InfoDTO;
@@ -51,15 +53,69 @@ public class InfoController {
 		map.put("eno", eno);
 
 		List<InfoDTO> infoList=infoDao.list(map);
+		model.addAttribute("list", infoList);
 		
 		return "/info";
 	}
 	
-	@RequestMapping("/info/create")
+	@RequestMapping(value="info/create",method=RequestMethod.GET)
 	public String create() {
 		
 		
 		return "/info/create";
+	}
+	@RequestMapping(value="/info/create",method=RequestMethod.POST)
+	public String create(InfoDTO infoDto,Model model,HttpServletRequest request) {
+		
+		boolean flag = infoDao.create(infoDto);
+		if(flag) {
+			return "redirect:/info";
+		}else {
+			
+		}
+		
+		return "/info";
+	}
+	@RequestMapping("/info/read")
+	public String read(int informnum,HttpServletRequest request,Model model) {
+		InfoDTO  infoDto = (InfoDTO) infoDao.read(informnum);
+		infoDto.setContent(infoDto.getContent().replaceAll("\r\n","<br>"));
+		model.addAttribute("dto", infoDto);
+		
+		return "/info/read";
+	}
+	@RequestMapping(value="/info/update",method=RequestMethod.GET)
+	public String update(int informnum,Model model,HttpServletRequest request) {
+		
+		InfoDTO infoDto = (InfoDTO) infoDao.read(informnum);
+		model.addAttribute("dto", infoDto);
+		
+	return "/info/update";	
+	}
+	
+	@RequestMapping(value="/info/update",method=RequestMethod.POST)
+	public String update(InfoDTO infoDto,Model model,HttpServletRequest request) {
+		boolean flag = infoDao.update(infoDto);
+		if(flag) {
+			model.addAttribute("informnum", infoDto.getInformnum());
+			model.addAttribute("col", request.getParameter("col"));
+			model.addAttribute("word", request.getParameter("word"));
+			model.addAttribute("nowPage", request.getParameter("nowPage"));
+			return "redirect:/info/read";
+		
+		}
+		else {
+			
+			return "/error";
+		}
+	}
+	
+	@RequestMapping(value="/info/delete",method=RequestMethod.GET)
+	public String delete(int informnum) {
+		
+		boolean flag = infoDao.delete(informnum);
+		
+		return "/info/delete";
 	}
 	
 }
