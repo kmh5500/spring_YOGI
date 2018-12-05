@@ -8,15 +8,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="create" parameterType="MemberDTO">
 	         
     INSERT INTO member(id, name, email, grade, pass, phone) 
-    VALUES (#{id},#{name} , #{email}, #{grade} , #{pass} , #{phone} )
+    VALUES (#{id},#{name,jdbcType=VARCHAR} , #{email}, #{grade} , #{pass} , #{phone} )
 
 	                                       
      </insert> 
      
      <select id="read" resultType="MemberDTO" parameterType="String">
-		<!-- num ,name, subject ,content, count, to_char(regdate, 'yyyy-mm-dd)regdate, 
-			ip, filename, filesize -->
-		select * from Member
+	
+		select id,name,email,phone from member
 		where id = #{id}
 	</select>  
 
@@ -119,6 +118,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	select count(*) from member
 	where email = #{email}
+	</select>
+	
+	<select id="loginCheck" parameterType="Map" resultType="int">
+	
+	select count(*) from member 
+	where id = #{id} 
+	and pass= #{pass} 
+	</select>
+	
+	<select id="getGrade" parameterType="String" resultType="String">
+	
+	select grade from member
+	where id = #{id}
+	
 	</select>
 	
 

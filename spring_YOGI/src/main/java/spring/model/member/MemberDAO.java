@@ -122,4 +122,16 @@ public class MemberDAO implements IMemberDAO{
 		
 	}
 
+	@Override
+	public int loginCheck(Map map) {
+		// TODO Auto-generated method stub
+		return mysql.selectOne("member.loginCheck", map);
+	}
+
+	@Override
+	public String getGrade(String id) {
+		// TODO Auto-generated method stub
+		return mysql.selectOne("member.getGrade", id);
+	}
+
 }

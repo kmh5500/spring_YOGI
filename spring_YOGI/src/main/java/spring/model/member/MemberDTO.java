@@ -8,6 +8,7 @@ public class MemberDTO {
 	private String pass;
 	private String phone;
 	private int bcnt;
+	
 	public String getId() {
 		return id;
 	}
