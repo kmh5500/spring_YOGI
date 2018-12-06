@@ -25,6 +25,14 @@
         <put-attribute name="title" value=" member조회" ></put-attribute> 
         <put-attribute name="body" value="/WEB-INF/views/member/read.jsp" /> 
     </definition> 
+    <definition name="/member/findid" extends="main"> 
+        <put-attribute name="title" value=" id찾기" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/member/findid.jsp" /> 
+    </definition> 
+    <definition name="/member/sendid" extends="main"> 
+        <put-attribute name="title" value=" id찾기" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/member/sendid.jsp" /> 
+    </definition> 
     
     
     

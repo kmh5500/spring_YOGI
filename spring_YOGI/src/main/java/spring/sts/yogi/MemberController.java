@@ -23,6 +23,23 @@ public class MemberController {
 	@Autowired
 	private MemberDAO memberdao;
 	
+	@RequestMapping(value="/member/findid")
+	public String findid() {
+		return "/member/findid";
+	}
+	
+	@RequestMapping(value="/member/id")
+	public String sendid(String email, Model model) {
+		boolean flag = false;
+		
+		String findId = memberdao.findid(email);
+		if(findId!=null) {
+			flag = true;
+		}
+		model.addAttribute("flag", flag);
+		return "/member/sendid";
+		
+	}
 	
 	
 	@RequestMapping(value="/member/login" , method=RequestMethod.GET)

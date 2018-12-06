@@ -37,7 +37,8 @@
   
   
   <DIV class='bottom'>
-  <input type="button" value='ID/Passwd 찾기' onclick="location.href='./idpwfind'">
+  <input type="button" value='ID 찾기' onclick="location.href='./findid'">
+  <input type="button" value='/Passwd 찾기' onclick="location.href='./idpwfind'">
     <input type='submit' value='로그인'>
     <input type='button' value='회원가입' 
     onclick="location.href='/member/agree'">

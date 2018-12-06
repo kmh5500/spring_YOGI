@@ -134,4 +134,10 @@ public class MemberDAO implements IMemberDAO{
 		return mysql.selectOne("member.getGrade", id);
 	}
 
+	@Override
+	public String findid(String email) {
+		// TODO Auto-generated method stub
+		return mysql.selectOne("member.findid", email);
+	}
+
 }
