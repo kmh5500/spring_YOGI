@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="booking">
+
+<insert id="create" parameterType="BookingDTO">
+INSERT INTO booking_affiliation(
+b_num,b_time,b_phone,b_name,b_head,b_email,b_id,af_num
+)
+VALUES(
+SEQ_NO.NEXTVAL,#{b_time},#{b_phone},
+#{b_name},#{b_head},#{b_email},#{b_id},#{af_num})
+</insert>
+
+<select id="read" resultType="BookingDTO" parameterType="int">
+SELECT * FROM booking_affiliation
+WHERE b_num = #{b_num}
+
+</select>
+
+<update id="update" parameterType="BookingDTO">
+UPDATE booking_affiliation SET 
+b_time = #{b_time},
+b_phone = #{b_phone},
+b_name = #{b_name},
+b_head = #{b_head}
+</update>
+
+<delete id="delete" parameterType="int">
+DELETE FROM booking_affiliation
+WHERE b_num = #{b_num}
+</delete>
+
+<select id="list" parameterType="Map" resultType="BookingDTO">
+
+SELECT  B_NUM, B_ID, B_NAME, B_TIME, B_HEAD, b_date,b_phone,af_num, b_email,r
+	from(
+		SELECT B_NUM, B_ID, B_NAME, B_TIME, B_HEAD, b_date,b_phone,b_email,af_num, rownum as r
+from(
+SELECT B_NUM, B_ID, B_NAME, B_TIME, B_HEAD,b_phone,b_email, af_num,to_char(b_date,'yyyy-mm-dd') as b_date
+FROM
+        booking_affiliation        
+        ORDER BY B_NUM DESC
+        )
+        <![CDATA[
+        )where r>=#{sno} and r<=#{eno}
+        ]]>
+</select>
+
+<select id="total" parameterType="Map" resultType="int">
+		select count(*) from booking_affiliation 
+		<where>
+			<choose>
+				<when test="col=='b_name'">
+					b_name like '%'||#{word}||'%'
+				</when>
+				<when test="col=='b_phone'">
+					b_phone like '%'||#{word}||'%'
+				</when>
+			</choose>
+		</where>
+
+	</select>
+
+</mapper>
+
