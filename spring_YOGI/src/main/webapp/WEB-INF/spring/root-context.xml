@@ -58,6 +58,7 @@
             <list> 
             	<value>/WEB-INF/spring/member.xml</value> 
                 <value>/WEB-INF/spring/info.xml</value> 
+                <value>/WEB-INF/spring/alliance.xml</value> 
               
             </list> 
         </property> 

@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jQuery UI Datepicker</title>
+<link type="text/css" href="/ui/ui.all.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/ui/ui.core.js"></script>
+<script type="text/javascript" src="/ui/effects.core.js"></script>
+<script type="text/javascript" src="/ui/effects.blind.js"></script>
+<script type="text/javascript" src="/ui/effects.drop.js"></script>
+<script type="text/javascript" src="/ui/effects.explode.js"></script>
+<script type="text/javascript" src="/ui/ui.datepicker.js"></script>
+<style>
+body {font-size: 62.5%; font-family:"Dotum", "Tahoma";}
+.body {width:440px; height:280px; border:1px solid #CCCCCC; padding:10px; background-color:#FAFDE2}
+.demo {width:330px; border:1px solid #CCCCCC; padding:10px; background-color:#FFFFFF}
+.text {font-size:12px; margin-right:4px; width:80px; line-height:20px;}
+.datepicker_input1 {border:1px solid #999999; margin-right:4px; width:70px;}
+.datepicker_input2 {border:1px solid #999999; margin-right:4px; width:70px;}
+.datepicker1_div {margin-right:10px; float:left;}
+</style>
+<script type="text/javascript">
+$.datepicker.setDefaults({
+    //monthNames: ['년 1월','년 2월','년 3월','년 4월','년 5월','년 6월','년 7월','년 8월','년 9월','년 10월','년 11월','년 12월'],
+    //dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+    //showMonthAfterYear:true,
+    dateFormat: 'yy-mm-dd',
+    buttonImageOnly: true,
+    buttonText: "달력",
+    buttonImage: "/ui/images/calendar.gif"
+});
+$(document).ready(function(){
+    $("#datepicker2").val($.datepicker.formatDate($.datepicker.ATOM, new Date(2009, 1 - 1, 18)));
+    $("#datepicker1").datepicker({
+        inline: true,
+        defaultDate: new Date(2009, 1 - 1, 18),
+        onSelect: function(date) { $("#datepicker2").val(date); }
+    })
+    $("#datepicker2").datepicker({
+        defaultDate: new Date(2009, 1 - 1, 27),
+        showOn: "both", // focus, button, both
+        showAnim: "blind", // blind, clip, drop, explode, fold, puff, slide, scale, size, pulsate, bounce, highlight, shake, transfer
+        showOptions: {direction: 'horizontal'},
+        duration: 200
+    })
+    $("#datepicker3").datepicker({
+        defaultDate: new Date(2009, 1 - 1, 28),
+        showOn: "both", // focus, button, both
+        showAnim: "drop", // blind, clip, drop, explode, fold, puff, slide, scale, size, pulsate, bounce, highlight, shake, transfer
+        showOptions: {direction: 'horizontal'},
+        duration: 200
+    })
+    $("#datepicker4").datepicker({
+        defaultDate: new Date(2009, 1 - 1, 29),
+        showOn: "button", // focus, button, both
+        showAnim: "explode",
+        showOptions: {pieces: 4},
+        duration: 500
+    })
+    $(".datepicker_input2").datepicker({
+        defaultDate: new Date(2009, 1 - 1, 30),
+        showOn: "both", // focus, button, both
+        showAnim: "show", // show, fadeIn, slideDown
+        duration: 200
+    })
+});
+</script>
+</head>
+<body>
+<div class="body">
+<div class="demo">
+<div id="datepicker1" class="datepicker1_div" /></div>
+<span class="text">날짜</span> <input type="text" id="datepicker2" class="datepicker_input1"><br />
+<span class="text">날짜</span> <input type="text" id="datepicker3" class="datepicker_input1"><br />
+<span class="text">날짜</span> <input type="text" id="datepicker4" class="datepicker_input1"><br />
+<span class="text">날짜</span> <input type="text" class="datepicker_input2"><br />
+</div>
+<br />
+<span class="text">
+jQuery UI Datepicker<br />
+jQuery UI 날짜 입력기<br />
+jQuery UI Calendar, 달력<br />
+</span>
+</div>
+</body>
+</html>

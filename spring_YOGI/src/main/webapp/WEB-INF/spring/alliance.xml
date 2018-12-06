@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE  tiles-definitions PUBLIC 
+    "-//Aapche Software Foundation//DTD Tiles Configuration 2.0//EN" 
+    "http://tiles.apache.org/dtds/tiles-config_2_0.dtd"> 
+
+<tiles-definitions> 
+    
+     <definition name="/alliance/create" extends="main"> 
+        <put-attribute name="title" value="제휴 등록" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/alliance/createForm.jsp" /> 
+    </definition>
+    
+    <definition name="/alliance/read" extends="main"> 
+        <put-attribute name="title" value=" 제휴 정보" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/alliance/read.jsp" /> 
+    </definition> 
+      
+      <definition name="/alliance/list" extends="main"> 
+        <put-attribute name="title" value="제휴 목록" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/alliance/list.jsp" /> 
+    </definition>
+    
+     <definition name="/alliance/update" extends="main"> 
+        <put-attribute name="title" value="제휴수정" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/alliance/updateForm.jsp" /> 
+    </definition>
+    
+    
+    <definition name="/create" extends="main"> 
+        <put-attribute name="title" value="제휴 등록" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/alliance/createForm.jsp" /> 
+    </definition>   
+    <definition name="/update" extends="main"> 
+        <put-attribute name="title" value="제휴수정" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/alliance/updateForm.jsp" /> 
+    </definition> 
+    
+    </tiles-definitions>
+    
+    
+         
