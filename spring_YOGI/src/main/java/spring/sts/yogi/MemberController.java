@@ -3,12 +3,16 @@ package spring.sts.yogi;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +27,10 @@ public class MemberController {
 	@Autowired
 	private MemberDAO memberdao;
 	
+	@Autowired 
+	private JavaMailSenderImpl mailSender;
+
+	
 	@RequestMapping(value="/member/findid")
 	public String findid() {
 		return "/member/findid";
@@ -32,9 +40,22 @@ public class MemberController {
 	public String sendid(String email, Model model) {
 		boolean flag = false;
 		
+		//이메일 발송 부분
+		final MimeMessagePreparator preparator = new MimeMessagePreparator() {
+			@Override public void prepare(MimeMessage mimeMessage) throws Exception { 
+				final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+				helper.setFrom("nosqljava@gmail.com"); 
+				helper.setTo("kmh5500@hanmail.net");
+				helper.setSubject("테스트 메일입니다");
+				helper.setText("당신의 아이디는 이것입니다.", true);
+				} 
+			}; 
+			//	return "result";
+
 		String findId = memberdao.findid(email);
 		if(findId!=null) {
 			flag = true;
+			mailSender.send(preparator); 
 		}
 		model.addAttribute("flag", flag);
 		return "/member/sendid";

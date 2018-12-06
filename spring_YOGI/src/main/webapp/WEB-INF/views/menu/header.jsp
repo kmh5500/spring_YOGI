@@ -34,10 +34,29 @@
 				<li class="propClone"><a href="shop.html">호텔예약</a></li>
 				<li class="propClone"><a href="${root}/booking/create">제휴관련</a></li>
 				<li class="propClone"><a href="checkout.html">예약내역</a></li>
-				<li class="propClone"><a href="contact.html">게시판</a></li>
-				<li class="propClone"><a href="contact.html" style="color:gold">마이페이지</a></li>
-				<li class="propClone"><a href="${root }/member/login" style="color:gold">로그인</a></li>
+				<li class="propClone"><a href="contact.html">게시판</a>
+						<ul>
+					     <li><a href="#">Sliders</a></li>
+					     <li><a href="#">Galleries</a></li>
+					     <li><a href="#">Apps</a></li>
+					     <li><a href="#">Extensions</a></li>
+					   </ul>								
+				</li>
 				
+				<c:choose>
+					<c:when test="${empty sessionScope.id }">
+					<li class="propClone"><a href="${root }/member/login" style="color:gold">로그인</a></li>
+					<li class="propClone"><a href="${root }/member/choice" style="color:gold">회원가입</a></li>
+					
+					</c:when>
+					<c:otherwise>
+					
+					
+					
+					<li class="propClone"><a href="${root }/member/read" style="color:gold">마이페이지</a></li>
+					<li class="propClone"><a href="${root }/member/logout" style="color:gold">로그아웃</a></li>
+					</c:otherwise>
+				</c:choose>
 			</ul>
 		</div>
 	</div>
