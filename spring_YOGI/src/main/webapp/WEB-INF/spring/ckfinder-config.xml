@@ -18,7 +18,7 @@
 	http://docs.cksource.com/CKFinder_2.x/Developers_Guide/Java/Configuration/baseURL_and_baseDir
 	-->
 	<baseDir>D:/javasecurity/spring/local_spring_YOGI/spring_YOGI/spring_YOGI/src/main/webapp/ckstorage</baseDir>
-	<baseURL>/yogi/ckstorage</baseURL>
+	<baseURL>/YOGI/ckstorage</baseURL>
 	<licenseKey></licenseKey>
 	<licenseName></licenseName>
 	<!--

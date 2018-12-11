@@ -43,7 +43,7 @@
 </table>
 
 <div >
-	<input type="button" name="submit" value=""/>
+	<input type="button" name="submit" value="등록"/>
 </div>
 </body>
 </html>
