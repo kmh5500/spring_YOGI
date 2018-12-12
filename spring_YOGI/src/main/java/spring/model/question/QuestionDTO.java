@@ -2,20 +2,26 @@ package spring.model.question;
 
 public class QuestionDTO {
 	
-	private int questionNum    ;     
+	private int qnum			;     
+    private String qtype		;     
     private String title       ;     
     private String wname       ;     
-    private String questionType;     
     private String content     ;     
     private String phone       ;     
     private String passwd      ;     
     private String wdate       ;
     
-	public int getQuestionNum() {
-		return questionNum;
+	public int getQnum() {
+		return qnum;
 	}
-	public void setQuestionNum(int questionNum) {
-		this.questionNum = questionNum;
+	public void setQnum(int qnum) {
+		this.qnum = qnum;
+	}
+	public String getQtype() {
+		return qtype;
+	}
+	public void setQtype(String qtype) {
+		this.qtype = qtype;
 	}
 	public String getTitle() {
 		return title;
@@ -28,12 +34,6 @@ public class QuestionDTO {
 	}
 	public void setWname(String wname) {
 		this.wname = wname;
-	}
-	public String getQuestionType() {
-		return questionType;
-	}
-	public void setQuestionType(String questionType) {
-		this.questionType = questionType;
 	}
 	public String getContent() {
 		return content;

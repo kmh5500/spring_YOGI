@@ -5,16 +5,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="question">
     
  <insert id="create" parameterType="QuestionDTO">
-    insert into question(questionNum, questionType, wname, title, content, 
-    					phone, passwd, wdate)
-	values((select nvl(max(questionNum),0)+1 from question), #{questionType}, #{wname}, #{title}, #{content}, 
-    		#{phone, jdbcType=VARCHAR}, #{passwd}, sysdate)	
+    insert into question(qnum, qtype, wname, title, content, phone, passwd, wdate)
+	values((select nvl(max(qnum),0)+1 from question), #{qtype}, #{wname}, #{title}, 
+			#{content}, #{phone, jdbcType=VARCHAR}, #{passwd}, sysdate)	
  </insert>
 
  <select id="read" parameterType="int" resultType="QuestionDTO">
-	select questionNum, questionType, wname, title, content, phone, wdate
+	select qnum, qtype, wname, title, content, phone, wdate
 	from question
-	where questionNum = #{questionNum}
+	where qnum = #{qnum}
  </select>
  
  <update id="update" parameterType="QuestionDTO">
@@ -22,25 +21,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	set title = #{title},
 	    content = #{content}, 
 	    phone = #{phone, jdbcType=VARCHAR}
-	where questionNum = #{questionNum}
+	where qnum = #{qnum}
  </update>
  
  <delete id="delete" parameterType="int">
 	delete from question
-	where questionNum = #{questionNum}
+	where qnum = #{qnum}
  </delete>
  
  <select id="list" parameterType="Map" resultType="QuestionDTO">
-	select questionNum, questionType, wname, title, wdate, r
+	select qnum, qtype, wname, title, wdate, r
 	from (
-	        select questionNum, questionType, wname, title, wdate, rownum as r
+	        select qnum, qtype, wname, title, wdate, rownum as r
 	        from(
-	            select questionNum, questionType, wname, title, to_char(wdate, 'yyyy-mm-dd') as wdate
+	            select qnum, qtype, wname, title, to_char(wdate, 'yyyy-mm-dd') as wdate
 	            from question
 	            <where>
 	             <choose>
-	              <when test="col=='questionType'">
-	             	questionType like '%'||#{word}||'%'
+	              <when test="col=='qtype'">
+	             	qtype like '%'||#{word}||'%'
 	              </when>
 	              <when test="col=='wname'">
 	             	wname like '%'||#{word}||'%'
@@ -58,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	              </otherwise>	             
 	             </choose>
 	            </where>
-	            order by questionNum desc
+	            order by qnum desc
 	        )
 	)
 	<![CDATA[
@@ -70,8 +69,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select count(*) from question
     <where>
      <choose>
-      <when test="col=='questionType'">
-     	questionType like '%'||#{word}||'%'
+      <when test="col=='qtype'">
+     	qtype like '%'||#{word}||'%'
       </when>
       <when test="col=='wname'">
      	wname like '%'||#{word}||'%'
@@ -93,7 +92,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
  <select id="checkPasswd" parameterType="Map" resultType="int">
 	select count(*) from question
-	where questionNum = #{questionNum} 
+	where qnum = #{qnum} 
 	and passwd = #{passwd}
  </select>
 

@@ -22,9 +22,6 @@
 		<beans:property name="order" value="2"/>
 	</beans:bean>
 	
-	<context:component-scan base-package="spring.sts.yogi" />
-	
-	
-	
+	<context:component-scan base-package="spring.sts.yogi" />	
 	
 </beans:beans>

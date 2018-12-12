@@ -11,10 +11,10 @@ import org.springframework.stereotype.Repository;
 public class QuestionDAO implements IQuestionDAO {
 
 	@Autowired
-	private static SqlSessionTemplate sst;
+	private SqlSessionTemplate sst;
 	
-	public static void setSst(SqlSessionTemplate sst) {
-		QuestionDAO.sst = sst;
+	public void setSst(SqlSessionTemplate sst) {
+		this.sst = sst;
 	}
 
 	@Override
@@ -31,14 +31,14 @@ public class QuestionDAO implements IQuestionDAO {
 	@Override
 	public Object read(Object pk) throws Exception {
 		
-		int questionNum = (Integer)pk;
+		int qNum = (Integer)pk;
 		
-		return sst.selectOne("question.read", questionNum);
+		return sst.selectOne("question.read", qNum);
 		
 	}
 
 	@Override
-	public List list(Map map) throws Exception {
+	public List<QuestionDTO> list(Map map) throws Exception {
 		
 		 return sst.selectList("question.list", map);
 		 
@@ -59,9 +59,9 @@ public class QuestionDAO implements IQuestionDAO {
 	public boolean delete(Object pk) throws Exception {
 		boolean flag = false;
 		
-		int questionNum = (Integer)pk; 
+		int qNum = (Integer)pk; 
 				
-		if(sst.delete("question.delete", questionNum) > 0) {
+		if(sst.delete("question.delete", qNum) > 0) {
 			flag = true;
 		}
 		
@@ -70,7 +70,9 @@ public class QuestionDAO implements IQuestionDAO {
 
 	@Override
 	public int total(Map map) throws Exception {
-		return 0;
+
+		return sst.selectOne("question.total", map);
+		
 	}
 	
 	@Override
