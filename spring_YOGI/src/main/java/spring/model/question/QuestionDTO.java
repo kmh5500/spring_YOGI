@@ -2,8 +2,8 @@ package spring.model.question;
 
 public class QuestionDTO {
 	
-	private int qnum			;     
-    private String qtype		;     
+	private int qnum		   ;     
+    private String qtype	   ;     
     private String title       ;     
     private String wname       ;     
     private String content     ;     
