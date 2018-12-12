@@ -32,7 +32,18 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class="propClone"><a href="/views/home.jsp">Home</a></li>
 				<li class="propClone"><a href="shop.html">호텔예약</a></li>
-				<li class="propClone"><a href="${root}/alliance/create">제휴관련</a></li>
+				<li class="propClone"><a href="${root}/alliance/create">제휴관련</a>
+					<ul>
+						
+					<li class="propClone"><a href="/views/alliance/createForm.jsp">제휴등록</a></li>
+					<li class="propClone"><a href="/views/alliance/list.jsp">제휴목록</a></li>
+					
+					
+					
+					
+					</ul>
+				
+				</li>
 				<li class="propClone"><a href="checkout.html">예약내역</a></li>
 				<li class="propClone"><a href="contact.html">게시판</a></li>
 				<li class="propClone"><a href="contact.html" style="color:gold">마이페이지</a></li>
