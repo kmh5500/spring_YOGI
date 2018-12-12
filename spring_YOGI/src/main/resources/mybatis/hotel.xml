@@ -5,10 +5,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="hotel">
 	<insert id="create" parameterType="HotelDTO">
 		insert into hotel(hnum, hname,
-		hphone, hemail, hzipcode, haddress1, haddress2, hfname, hinfo, hcheckin, hcheckout, hstar)
+		hphone, hemail, hzipcode, haddress1, haddress2, hfname, hinfo, hcheckin, hcheckout)
 		values(seq_hnum.nextval, #{hname},
 		#{hphone}, #{hemail}, #{hzipcode},
-		#{haddress1}, #{haddress2}, #{hfname}, #{hinfo}, #{hcheckin}, #{hcheckout}, #{hstar})
+		#{haddress1}, #{haddress2}, #{hfname}, #{hinfo}, #{hcheckin}, #{hcheckout})
 	</insert>
 
 	<select id="read" parameterType="HotelDTO">

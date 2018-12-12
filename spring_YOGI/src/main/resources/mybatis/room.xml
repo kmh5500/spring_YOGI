@@ -3,6 +3,20 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="room">
+	<resultMap type="RoomDTO" id="roomMap">
+    	<result property="rnum" column="rnum"/>
+    	<result property="rtype" column="rty"/>
+    	<result property="acperson" column="acperson"/>
+    	<result property="adperson" column="adperson"/>
+    	<result property="rfname" column="rfn"/>
+    	<result property="rinfo" column="rinfo"/>
+    	<result property="hnum" column="hnum"/>
+    	<result property="rprice" column="rpr"/>
+    	<result property="rrate" column="rra"/>
+    	<result property="hdto.hname" column="hna"/>
+    	<result property="hdto.hstar" column="hst"/>
+    </resultMap>
+
 	<insert id="create" parameterType="RoomDTO">
 		insert into room(rnum, rtype,
 		rprice, rrate, acperson, adperson, rfname, rinfo, hnum)
@@ -30,21 +44,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where hnum = #{hnum} and rnum = #{rnum}
 	</update>
 
-	<select id="list" resultType="Map" parameterType="Map">
-		select rty, rpr, rra, rfn, hna, rn
+	<select id="list" resultMap="roomMap" parameterType="Map">
+		select rty, rpr, rra, rfn, hna, hst, rn
 		from(
-			select rty, rpr, rra, rfn, hna, rownum as rn
+			select rty, rpr, rra, rfn, hna, hst, rownum as rn
 			from (
-				select r.rtype as rty, r.rprice as rpr, r.rrate as rra, r.rfname as rfn, h.hname as hna
+				select r.rtype as rty, r.rprice as rpr, r.rrate as rra, r.rfname as rfn, h.hname as hna, h.hstar as hst
 				from room r, hotel h
 				<where> r.hnum=h.hnum
 		        and r.rnum not in(
 		                select rnum
 		                from room r , booking_room b
 		                where r.rnum = b.rnum_FK
-		                <![CDATA[ 
-		                and ( to_date(b.endDate)>to_date(#{sdate}) and to_date(b.startDate)<=to_date(#{edate}))
-		                ]]>
+		                and 
+						<choose>
+							<when test="(sdate=='' or sdate==null) and (edate=='' or edate==null)">
+								<![CDATA[ 
+		                		( to_date(b.endDate,'yyyy-mm-dd')>to_date(sysdate,'yyyy-mm-dd') and to_date(b.startDate,'yyyy-mm-dd')<=to_date(sysdate + 1,'yyyy-mm-dd'))
+		               			 ]]>
+							</when>
+							<otherwise>								                
+				                <![CDATA[ 
+				                ( to_date(b.endDate,'yyyy-mm-dd')>to_date(#{sdate},'yyyy-mm-dd') and to_date(b.startDate,'yyyy-mm-dd')<=to_date(#{edate},'yyyy-mm-dd'))
+				                ]]>
+				            </otherwise>
+		                </choose>
 		        ) 
 	            and
 				<choose>
@@ -60,18 +84,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					<when test="type=='스위트룸'">
 						r.rtype = #{type}
 					</when>
+					<otherwise>
+						r.rtype like '%'||#{type}||'%'
+					</otherwise>
+					
 				</choose>
-				<![CDATA[ 
-				and r.rprice * (1 - r.rrate) >= #{srprice}  
-	            and r.rprice * (1 - r.rrate) <= #{erprice}
-           		and r.acperson + r.adperson >= #{rperson}
-           		]]>
+				
+				<choose>
+					<when test="srprice!=null and erprice!=null">
+						<![CDATA[ 
+						and r.rprice * (1 - r.rrate) >= #{srprice}  
+			            and r.rprice * (1 - r.rrate) <= #{erprice}
+		           		]]>	
+					</when>
+				</choose>
+				
+				<choose>
+					<when test="rperson!=null">
+						<![CDATA[ 
+		           		and r.acperson + r.adperson >= #{rperson}
+		           		]]>
+           			</when>
+           		</choose>
            		</where>
 			ORDER BY r.rnum DESC
 			)
 		)                                                                            
    <![CDATA[                                                                        
-   where r>=#{sno} and r<=#{eno}  
+   where rn>=#{sno} and rn<=#{eno}  
    ]]>
 	</select>
 
@@ -85,9 +125,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		                select rnum
 		                from room r , booking_room b
 		                where r.rnum = b.rnum_FK
-		                <![CDATA[ 
-		                and ( to_date(b.endDate)>to_date(#{sdate}) and to_date(b.startDate)<=to_date(#{edate}))
-		                ]]>
+		                and 
+						<choose>
+							<when test="(sdate=='' or sdate==null) and (edate=='' or edate==null)">
+								<![CDATA[ 
+		                		( to_date(b.endDate,'yyyy-mm-dd')>to_date(sysdate,'yyyy-mm-dd') and to_date(b.startDate,'yyyy-mm-dd')<=to_date(sysdate + 1,'yyyy-mm-dd'))
+		               			 ]]>
+							</when>
+							<otherwise>								                
+				                <![CDATA[ 
+				                ( to_date(b.endDate,'yyyy-mm-dd')>to_date(#{sdate},'yyyy-mm-dd') and to_date(b.startDate,'yyyy-mm-dd')<=to_date(#{edate},'yyyy-mm-dd'))
+				                ]]>
+				            </otherwise>
+		                </choose>
 		        ) 
 	            and
 				<choose>
@@ -103,12 +153,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					<when test="type=='스위트룸'">
 						r.rtype = #{type}
 					</when>
+					<otherwise>
+						r.rtype like '%'||#{type}||'%'
+					</otherwise>
+					
 				</choose>
-				<![CDATA[ 
-				and r.rprice >= #{srprice}  
-	            and r.rprice <= #{erprice}
-           		and r.acperson = #{rperson}
-           		]]>
+				
+				<choose>
+					<when test="srprice!=null and erprice!=null">
+						<![CDATA[ 
+						and r.rprice * (1 - r.rrate) >= #{srprice}  
+			            and r.rprice * (1 - r.rrate) <= #{erprice}
+		           		]]>	
+					</when>
+				</choose>
+				
+				<choose>
+					<when test="rperson!=null">
+						<![CDATA[ 
+		           		and r.acperson + r.adperson >= #{rperson}
+		           		]]>
+           			</when>
+           		</choose>
            		</where>
 	</select>
 

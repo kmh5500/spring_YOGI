@@ -1,5 +1,7 @@
 package spring.model.room;
 
+import spring.model.hotel.HotelDTO;
+
 public class RoomDTO {
 	private int rnum;
 	private String rtype;
@@ -9,9 +11,17 @@ public class RoomDTO {
 	private String rinfo;
 	private int hnum;
 	private int rprice;
-	private int rrate;
+	private double rrate;
+	
+	private HotelDTO hdto;
 	
 	
+	public HotelDTO getHdto() {
+		return hdto;
+	}
+	public void setHdto(HotelDTO hdto) {
+		this.hdto = hdto;
+	}
 	public int getRnum() {
 		return rnum;
 	}
@@ -60,10 +70,10 @@ public class RoomDTO {
 	public void setRprice(int rprice) {
 		this.rprice = rprice;
 	}
-	public int getRrate() {
+	public double getRrate() {
 		return rrate;
 	}
-	public void setRrate(int rrate) {
+	public void setRrate(double rrate) {
 		this.rrate = rrate;
 	}
 	

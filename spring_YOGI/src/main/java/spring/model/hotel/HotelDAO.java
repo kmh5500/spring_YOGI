@@ -55,4 +55,15 @@ public class HotelDAO implements IHotelDAO {
 		return session.selectOne("hotel.total", map);
 	}
 
+	@Override
+	public boolean starupdate(int hnum) throws Exception {
+		boolean flag = false;
+		
+		int cnt = session.update("hotel.starupdate", hnum);
+		if(cnt>0) flag = true;
+		
+		return flag;
+		
+	}
+
 }

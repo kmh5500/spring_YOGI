@@ -6,6 +6,7 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 @Repository
 public class RoomDAO implements IRoomDAO {
 	
@@ -14,26 +15,34 @@ public class RoomDAO implements IRoomDAO {
 	
 	@Override
 	public boolean create(Object dto) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+		boolean flag = false;
+		int cnt = session.insert("room.create", (RoomDTO)dto);
+		if (cnt > 0)
+			flag = true;
+		return flag;
 	}
 
 	@Override
 	public List list(Map map) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return session.selectList("room.list", map);
 	}
 
 	@Override
 	public Object read(Object pk) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		int rnum = (Integer)pk;
+		
+		return session.selectOne("room.read", rnum);
 	}
 
 	@Override
 	public boolean update(Object dto) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+		boolean flag = false;
+		
+		int cnt = session.update("room.update", (RoomDTO)dto);
+		if(cnt>0) flag = true;
+		
+		return flag;
 	}
 
 	@Override
@@ -44,8 +53,7 @@ public class RoomDAO implements IRoomDAO {
 
 	@Override
 	public int total(Map map) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return session.selectOne("room.total", map);
 	}
 
 }
