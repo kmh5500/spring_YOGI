@@ -26,8 +26,8 @@
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />
-		<property name="username" value="nosqljava@gmail.com" />
-		<property name="password" value="python2016" />
+		<property name="username" value="soldeskyogi@gmail.com" />
+		<property name="password" value="soldesk1" />
 
 
 	<!-- email 요청시는 SMTP -->
@@ -41,6 +41,7 @@
 		</property>
 	</bean>
 	
+	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		   <!-- Transaction Manager -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -49,7 +50,7 @@
  
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
        <tx:attributes>
-          <tx:method name="delete" rollback-for="Exception"/>
+          <tx:method name="allDelete" rollback-for="Exception"/>
           <tx:method name="reply" rollback-for="Exception"/>
        </tx:attributes>
     </tx:advice>

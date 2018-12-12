@@ -44,7 +44,7 @@ function create(grade){
 <body>
 <div class="member_register_wrap">
 
-<p class="ex_text"><strong>일반회원/딜러회원</strong> 종류에 따라 회원가입 절차가 다릅니다.<br />
+<p class="ex_text"><strong>일반회원/호텔 관리자/업체 관리자</strong> 종류에 따라 회원가입 절차가 다릅니다.<br />
 
 고객님이 해당하는 회원 종류를 선택해주세요.</p>
 
@@ -55,7 +55,7 @@ function create(grade){
 
 		<div class="member_register_basic">
 
-		<p><img src="${pageContext.request.contextPath }/images/h.png"  alt="일반 회원"></p>
+		<p><img src="${pageContext.request.contextPath }/images/p.png"  alt="일반 회원"></p>
 
 		<p class="bt_text">일반 회원</p>
 
@@ -67,7 +67,7 @@ function create(grade){
 
 		<div class="member_register_basic">
 
-		<p><img src="${pageContext.request.contextPath }/images/h.png"  alt="호텔 회원"></p>
+		<p><img src="${pageContext.request.contextPath }/images/h.png"  alt="호텔 관리자"></p>
 
 		<p class="bt_text">호텔 회원</p>
 
@@ -79,7 +79,7 @@ function create(grade){
 
 		<div class="member_register_basic">
 
-		<p><img src="${pageContext.request.contextPath }/images/h.png"  alt="제휴 회원"></p>
+		<p><img src="${pageContext.request.contextPath }/images/a.png"  alt="업체 관리자"></p>
 
 		<p class="bt_text">제휴 회원</p>
 

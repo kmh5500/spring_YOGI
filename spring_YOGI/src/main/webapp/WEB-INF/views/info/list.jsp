@@ -45,7 +45,9 @@ function infoRead(informnum){
 			</select> <input type="text" name="word" value="${word}">
 
 			<button>검색</button>
+			<c:if test="${sessionScope.grade=='Y' }">
 			<button type="button" onclick="location.href='./info/create'">등록</button>
+			</c:if>
 		</form>
 
 	</div>

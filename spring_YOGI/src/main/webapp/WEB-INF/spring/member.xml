@@ -33,6 +33,18 @@
         <put-attribute name="title" value=" id찾기" ></put-attribute> 
         <put-attribute name="body" value="/WEB-INF/views/member/sendid.jsp" /> 
     </definition> 
+    <definition name="/member/findpass" extends="main"> 
+        <put-attribute name="title" value=" 비밀번호 찾기" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/member/findpass.jsp" /> 
+    </definition> 
+    <definition name="/member/sendpass" extends="main"> 
+        <put-attribute name="title" value=" 비밀번호 찾기" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/member/sendpass.jsp" /> 
+    </definition> 
+     <definition name="/member/list" extends="main"> 
+        <put-attribute name="title" value="admin/회원 목록" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/member/list.jsp" /> 
+    </definition> 
     
     
     
@@ -57,10 +69,7 @@
         <put-attribute name="body" value="/WEB-INF/views/member/logout.jsp" /> 
     </definition>   
       
-      <definition name="/member/list" extends="main"> 
-        <put-attribute name="title" value="admin/회원 목록" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/list.jsp" /> 
-    </definition> 
+     
       <definition name="/member/updatePw" extends="main"> 
         <put-attribute name="title" value="패스워드 변경" ></put-attribute> 
         <put-attribute name="body" value="/WEB-INF/views/member/updatePwForm.jsp" /> 

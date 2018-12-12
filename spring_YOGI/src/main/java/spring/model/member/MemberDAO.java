@@ -25,7 +25,7 @@ public class MemberDAO implements IMemberDAO{
 	}
 
 	@Override
-	public List list(Map map) throws Exception {
+	public List list(Map map)  {
 		// TODO Auto-generated method stub
 		return mysql.selectList("member.list", map);
 	}
@@ -60,7 +60,7 @@ public class MemberDAO implements IMemberDAO{
 	}
 
 	@Override
-	public int total(Map map) throws Exception {
+	public int total(Map map) {
 		// TODO Auto-generated method stub
 		return mysql.selectOne("member.total", map);
 	}
@@ -93,7 +93,7 @@ public class MemberDAO implements IMemberDAO{
 	@Override
 	public int emailCheck(String email) {
 		// TODO Auto-generated method stub
-		return mysql.selectOne("member.idCheck", email);
+		return mysql.selectOne("member.emailCheck", email);
 	}
 
 	@Override
@@ -138,6 +138,12 @@ public class MemberDAO implements IMemberDAO{
 	public String findid(String email) {
 		// TODO Auto-generated method stub
 		return mysql.selectOne("member.findid", email);
+	}
+	
+	@Override
+	public String findpass(String email) {
+		// TODO Auto-generated method stub
+		return mysql.selectOne("member.findpass", email);
 	}
 
 }

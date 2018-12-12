@@ -35,11 +35,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<select id="list" resultType="MemberDTO" parameterType="Map">
-		select id,name,phone,email,r  
+		select id,name,phone,email,grade,r  
 
-        from (select id, name, phone, email,rownum r 
+        from (select id, name, phone, email,grade,rownum r 
                 from(
-                select id,name,phone, email 
+                select id,name,phone, email,grade 
                 from member
             
 		<where>
@@ -124,6 +124,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	select id from member
+	where email = #{email}
+	
+	</select>
+	
+	<select id="findpass" parameterType="String" resultType="String">
+	
+	
+	select pass from member
 	where email = #{email}
 	
 	</select>

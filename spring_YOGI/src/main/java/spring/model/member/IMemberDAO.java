@@ -17,5 +17,6 @@ public interface IMemberDAO extends DAOSTDInter {
 	void baDelete(String id);
 	String getGrade(String id);
 	String findid(String email);
+	String findpass(String email);
 	
 }

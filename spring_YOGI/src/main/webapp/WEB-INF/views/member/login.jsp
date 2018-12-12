@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@include file="/ssi/ssi.jsp" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,13 +17,14 @@
     <TR>
       <TH>아이디</TH>
       <TD><input type="text" name="id"  value='${c_id_val}'>
+      
      	<c:choose>
      		<c:when test="${c_id=='Y' }">
      		
-         <input type='checkbox' name='c_id' value='Y' checked='checked'> ID 저장 
+         	<input type='checkbox' name='c_id' value='Y' checked='checked'> ID 저장 
      		</c:when>
      		<c:otherwise>
-         <input type='checkbox' name='c_id' value='Y' > ID 저장 
+           <input type='checkbox' name='c_id' value='Y' > ID 저장 
      		
      		</c:otherwise>
      	</c:choose>
@@ -38,7 +40,7 @@
   
   <DIV class='bottom'>
   <input type="button" value='ID 찾기' onclick="location.href='./findid'">
-  <input type="button" value='/Passwd 찾기' onclick="location.href='./idpwfind'">
+  <input type="button" value='/Passwd 찾기' onclick="location.href='./findpass'">
     <input type='submit' value='로그인'>
     <input type='button' value='회원가입' 
     onclick="location.href='/member/agree'">

@@ -36,7 +36,7 @@
 				<li class="propClone"><a href="checkout.html">예약내역</a></li>
 				<li class="propClone"><a href="contact.html">게시판</a>
 						<ul>
-					     <li><a href="#">Sliders</a></li>
+					     <li><a href="${root}/info">공지사항</a></li>
 					     <li><a href="#">Galleries</a></li>
 					     <li><a href="#">Apps</a></li>
 					     <li><a href="#">Extensions</a></li>
@@ -53,7 +53,25 @@
 					
 					
 					
-					<li class="propClone"><a href="${root }/member/read" style="color:gold">마이페이지</a></li>
+					<li class="propClone"><a href="${root }/member/read" style="color:gold">마이페이지</a>
+						<ul>
+					     <li><a href="#">내정보</a></li>
+					     <c:if test="${sessionScope.grade=='H' }">
+					     <li><a href="#">호텔등록</a></li>
+					     </c:if>
+					  
+					     <c:if test="${sessionScope.grade=='A' }">
+					     <li><a href="#">업체 등록</a></li>
+					     </c:if>
+					   
+					    
+					     <li><a href="#">예약 현황</a></li>
+					   </ul>
+					</li>
+					<c:if test="${sessionScope.grade=='Y' }">
+					<li class="propClone"><a href="${root }/admin/list" style="color:gold">회원목록</a>
+					
+					</c:if>
 					<li class="propClone"><a href="${root }/member/logout" style="color:gold">로그아웃</a></li>
 					</c:otherwise>
 				</c:choose>

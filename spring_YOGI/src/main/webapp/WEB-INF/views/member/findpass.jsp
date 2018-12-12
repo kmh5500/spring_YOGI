@@ -62,9 +62,10 @@ function checkEmail() {
 }
 </script>
 <body>
-<form action="./id" id="findForm" method="post">
+<form action="./pass" id="findForm" method="post">
     <fieldset>
-        <legend class="screen_out">아이디 찾기 폼</legend>
+
+        <legend class="screen_out">비밀번호 찾기 폼</legend>
  
         <div class="">
             <label>이메일</label>
@@ -78,9 +79,10 @@ function checkEmail() {
                 <button type="submit" class="form-control btn btn-primary signupbtn" 
                 disabled="disabled">이메일 전송</button>
         </div>
+   
     </fieldset>
-
 </form>
+
 
 
 

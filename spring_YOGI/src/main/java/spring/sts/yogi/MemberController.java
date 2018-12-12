@@ -1,6 +1,7 @@
 package spring.sts.yogi;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
@@ -17,9 +18,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import spring.model.member.MemberDAO;
 import spring.model.member.MemberDTO;
+import spring.utility.yogi.Utility;
 
 @Controller
 public class MemberController {
@@ -37,28 +40,62 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/member/id")
-	public String sendid(String email, Model model) {
+	public String sendid(final String email, Model model) {
 		boolean flag = false;
 		
 		//이메일 발송 부분
-		final MimeMessagePreparator preparator = new MimeMessagePreparator() {
-			@Override public void prepare(MimeMessage mimeMessage) throws Exception { 
-				final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-				helper.setFrom("nosqljava@gmail.com"); 
-				helper.setTo("kmh5500@hanmail.net");
-				helper.setSubject("테스트 메일입니다");
-				helper.setText("당신의 아이디는 이것입니다.", true);
+		
+		String findId = memberdao.findid(email);
+		final StringBuffer sb = new StringBuffer();
+		if(findId!=null) {
+			sb.append("당신의 아이디는 "+findId+"입니다.");
+			final MimeMessagePreparator preparator = new MimeMessagePreparator() {
+				@Override public void prepare(MimeMessage mimeMessage) throws Exception { 
+					final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+					helper.setFrom("soldeskyogi@gmail.com"); 
+					helper.setTo(email);
+					helper.setSubject("테스트 메일입니다");
+					helper.setText(sb.toString(), true);
 				} 
 			}; 
-			//	return "result";
-
-		String findId = memberdao.findid(email);
-		if(findId!=null) {
 			flag = true;
 			mailSender.send(preparator); 
 		}
 		model.addAttribute("flag", flag);
 		return "/member/sendid";
+		
+	}
+	
+	
+	@RequestMapping(value="/member/findpass")
+	public String findpass() {
+		return "/member/findpass";
+	}
+	
+	@RequestMapping(value="/member/pass")
+	public String sendpass(final String email, Model model) {
+		boolean flag = false;
+		
+		//이메일 발송 부분
+		
+		String findPass = memberdao.findpass(email);
+		final StringBuffer sb = new StringBuffer();
+		if(findPass!=null) {
+			sb.append("당신의 비밀번호는 "+findPass+"입니다.");
+			final MimeMessagePreparator preparator = new MimeMessagePreparator() {
+				@Override public void prepare(MimeMessage mimeMessage) throws Exception { 
+					final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+					helper.setFrom("soldeskyogi@gmail.com"); 
+					helper.setTo(email);
+					helper.setSubject("테스트 메일입니다");
+					helper.setText(sb.toString(), true);
+				} 
+			}; 
+			flag = true;
+			mailSender.send(preparator); 
+		}
+		model.addAttribute("flag", flag);
+		return "/member/sendpass";
 		
 	}
 	
@@ -107,7 +144,7 @@ public class MemberController {
 		// 회원등급
 		if (flag==1) {// 회원인경우
 			String grade = memberdao.getGrade(id);
-			System.out.println(grade);
+			
 			request.getSession().setAttribute("id", id);
 			
 			request.getSession().setAttribute("grade", grade);
@@ -199,5 +236,71 @@ public class MemberController {
 		
 		return "/member/read";
 	}
-
+	
+	@RequestMapping("/admin/list")
+	public String list(HttpServletRequest request) {
+		
+		String col= Utility.checkNull(request.getParameter("col"));
+	 	String word= Utility.checkNull(request.getParameter("word"));
+	 	if(col.equals("total")){
+	 		word="";
+	 	}
+	 	//페이징
+	 	int nowPage	=1;
+	 	int recordPerPage=5;
+	 	if(request.getParameter("nowPage")!=null){
+	 		nowPage=Integer.parseInt(request.getParameter("nowPage"));
+	 	}
+	 	//db에서 가져올 순번
+	 	int sno= ((nowPage-1)*recordPerPage)+1;
+	 	int eno= nowPage* recordPerPage;
+	 	
+	 	Map map= new HashMap();
+	 	map.put("col", col);
+	 	map.put("word", word);
+	 	map.put("sno", sno);
+	 	map.put("eno", eno);
+	 	
+		int total= memberdao.total(map);
+	 	List<MemberDTO> list =memberdao.list(map);
+	 	
+	 	String paging = Utility.paging3(total, nowPage, recordPerPage, col, word);
+	 			
+	 	request.setAttribute("list",list);
+	 	
+	 	request.setAttribute("paging",paging);
+	 	request.setAttribute("col",col);
+	 	request.setAttribute("word",word);
+	 	request.setAttribute("nowPage", nowPage);
+		
+		return "/member/list";
+				
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="/member/idCheck", method=RequestMethod.GET)
+	public String idCheck(String id) {
+		System.out.println(id);
+		System.out.println(memberdao);
+		String check = "0";
+		if(memberdao.idCheck(id)==1) {
+			check="1";
+		}
+		System.out.println(check);
+		return check;
+	}
+	@ResponseBody
+	@RequestMapping(value="/member/emailCheck", method=RequestMethod.GET)
+	public String emailCheck(String email) {
+		System.out.println(email);
+		System.out.println(memberdao);
+		String check = "0"; //중복이 아니면 문자열 0을 리턴
+		if(memberdao.emailCheck(email)==1) {
+			check="1"; //중복이면 문자열 1을 리턴
+		}
+		System.out.println(check);
+		return check;
+	}
+  
 }
