@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="booking_room">
+
+ <insert id="create" parameterType="Booking_roomDTO">
+	insert into booking_room(bRnum, bName, bPhone, bHname, bRtype, bRinfo,
+							bPerson, bCapacity, bPrice, startDate, endDate,
+							bCheckIn, bCheckOut, id_FK, rnum_FK)
+	values(
+	        (select nvl(max(bRnum),0)+1 from booking_room),
+			#{bName}, #{bPhone}, #{bHname}, #{bRtype}, #{bRinfo},
+			#{bPerson}, #{bCapacity}, #{bPrice}, #{startDate}, #{endDate},
+			#{bCheckIn}, #{bCheckOut}, #{id_FK}, #{rnum_FK})
+ </insert>
+ 
+ <delete id="delete" parameterType="int">
+	delete from booking_room
+	where bRnum = #{bRnum}
+ </delete>
+
+ <update id="update" parameterType="Booking_roomDTO">
+	update booking_room
+	set bName = #{bName},
+	    bPhone = #{bPhone},
+	    bRtype = #{bRtype},
+	    bRinfo = #{bRinfo},
+	    bPerson = #{bPerson},
+	    bPrice = #{bPrice},
+	    startDate = #{startDate},
+	    endDate = #{endDate},
+	    bCheckIn = #{bCheckIn},
+	    bCheckOut = #{bCheckOut},
+	    bStatus = #{bStatus}
+	where bRnum = #{bRnum}
+ </update>
+ 
+ <select id="read" parameterType="int" resultType="Booking_roomDTO">
+	select bRnum, bName, bPhone, bHname, bRtype, bRinfo, 
+			bPerson, bCapacity, bPrice, startDate, endDate,
+			bCheckIn, bCheckOut, bStatus
+	from booking_room
+	where bRnum = #{bRnum}
+ </select> 
+ 
+ <select id="list" parameterType="Map" resultType="Booking_roomDTO">
+ 	<![CDATA[
+	select bRnum, bHname, bRtype, startDate, endDate, bStatus, r
+	from (
+	        select bRnum, bHname, bRtype, startDate, endDate, bStatus, rownum r
+	        from (
+	                select bRnum, bHname, bRtype, startDate, endDate, bStatus
+	                from booking_room
+	                where id_FK = #{id_FK}
+	                and endDate >= #{inSdate} and startDate <= #{inEdate}
+	                order by startDate desc, endDate desc
+	        )
+	)
+	where r >= #{sno} and r <= #{eno}
+	]]>
+ </select>
+ 
+</mapper>

@@ -41,6 +41,12 @@
 	<bean id= "member" class="spring.model.member.MemberDAO"
 		p:mybatis-ref="sqlSession"
 	/>
+	<bean id= "booking_room" class="spring.model.booking_room.Booking_roomDAO"
+		p:sst-ref="sqlSession"
+	/>
+	<bean id= "question" class="spring.model.question.QuestionDAO"
+		p:sst-ref="sqlSession"
+	/>
 	
 
 
