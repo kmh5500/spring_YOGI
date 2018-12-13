@@ -20,16 +20,21 @@
         <function-signature>boolean compareDay(java.lang.String) 
         </function-signature> 
     </function> 
-     <function>
+    <function>
     	<description>직업명 출력</description>
     	<name>jobName</name>
     	<function-class>spring.utility.yogi.Utility</function-class>
-    	<function-signature>java.lang.String getCodeValue(java.lang.String)</function-signature>
-    
+    	<function-signature>java.lang.String getCodeValue(java.lang.String)</function-signature>   
+    </function>
+    <function>
+    	<description>문의 유형 출력</description>
+    	<name>questionType</name>
+    	<function-class>spring.utility.yogi.Utility</function-class>
+    	<function-signature>java.lang.String changeQuestionType(java.lang.String)</function-signature>   
     </function>
     
     
-        <function>  
+    <function>  
         <description>댓글수 보여주기</description> 
         <name>rcount</name>
         <function-class>

@@ -21,6 +21,23 @@ public class Utility {
 //        return rdao.rcount(bbsno);
 //   }
 	
+	public static String changeQuestionType(String code) { 
+		
+		String type = null;
+		
+		Hashtable codes = new Hashtable();
+		codes.put("Q01", "예약/결제");
+		codes.put("Q02", "취소/환불");
+		codes.put("Q03", "이용 문의");
+		codes.put("Q04", "회원 정보");
+		codes.put("Q05", "기타");
+		
+		type = (String)codes.get(code);
+		
+		return type;
+	     
+	}	
+	
 	
 	public static String getCodeValue(String code) {
 		String value= null;
@@ -120,9 +137,7 @@ public class Utility {
 		}
 		
 		return flag;
-	}
-	
-	
+	}	
 	
 	public static List<String> getDay(){
 		List<String> list = new ArrayList<String>();
@@ -279,8 +294,6 @@ public class Utility {
 		return str;
 		
 	}
-
-
 
 	public static void deleteFile(String basePath, String oldfile) {
 		// TODO Auto-generated method stub

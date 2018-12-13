@@ -20,9 +20,5 @@
         <put-attribute name="title" value="question 수정"></put-attribute> 
         <put-attribute name="body" value="/WEB-INF/views/question/updateForm.jsp" /> 
     </definition>
-    <definition name="/question/delete" extends="main"> 
-        <put-attribute name="title" value="question 삭제"></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/question/deleteForm.jsp" /> 
-    </definition>
 </tiles-definitions> 
      

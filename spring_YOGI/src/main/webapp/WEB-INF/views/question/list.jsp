@@ -29,27 +29,18 @@ function readQ(qnum) {
   </div>
 
   <div>
-    <form method="post" action="list">
+    <form name="frm" method="post" action="list">
       <select name="col">
-        <option value="qtype"
-         <c:if test="${col == 'qtype' }">selected</c:if>
-        >문의 유형</option>
-        <option value="wname"
-         <c:if test="${col == 'wname' }">selected</c:if>
-        >작성자</option>
-        <option value="title"
-         <c:if test="${col == 'title' }">selected</c:if>
-        >제목</option>
-        <option value="content"
-         <c:if test="${col == 'content' }">selected</c:if>
-        >내용</option>
-        <option value="title_content"
-         <c:if test="${col == 'title_content' }">selected</c:if>
-        >제목+내용</option>
-        <option value="total"
-         <c:if test="${col == 'total' }">selected</c:if>
-        >전체 출력</option>      
+        <option value="qtype">문의 유형</option>
+        <option value="wname">작성자</option>
+        <option value="title">제목</option>
+        <option value="content">내용</option>
+        <option value="title_content">제목+내용</option>
+        <option value="total">전체 출력</option>      
       </select>
+      <script type="text/javascript">
+		document.frm.col.value = "${col}";
+      </script>
       
       <input type="text" name="word" value="${word }">
     
@@ -79,13 +70,13 @@ function readQ(qnum) {
     <c:forEach var="dto" items="${list }">
       <tr>
         <td>${dto.qnum }</td>
-        <td>${dto.qtype }</td>
+        <td>${util:questionType(dto.qtype) }</td>
         <td>${dto.wname }</td>
         <td>
           <a href="javascript:readQ('${dto.qnum }')">${dto.title }</a>
         </td>
         <td>${dto.wdate }</td>
-        <td>일단 보류</td>
+        <td>일단 보류.</td>
       </tr>
     </c:forEach>
   </c:otherwise>
