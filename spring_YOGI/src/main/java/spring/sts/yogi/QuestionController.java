@@ -22,6 +22,23 @@ public class QuestionController {
 	@Autowired
 	private QuestionDAO dao;
 	
+	@RequestMapping("/question/read")
+	public String read(int qnum, Model model) {
+		
+		try {
+			QuestionDTO dto = (QuestionDTO)dao.read(qnum);
+			
+			model.addAttribute("dto", dto);
+			
+			return "/question/read";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+		
+		return "/error/error";
+		
+	}
+	
 	@RequestMapping("/question/list")
 	public String list(HttpServletRequest request, Model model) {
 		

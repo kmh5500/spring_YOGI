@@ -8,7 +8,7 @@
 <title></title>
 
 <script type="text/javascript">
-function checkIn(f) {
+function checkQ(f) {
 	if(f.qType.value == "0") {
 		alert("문의 유형을 선택해주세요.");
 		f.qType.focus();
@@ -49,7 +49,7 @@ function checkIn(f) {
 
 <div style="margin-left: 5%">
 
-  <form action="create" method="post" onsubmit="return checkIn(this)">
+  <form action="create" method="post" onsubmit="return checkQ(this)">
   
     <h3>문의 유형</h3>  
     <select name="qType">

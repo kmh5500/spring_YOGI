@@ -6,6 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
+
+<script type="text/javascript">
+function readQ(qnum) {
+	var url = "read";
+	url += "?qnum=" + qnum;
+	url += "&col=${col}";
+	url += "&word=${word}";
+	url += "&nowPage=${nowPage}";
+	location.href = url;
+	
+}
+</script>
+
 </head>
 <body>
 
@@ -18,8 +31,8 @@
   <div>
     <form method="post" action="list">
       <select name="col">
-        <option value="qType"
-         <c:if test="${col == 'qType' }">selected</c:if>
+        <option value="qtype"
+         <c:if test="${col == 'qtype' }">selected</c:if>
         >문의 유형</option>
         <option value="wname"
          <c:if test="${col == 'wname' }">selected</c:if>
@@ -68,7 +81,9 @@
         <td>${dto.qnum }</td>
         <td>${dto.qtype }</td>
         <td>${dto.wname }</td>
-        <td>${dto.title }</td>
+        <td>
+          <a href="javascript:readQ('${dto.qnum }')">${dto.title }</a>
+        </td>
         <td>${dto.wdate }</td>
         <td>일단 보류</td>
       </tr>
