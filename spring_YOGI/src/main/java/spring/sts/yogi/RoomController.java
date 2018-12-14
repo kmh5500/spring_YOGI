@@ -29,10 +29,13 @@ public class RoomController {
 		int rperson = 1;
 		
 		String type = Utility.checkNull(request.getParameter("type"));
-		if(request.getParameter("srprice")!=null) {
+		if(type.equals("선택")) {
+			type = "";
+		}
+		if(request.getParameter("srprice")!=null && request.getParameter("srprice")!="") {
 			srprice = Integer.parseInt(request.getParameter("srprice"));
 		}
-		if(request.getParameter("erprice")!=null) {
+		if(request.getParameter("erprice")!=null && request.getParameter("erprice")!="") {
 			erprice = Integer.parseInt(request.getParameter("erprice"));
 		}
 		String sdate = Utility.checkNull(request.getParameter("sdate"));
@@ -40,6 +43,8 @@ public class RoomController {
 		if(request.getParameter("rperson")!=null) {
 			rperson = Integer.parseInt(request.getParameter("rperson"));
 		}
+		
+		
 		//paging관련
 		int nowPage = 1;
 		int recordPerPage = 5;

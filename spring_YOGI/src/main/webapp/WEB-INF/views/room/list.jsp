@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
   <link rel="stylesheet" type="text/css" href="${root }/jquery/jquery-ui.css">
   <script type="text/javascript" src="${root }/jquery/jquery.js"></script>
@@ -61,7 +62,7 @@
   });
   </script>
 <body>
-
+<div class="clearfix">
 <form name="frm" method="post" action="./list">
 
 <div style="float: left; width: 30%; background-color: #f0eef0; margin-left: 5%; margin-top: 5%; margin-bottom: 10%;">
@@ -73,7 +74,7 @@
 	<br><br><br>
 	<b>날짜</b><br><br>
 	<label for="sdate">체크인</label>
-	<input type="text" id="sdate" name="sdate" value="${param.sdate }">
+	<input type="text" id="sdate" name="sdate" value="${sdate }">
 	<br><br>
 	<label for="edate">체크아웃</label>
 	<input type="text" id="edate" name="edate" value="${edate }">
@@ -105,8 +106,8 @@
 	<b>가격</b><br><br>
 	<p id="price">
  	<div style="width:300px" id="slider-range"></div>
-    <input type="" id="srprice" name="srprice">
-    <input type="hidden" id="erprice" name="erprice">
+    <input type="hidden" id="srprice" value = "0" name="srprice">
+    <input type="hidden" id="erprice" value="500000" name="erprice">
 	
 	<br><br><br>
 	
@@ -161,6 +162,6 @@
 
 
 </form>
-
+</div>
 </body>
 </html>
