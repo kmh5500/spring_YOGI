@@ -33,9 +33,9 @@ public class Booking_roomDAO implements IBooking_roomDAO {
 	@Override
 	public Object read(Object pk) throws Exception {
 		
-		int bRnum = (Integer)pk;
+		int bnum = (Integer)pk;
 		
-		return sst.selectOne("booking_room.read", bRnum);
+		return sst.selectOne("booking_room.read", bnum);
 		
 	}
 
@@ -57,9 +57,9 @@ public class Booking_roomDAO implements IBooking_roomDAO {
 	public boolean delete(Object pk) throws Exception {
 		boolean flag = false;
 		
-		int bRnum = (Integer)pk;
+		int bnum = (Integer)pk;
 		
-		if(sst.delete("booking_room.delete", bRnum) > 0) {
+		if(sst.delete("booking_room.delete", bnum) > 0) {
 			flag = true;
 		}
 		

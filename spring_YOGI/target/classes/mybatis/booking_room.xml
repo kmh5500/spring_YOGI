@@ -5,52 +5,52 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="booking_room">
 
  <insert id="create" parameterType="Booking_roomDTO">
-	insert into booking_room(bRnum, bName, bPhone, bHname, bRtype, bRinfo,
-							bPerson, bCapacity, bPrice, startDate, endDate,
-							bCheckIn, bCheckOut, id_FK, rnum_FK)
+	insert into booking_room(bnum, bname, bphone, bhname, brtype, brinfo,
+							bperson, bcapacity, bprice, startDate, endDate,
+							bcheckIn, bcheckOut, id_FK, rnum_FK)
 	values(
-	        (select nvl(max(bRnum),0)+1 from booking_room),
-			#{bName}, #{bPhone}, #{bHname}, #{bRtype}, #{bRinfo},
-			#{bPerson}, #{bCapacity}, #{bPrice}, #{startDate}, #{endDate},
-			#{bCheckIn}, #{bCheckOut}, #{id_FK}, #{rnum_FK})
+	        (select nvl(max(bnum),0)+1 from booking_room),
+			#{bname}, #{bphone}, #{bhname}, #{brtype}, #{brinfo},
+			#{bperson}, #{bcapacity}, #{bprice}, #{startDate}, #{endDate},
+			#{bcheckIn}, #{bcheckOut}, #{id_FK}, #{rnum_FK})
  </insert>
  
  <delete id="delete" parameterType="int">
 	delete from booking_room
-	where bRnum = #{bRnum}
+	where bnum = #{bnum}
  </delete>
 
  <update id="update" parameterType="Booking_roomDTO">
 	update booking_room
-	set bName = #{bName},
-	    bPhone = #{bPhone},
-	    bRtype = #{bRtype},
-	    bRinfo = #{bRinfo},
-	    bPerson = #{bPerson},
-	    bPrice = #{bPrice},
+	set bname = #{bname},
+	    bphone = #{bphone},
+	    brtype = #{brtype},
+	    brinfo = #{brinfo},
+	    bperson = #{bperson},
+	    bprice = #{bprice},
 	    startDate = #{startDate},
 	    endDate = #{endDate},
-	    bCheckIn = #{bCheckIn},
-	    bCheckOut = #{bCheckOut},
-	    bStatus = #{bStatus}
-	where bRnum = #{bRnum}
+	    bcheckIn = #{bcheckIn},
+	    bcheckOut = #{bcheckOut},
+	    bstatus = #{bstatus}
+	where bnum = #{bnum}
  </update>
  
  <select id="read" parameterType="int" resultType="Booking_roomDTO">
-	select bRnum, bName, bPhone, bHname, bRtype, bRinfo, 
-			bPerson, bCapacity, bPrice, startDate, endDate,
-			bCheckIn, bCheckOut, bStatus
+	select bnum, bname, bphone, bhname, brtype, brinfo, 
+			bperson, bcapacity, bprice, startDate, endDate,
+			bcheckIn, bcheckOut, bstatus
 	from booking_room
-	where bRnum = #{bRnum}
+	where bnum = #{bnum}
  </select> 
  
  <select id="list" parameterType="Map" resultType="Booking_roomDTO">
  	<![CDATA[
-	select bRnum, bHname, bRtype, startDate, endDate, bStatus, r
+	select bnum, bhname, brtype, startDate, endDate, bstatus, r
 	from (
-	        select bRnum, bHname, bRtype, startDate, endDate, bStatus, rownum r
+	        select bnum, bhname, brtype, startDate, endDate, bstatus, rownum r
 	        from (
-	                select bRnum, bHname, bRtype, startDate, endDate, bStatus
+	                select bnum, bhname, brtype, startDate, endDate, bstatus
 	                from booking_room
 	                where id_FK = #{id_FK}
 	                and endDate >= #{inSdate} and startDate <= #{inEdate}

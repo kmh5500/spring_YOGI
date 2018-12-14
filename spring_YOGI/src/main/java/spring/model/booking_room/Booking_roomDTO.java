@@ -2,88 +2,88 @@ package spring.model.booking_room;
 
 public class Booking_roomDTO {
 
-    private int bRnum       ;
-    private String bName    ;
-    private String bPhone   ;
-    private String bHname   ;
-    private String bRtype   ;
-    private String bRinfo   ;
-    private int bPerson     ;
-    private String bCapacity;
-    private int bPrice      ;
-    private String bCheckIn ;
-    private String bCheckOut;
+    private int bnum       ;
+    private String bname    ;
+    private String bphone   ;
+    private String bhname   ;
+    private String brtype   ;
+    private String brinfo   ;
+    private int bperson     ;
+    private String bcapacity;
+    private int bprice      ;
+    private String bcheckIn ;
+    private String bcheckOut;
     private String startDate;
     private String endDate  ;
     private String id_FK    ;
-    private String bStatus  ;
+    private String bstatus  ;
     private int rnum_FK     ;
     
-	public int getbRnum() {
-		return bRnum;
+	public int getBnum() {
+		return bnum;
 	}
-	public void setbRnum(int bRnum) {
-		this.bRnum = bRnum;
+	public void setBnum(int bnum) {
+		this.bnum = bnum;
 	}
-	public String getbName() {
-		return bName;
+	public String getBname() {
+		return bname;
 	}
-	public void setbName(String bName) {
-		this.bName = bName;
+	public void setBname(String bname) {
+		this.bname = bname;
 	}
-	public String getbPhone() {
-		return bPhone;
+	public String getBphone() {
+		return bphone;
 	}
-	public void setbPhone(String bPhone) {
-		this.bPhone = bPhone;
+	public void setBphone(String bphone) {
+		this.bphone = bphone;
 	}
-	public String getbHname() {
-		return bHname;
+	public String getBhname() {
+		return bhname;
 	}
-	public void setbHname(String bHname) {
-		this.bHname = bHname;
+	public void setBhname(String bhname) {
+		this.bhname = bhname;
 	}
-	public String getbRtype() {
-		return bRtype;
+	public String getBrtype() {
+		return brtype;
 	}
-	public void setbRtype(String bRtype) {
-		this.bRtype = bRtype;
+	public void setBrtype(String brtype) {
+		this.brtype = brtype;
 	}
-	public String getbRinfo() {
-		return bRinfo;
+	public String getBrinfo() {
+		return brinfo;
 	}
-	public void setbRinfo(String bRinfo) {
-		this.bRinfo = bRinfo;
+	public void setBrinfo(String brinfo) {
+		this.brinfo = brinfo;
 	}
-	public int getbPerson() {
-		return bPerson;
+	public int getBperson() {
+		return bperson;
 	}
-	public void setbPerson(int bPerson) {
-		this.bPerson = bPerson;
+	public void setBperson(int bperson) {
+		this.bperson = bperson;
 	}
-	public String getbCapacity() {
-		return bCapacity;
+	public String getBcapacity() {
+		return bcapacity;
 	}
-	public void setbCapacity(String bCapacity) {
-		this.bCapacity = bCapacity;
+	public void setBcapacity(String bcapacity) {
+		this.bcapacity = bcapacity;
 	}
-	public int getbPrice() {
-		return bPrice;
+	public int getBprice() {
+		return bprice;
 	}
-	public void setbPrice(int bPrice) {
-		this.bPrice = bPrice;
+	public void setBprice(int bprice) {
+		this.bprice = bprice;
 	}
-	public String getbCheckIn() {
-		return bCheckIn;
+	public String getBcheckIn() {
+		return bcheckIn;
 	}
-	public void setbCheckIn(String bCheckIn) {
-		this.bCheckIn = bCheckIn;
+	public void setBcheckIn(String bcheckIn) {
+		this.bcheckIn = bcheckIn;
 	}
-	public String getbCheckOut() {
-		return bCheckOut;
+	public String getBcheckOut() {
+		return bcheckOut;
 	}
-	public void setbCheckOut(String bCheckOut) {
-		this.bCheckOut = bCheckOut;
+	public void setBcheckOut(String bcheckOut) {
+		this.bcheckOut = bcheckOut;
 	}
 	public String getStartDate() {
 		return startDate;
@@ -103,11 +103,11 @@ public class Booking_roomDTO {
 	public void setId_FK(String id_FK) {
 		this.id_FK = id_FK;
 	}
-	public String getbStatus() {
-		return bStatus;
+	public String getBstatus() {
+		return bstatus;
 	}
-	public void setbStatus(String bStatus) {
-		this.bStatus = bStatus;
+	public void setBstatus(String bstatus) {
+		this.bstatus = bstatus;
 	}
 	public int getRnum_FK() {
 		return rnum_FK;
