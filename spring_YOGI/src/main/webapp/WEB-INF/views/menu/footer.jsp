@@ -1,5 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8" %>
 	<!-- FOOTER =============================-->
+	
 	<div class="footer text-center">
 		<div class="container">
 			<div class="row">

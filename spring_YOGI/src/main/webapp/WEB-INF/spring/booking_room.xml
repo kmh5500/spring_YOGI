@@ -8,6 +8,10 @@
         <put-attribute name="title" value="booking_room 생성"></put-attribute> 
         <put-attribute name="body" value="/WEB-INF/views/booking_room/createForm.jsp" /> 
     </definition>   
+    <definition name="/booking_room/completecreate" extends="main"> 
+        <put-attribute name="title" value="booking_room 완료 페이지"></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/booking_room/completecreateForm.jsp" /> 
+    </definition>   
     <definition name="/booking_room/read" extends="main"> 
         <put-attribute name="title" value="booking_room 조회"></put-attribute> 
         <put-attribute name="body" value="/WEB-INF/views/booking_room/read.jsp" /> 
