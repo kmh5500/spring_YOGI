@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import spring.model.room.RoomDAO;
 import spring.model.room.RoomDTO;
@@ -20,6 +21,40 @@ public class RoomController {
 	
 	@Autowired
 	private RoomDAO dao;
+	
+	
+	@RequestMapping(value="/room/create", method=RequestMethod.POST)
+	public String create(RoomDTO dto, HttpServletRequest request ) {
+		
+	 	String upDir = request.getRealPath("/room/storage");
+	 	
+		String rfname = "";
+		rfname = Utility.saveFileSpring(dto.getFilenameMF(), upDir);
+		
+	 	dto.setRfname(rfname);
+	 	
+	 	boolean flag;
+		try {
+			flag = dao.create(dto);
+			if(flag) {
+				return "redirect:/room/list";
+			}else {
+				if(!rfname.equals(""))
+					Utility.deleteFile(upDir, rfname);
+				return "/error/error";
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "/room/list";
+	}
+	
+	@RequestMapping(value="/room/create", method=RequestMethod.GET)
+	public String create() {
+		
+		return "/room/create";
+	}
 	
 	@RequestMapping("/room/list")
 	public String list(HttpServletRequest request, Model model) {

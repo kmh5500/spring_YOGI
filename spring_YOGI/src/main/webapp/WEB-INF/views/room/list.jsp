@@ -50,6 +50,7 @@
       range: true,
       min: 0,
       max: 500000,
+      step : 100,
       values: [ 0, 500000 ],
       slide: function( event, ui ) {
         $( "#price" ).html( ui.values[ 0 ] + "원 ~ " + ui.values[ 1 ] + "원" );

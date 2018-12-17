@@ -1,5 +1,7 @@
 package spring.model.room;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import spring.model.hotel.HotelDTO;
 
 public class RoomDTO {
@@ -12,10 +14,17 @@ public class RoomDTO {
 	private int hnum;
 	private int rprice;
 	private double rrate;
+	private MultipartFile filenameMF;
 	
 	private HotelDTO hdto;
 	
 	
+	public MultipartFile getFilenameMF() {
+		return filenameMF;
+	}
+	public void setFilenameMF(MultipartFile filenameMF) {
+		this.filenameMF = filenameMF;
+	}
 	public HotelDTO getHdto() {
 		return hdto;
 	}

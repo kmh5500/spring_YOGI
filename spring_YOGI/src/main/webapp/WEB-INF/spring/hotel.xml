@@ -5,10 +5,41 @@
 
 <tiles-definitions> 
     
+    <definition name="/room/rlist" extends="main"> 
+        <put-attribute name="title" value="관리자 방 목록" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/room/rlist.jsp" /> 
+    </definition>   
     <definition name="/room/list" extends="main"> 
         <put-attribute name="title" value="방 목록" ></put-attribute> 
         <put-attribute name="body" value="/WEB-INF/views/room/list.jsp" /> 
     </definition>   
+    <definition name="/room/create" extends="main"> 
+        <put-attribute name="title" value="방 등록" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/room/createForm.jsp" /> 
+    </definition>   
+    <definition name="/room/update" extends="main"> 
+        <put-attribute name="title" value="방 수정" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/room/updateForm.jsp" /> 
+    </definition>
+    <definition name="/room/read" extends="main"> 
+        <put-attribute name="title" value="방 보기" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/room/read.jsp" /> 
+    </definition>
+    
+    
+    <definition name="/hotel/create" extends="main"> 
+        <put-attribute name="title" value="호텔 등록" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/hotel/createForm.jsp" /> 
+    </definition>
+    <definition name="/hotel/update" extends="main"> 
+        <put-attribute name="title" value="호텔 수정" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/hotel/updateForm.jsp" /> 
+    </definition>
+    <definition name="/hotel/read" extends="main"> 
+        <put-attribute name="title" value="호텔 보기" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/hotel/read.jsp" /> 
+    </definition>
+       
     
     
 </tiles-definitions> 

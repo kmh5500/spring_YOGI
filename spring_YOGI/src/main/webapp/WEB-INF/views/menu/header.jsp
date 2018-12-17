@@ -32,6 +32,7 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class="propClone"><a href="/views/home.jsp">Home</a></li>
 				<li class="propClone"><a href="${root}/room/list">호텔예약</a></li>
+				<li class="propClone"><a href="${root}/room/create">방등록</a></li>
 				<li class="propClone"><a href="${root}/booking/create">제휴관련</a></li>
 				<li class="propClone"><a href="checkout.html">예약내역</a></li>
 				<li class="propClone"><a href="contact.html">게시판</a></li>

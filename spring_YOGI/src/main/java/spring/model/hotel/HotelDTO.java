@@ -1,5 +1,7 @@
 package spring.model.hotel;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class HotelDTO {
 	private int hnum;
 	private String hname;
@@ -13,6 +15,16 @@ public class HotelDTO {
 	private String hcheckin;
 	private String hcheckout;
 	private double hstar;
+	private MultipartFile filenameMF;
+	
+	
+	public MultipartFile getFilenameMF() {
+		return filenameMF;
+	}
+
+	public void setFilenameMF(MultipartFile filenameMF) {
+		this.filenameMF = filenameMF;
+	}
 
 	public int getHnum() {
 		return hnum;
