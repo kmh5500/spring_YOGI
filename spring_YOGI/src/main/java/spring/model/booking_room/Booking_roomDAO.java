@@ -74,9 +74,18 @@ public class Booking_roomDAO implements IBooking_roomDAO {
 		
 	}
 
+	// 페이징 처리를 위해
 	@Override
 	public int total(Map map) throws Exception {
 		return 0;
+	}
+
+	// name, phone, bcnt를 가져오기 위해
+	@Override
+	public Map readMember(String id) throws Exception {
+		
+		return sst.selectOne("booking_room.readMember", id);
+		
 	}
 	
 }

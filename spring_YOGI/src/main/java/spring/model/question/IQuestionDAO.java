@@ -6,5 +6,6 @@ import spring.model.yogiinter.DAOSTDInter;
 
 public interface IQuestionDAO extends DAOSTDInter {
 
-	boolean checkPasswd(Map map) throws Exception;
+	public boolean checkPasswd(Map map) throws Exception;
+	
 }
