@@ -1,6 +1,7 @@
 package spring.sts.yogi;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -57,8 +58,43 @@ public class Booking_roomController {
 		
 	}
 	
-	@RequestMapping("/booking_room/list")
-	public String list() {
+	@RequestMapping("/booking_room/hlist")
+	public String hlist() {
+		
+		return "/error/error";
+		
+	}
+	
+	@RequestMapping("/booking_room/mlist")
+	public String mlist(HttpServletRequest request, Model model) {
+		
+		
+		String inSdate = 
+		
+		String[] sdate = request.getParameter("sdate").split("/");
+		String[] edate = request.getParameter("edate").split("/");
+		
+		String term = String.format("%s-%s-%s ~ %s-%s-%s", 
+				sdate[2], sdate[1], sdate[0], edate[2], edate[1], edate[0]);
+		
+		
+		Map map = new HashMap();
+		map.put("inId", request.getParameter("id"));
+		map.put("inSdate", inSdate);
+		map.put("inEdate", inEdate);
+		map.put("sno", sno);
+		map.put("end", eno);
+		
+		
+		
+		model.addAttribute("mlist", mlist);
+		model.addAttribute("inSdate", inSdate);
+		model.addAttribute("inEdate", inEdate);
+		model.addAttribute("nowPage", nowPage);
+		
+		
+		
+		
 		
 		return "/error/error";
 		

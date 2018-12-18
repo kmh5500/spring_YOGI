@@ -44,21 +44,68 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where bnum = #{bnum}
  </select> 
  
- <select id="list" parameterType="Map" resultType="Booking_roomDTO">
- 	<![CDATA[
+ <select id="mlist" parameterType="Map" resultType="Booking_roomDTO">
+	<![CDATA[
 	select bnum, bhname, brtype, startDate, endDate, bstatus, r
 	from (
 	        select bnum, bhname, brtype, startDate, endDate, bstatus, rownum r
 	        from (
 	                select bnum, bhname, brtype, startDate, endDate, bstatus
 	                from booking_room
-	                where id_FK = #{id_FK}
-	                and endDate >= #{inSdate} and startDate <= #{inEdate}
+	                where id_FK = #{inId}
+	                and endDate >= #{inSdate} 
+	                and startDate <= #{inEdate}
 	                order by startDate desc, endDate desc
 	        )
-	)
+	) 	
 	where r >= #{sno} and r <= #{eno}
 	]]>
+ </select>
+ 
+ <select id="mtotal" parameterType="Map" resultType="int">
+	<![CDATA[
+	select count(*) from booking_room
+    where id_FK = #{inId}
+    and endDate >= #{inSdate} 
+    and startDate <= #{inEdate} 
+    ]]>
+ </select>
+ 
+ <select id="hlist" parameterType="Map" resultType="Booking_roomDTO">	
+	select bnum, rnum_FK, brtype, startDate, endDate, bstatus, r
+	from (
+	        select bnum, rnum_FK, brtype, startDate, endDate, bstatus, rownum r
+	        from (
+	                select bnum, rnum_FK, brtype, startDate, endDate, bstatus
+					from booking_room, hotel				
+					where hid = #{sid}
+					and bhname = hname
+				    <![CDATA[
+				    and endDate >= #{inSdate} 
+				    and startDate <= #{inEdate}
+				    ]]>
+				    and rnum_FK = #{inRnum}
+				    and brtype = #{inRtype}
+				    and bstatus = #{inStatus}
+	                order by startDate desc, endDate desc
+	        )
+	) 	
+	<![CDATA[
+	where r >= #{sno} and r <= #{eno}
+	]]>
+ </select>
+ 
+ <select id="htotal" parameterType="Map" resultType="int">
+	select count(*) from booking_room, hotel				
+	where hid = #{sid}
+	and bhname = hname
+    <![CDATA[
+    and endDate >= #{inSdate} 
+    and startDate <= #{inEdate}
+    ]]>
+    and rnum_FK = #{inRnum}
+    and brtype = #{inRtype}
+    and bstatus = #{inStatus}
  </select>
  
  <select id="readMember" parameterType="String" resultType="Map">

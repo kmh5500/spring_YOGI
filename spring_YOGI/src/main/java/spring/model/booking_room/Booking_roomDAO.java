@@ -66,18 +66,17 @@ public class Booking_roomDAO implements IBooking_roomDAO {
 		return flag;
 	}
 
-	// 예약 전체 리스트 확인
 	@Override
 	public List list(Map map) throws Exception {
-		
-		return sst.selectList("booking_room.list", map);
-		
+		return null;		
 	}
 
 	// 페이징 처리를 위해
 	@Override
 	public int total(Map map) throws Exception {
+		
 		return 0;
+		
 	}
 
 	// name, phone, bcnt를 가져오기 위해
@@ -85,6 +84,22 @@ public class Booking_roomDAO implements IBooking_roomDAO {
 	public Map readMember(String id) throws Exception {
 		
 		return sst.selectOne("booking_room.readMember", id);
+		
+	}
+
+	// 일반 회원이 확인 가능한 예약 목록
+	@Override
+	public List mlist(Map map) throws Exception {
+		
+		return sst.selectList("booking_room.mlist", map);
+		
+	}
+
+	// 호텔 관리자가 확인 가능한 예약 목록
+	@Override
+	public List hlist(Map map) throws Exception {
+		
+		return sst.selectList("booking_room.hlist", map);
 		
 	}
 	

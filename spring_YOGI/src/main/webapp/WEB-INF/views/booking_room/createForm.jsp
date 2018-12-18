@@ -27,14 +27,15 @@
 }
 #booking_right {
 	 float: right; 
-	 width: 40%; 
+	 width: 30%; 
 	 background-color: #f0eef0; 
 	 margin-top: 3%; 
 	 margin-bottom: 10%;
-	 margin-right: 5%;
+	 margin-right: 25%;
 }
 </style>
 
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
 <script type="text/javascript">
 function checkB(f) {
 	if(f.bname.value == "") {
@@ -49,6 +50,34 @@ function checkB(f) {
 		
 		return false;
 	}		
+	if(f.checkAll.checked == false) {
+		alert("약관동의를 확인해주세요.");
+		f.checkAll.focus();
+		
+		return false;
+	}
+	
+}
+
+$(function() {
+	$("#checkAll").click(function() {
+		if ($("#checkAll").prop("checked")) {
+			$("input[type=checkbox]").prop("checked", true);
+		} else {
+			$("input[type=checkbox]").prop("checked", false);
+		}
+	})
+});
+
+function re(b) {
+	var f = document.frm;
+	
+	if(b.checked == false) {		  	
+		f.checkAll.checked = false;
+	}
+	else if(f.checkOne[0].checked==true && f.checkOne[1].checked==true && f.checkOne[2].checked==true) {
+		f.checkAll.checked = true;
+	}
 }
 </script>
 
@@ -58,7 +87,7 @@ function checkB(f) {
 <!-- div.clearfix 이후에는 float 적용 안 됨 (footer 문제 해결) -->
 <div class="clearfix">
 
-  <form action="create" method="post" onsubmit="return checkB(this)">
+  <form name="frm" action="create" method="post" onsubmit="return checkB(this)">
   
     <input type="hidden" name="bhname" value="${param.hname }">
     <input type="hidden" name="brtype" value="${param.rtype }">
@@ -75,23 +104,23 @@ function checkB(f) {
 
 	<!--왼쪽 float -->
     <div id="booking_left">
-      <div style="width: 90%; margin-left: 5%; margin-top: 10%;">
+      <div style="width: 90%; margin-left: 15%; margin-top: 10%;">
  
 		<h3>예약자 정보</h3>
 			
 		예약자명<br>
 		&nbsp;<input type="text" name="bname" value="${name }">
-		<br>@(ajax 이용)회원가입 시 등록된 이름과 예약자명이 다릅니다. 정말 'value'로 예약하시겠습니까?<br>
-		<input type="button" value="예">
-		<input type="button" value="내 정보의 이름 사용하기">
-		<br><br><br>
+<!-- 		<br>@(ajax 이용)회원가입 시 등록된 이름과 예약자명이 다릅니다. 정말 'value'로 예약하시겠습니까?<br> -->
+<!-- 		<input type="button" value="예"> -->
+<!-- 		<input type="button" value="내 정보의 이름 사용하기"> -->
+		<br><br>
 		
 		휴대폰 번호<br>
 		&nbsp;<input type="text" name="bphone" value="${phone }">
-		<br>@(ajax 이용)회원가입 시 등록된 휴대폰번호와 입력한 휴대폰 번호가 다릅니다. 정말 'value'로 예약하시겠습니까?<br>
-		<input type="button" value="예">
-		<input type="button" value="내 정보의 전화번호 사용하기">
-		<br><br><br>
+<!-- 		<br>@(ajax 이용)회원가입 시 등록된 휴대폰번호와 입력한 휴대폰 번호가 다릅니다. 정말 'value'로 예약하시겠습니까?<br> -->
+<!-- 		<input type="button" value="예"> -->
+<!-- 		<input type="button" value="내 정보의 전화번호 사용하기"> -->
+		<br><br>
 		
 		<br>		
 		<h3>결제 수단 안내</h3>
@@ -107,11 +136,14 @@ function checkB(f) {
 		</div>
 		
 		<br><br>
-		
-		<input type="checkbox">전체동의<br>
-		&nbsp;<input type="checkbox">숙소 이용 규칙 동의 <b style="color: #ff0000">(필수)</b><br>
-		&nbsp;<input type="checkbox">취소/환불규정 동의 <b style="color: #ff0000">(필수)</b><br>
-		&nbsp;<input type="checkbox">개인정보 수집 및 이용 동의 <b style="color: #ff0000">(필수)</b><br>
+				
+		<input type="checkbox" name="checkAll" id="checkAll">전체동의<br>
+		&nbsp;<input type="checkbox" name="checkOne" onchange="re(this)">
+		숙소 이용 규칙 동의 <b style="color: #ff0000">(필수)</b><br>
+		&nbsp;<input type="checkbox" name="checkOne" onchange="re(this)">
+		취소/환불규정 동의 <b style="color: #ff0000">(필수)</b><br>
+		&nbsp;<input type="checkbox" name="checkOne" onchange="re(this)">
+		개인정보 수집 및 이용 동의 <b style="color: #ff0000">(필수)</b><br>
 	    
       </div>
     </div>
@@ -160,7 +192,7 @@ function checkB(f) {
 		
 		<div style="margin-left: 8px">
 		<ul>
-		  <li>해당 객실가는 세금, 청소료, 봉사료 등이 포함된 금액입니다.</li>
+		  <li>해당 객실가는 세금, 봉사료 등이 포함된 금액입니다.</li>
 		</ul>
 		</div>
 
