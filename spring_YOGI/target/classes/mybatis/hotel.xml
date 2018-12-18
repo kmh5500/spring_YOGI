@@ -3,12 +3,31 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="hotel">
+
+	<select id="checkHnum" parameterType="String" resultType="int">
+		select hnum
+		from hotel
+		where hid = #{hid}
+	</select>
+
+	<select id="duplicateHname" parameterType="String" resultType="int">
+		select count(hname)
+		from hotel
+		where hname = #{hname} 
+	</select>
+	
+	<select id="duplicateHemail" parameterType="String" resultType="int">
+		select count(hemail)
+		from hotel  
+		where hemail = #{hemail} 
+	</select>
+
 	<insert id="create" parameterType="HotelDTO">
 		insert into hotel(hnum, hname,
-		hphone, hemail, hzipcode, haddress1, haddress2, hfname, hinfo, hcheckin, hcheckout, hid)
+		hphone, hemail, hzipcode, haddress1, haddress2, hfname, hinfo, hcheckin, hcheckout, hstar, hid)
 		values(seq_hnum.nextval, #{hname},
 		#{hphone}, #{hemail}, #{hzipcode},
-		#{haddress1}, #{haddress2}, #{hfname}, #{hinfo}, #{hcheckin}, #{hcheckout}, #{sessionScope.id})
+		#{haddress1}, #{haddress2}, #{hfname}, #{hinfo}, #{hcheckin}, #{hcheckout}, #{hstar}, #{hid})
 	</insert>
 
 	<select id="read" parameterType="HotelDTO">

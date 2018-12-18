@@ -66,4 +66,27 @@ public class HotelDAO implements IHotelDAO {
 		
 	}
 
+	@Override
+	public boolean duplicateHname(String hname) throws Exception {
+		boolean flag = false;
+		int cnt = session.selectOne("hotel.duplicateHname", hname);
+		if(cnt>0)flag=true;
+		return flag;
+		
+	}
+
+	@Override
+	public boolean duplicateHemail(String hemail) throws Exception {
+		boolean flag = false;
+		int cnt = session.selectOne("hotel.duplicateHemail", hemail);
+		if(cnt>0)flag=true;
+		return flag;
+	}
+
+	@Override
+	public int checkHnum(String hid) throws Exception {
+		
+		return session.selectOne("hotel.checkHnum", hid);
+	}
+
 }

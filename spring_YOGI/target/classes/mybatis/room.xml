@@ -115,7 +115,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    ]]>
 	</select>
 
-
+	<select id="rlist" resultMap="roomMap" parameterType="Map">
+		select rty, rpr, rra, rfn, hna, hst, rn
+		from(
+			select rty, rpr, rra, rfn, hna, hst, rownum as rn
+			from (
+				select r.rtype as rty, r.rprice as rpr, r.rrate as rra, r.rfname as rfn, h.hname as hna, h.hstar as hst
+				from room r, hotel h
+				where r.hnum=h.hnum
+		        
+			ORDER BY r.rnum DESC
+			)
+		)                                                                            
+   <![CDATA[                                                                        
+   where rn>=#{sno} and rn<=#{eno}  
+   ]]>
+	</select>
 
 
 	<select id="total" parameterType="Map" resultType="int">

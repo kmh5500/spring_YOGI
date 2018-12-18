@@ -15,15 +15,24 @@ public class HotelDTO {
 	private String hcheckin;
 	private String hcheckout;
 	private double hstar;
-	private MultipartFile filenameMF;
+	private String hid;
+	private MultipartFile fnameMF;
 	
 	
-	public MultipartFile getFilenameMF() {
-		return filenameMF;
+	public String getHid() {
+		return hid;
 	}
 
-	public void setFilenameMF(MultipartFile filenameMF) {
-		this.filenameMF = filenameMF;
+	public void setHid(String hid) {
+		this.hid = hid;
+	}
+
+	public MultipartFile getFnameMF() {
+		return fnameMF;
+	}
+
+	public void setFnameMF(MultipartFile fnameMF) {
+		this.fnameMF = fnameMF;
 	}
 
 	public int getHnum() {

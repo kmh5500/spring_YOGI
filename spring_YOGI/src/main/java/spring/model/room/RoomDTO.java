@@ -14,16 +14,16 @@ public class RoomDTO {
 	private int hnum;
 	private int rprice;
 	private double rrate;
-	private MultipartFile filenameMF;
+	private MultipartFile fnameMF;
 	
 	private HotelDTO hdto;
 	
 	
-	public MultipartFile getFilenameMF() {
-		return filenameMF;
+	public MultipartFile getFnameMF() {
+		return fnameMF;
 	}
-	public void setFilenameMF(MultipartFile filenameMF) {
-		this.filenameMF = filenameMF;
+	public void setFnameMF(MultipartFile fnameMF) {
+		this.fnameMF = fnameMF;
 	}
 	public HotelDTO getHdto() {
 		return hdto;

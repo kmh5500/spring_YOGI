@@ -31,6 +31,14 @@
         <put-attribute name="title" value="호텔 등록" ></put-attribute> 
         <put-attribute name="body" value="/WEB-INF/views/hotel/createForm.jsp" /> 
     </definition>
+    <definition name="/hotel/createProc" extends="main"> 
+        <put-attribute name="title" value="호텔 등록처리" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/hotel/createProc.jsp" /> 
+    </definition>
+    <definition name="/hotel/pcreate" extends="main"> 
+        <put-attribute name="title" value="중복확인" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/hotel/pcreateProc.jsp" /> 
+    </definition> 
     <definition name="/hotel/update" extends="main"> 
         <put-attribute name="title" value="호텔 수정" ></put-attribute> 
         <put-attribute name="body" value="/WEB-INF/views/hotel/updateForm.jsp" /> 
