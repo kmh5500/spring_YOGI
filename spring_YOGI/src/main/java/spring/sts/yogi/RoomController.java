@@ -34,8 +34,8 @@ public class RoomController {
 		String hid = "user1";
 		
 		int hnum = hdao.checkHnum(hid);
-		double rrate = Integer.parseInt(request.getParameter("rrate"))/100;
-		
+		double rrate = dto.getRrate()/100;
+		System.out.println(rrate);
 		dto.setHnum(hnum);
 		dto.setRrate(rrate);
 		
@@ -49,7 +49,7 @@ public class RoomController {
 	 	boolean flag;
 			flag = dao.create(dto);
 			if(flag) {
-				return "redirect:/room/rlist";
+				return "redirect:/room/list";
 			}else {
 				if(!rfname.equals(""))
 					Utility.deleteFile(upDir, rfname);
