@@ -7,6 +7,7 @@ import spring.model.yogiinter.DAOSTDInter;
 public interface IMemberDAO extends DAOSTDInter {
 	
 	boolean updatePass(Map map);
+	boolean updatenewPass(Map map);
 	int passCheck(Map map);
 	int idCheck(String id);
 	int emailCheck(String email);
@@ -18,5 +19,6 @@ public interface IMemberDAO extends DAOSTDInter {
 	String getGrade(String id);
 	String findid(String email);
 	String findpass(String email);
+	String getRamdomPassword(int len);
 	
 }

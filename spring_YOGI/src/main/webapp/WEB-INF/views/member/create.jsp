@@ -11,26 +11,29 @@
 </head>
 
 <script type="text/javascript">
+var idresult ;
+var emailresult;
 function inputCheck(f){
-	if(!f.id.value==""){
-		 $.ajax({
-		    	
-		        data : {
-		            id : f.id.value
-		        },
-		        url : "idCheck",
-		        success : function(result) {
-		        	
-		        	if(result=="1"){
-		        		alert("아이디 중복을 확인해주세요");
-		        		f.id.focus();
-		        		return false;
-						}
-		        }
-	    });
+	
+	if(idresult == '1'){
+		alert("아이디 중복을 확인해주세요");
+		 
+		f.id.value = "";
+		f.id.focus();
+		return false;
+		 	
 	}
+	if(emailresult == '1'){
+		alert("이메일 중복을 확인해주세요");
+		 
+		f.email.value = "";
+		f.email.focus();
+		return false;
+		 	
+	}
+	
 	if(f.id.value==""){
-		alert("이이디를 입력해 주세요");
+		alert("아이디를 입력해 주세요");
 		f.id.focus();
 		return false;
 	}	
@@ -69,6 +72,8 @@ function inputCheck(f){
 	f.email.focus();
 	return false;
 	}
+	
+	
 	
 	
 }
@@ -125,6 +130,7 @@ function checkId() {
         },
         url : "idCheck",
         success : function(result) {
+        	idresult = result;
         	if(inputed=="" && result=="0"){
         	$("#idcheck").text("아이디를 입력해주세요").css("color","red");
         	
@@ -166,6 +172,7 @@ function checkEmail() {
         },
         url : "emailCheck",
         success : function(result) {
+        	emailresult = result;
         	if(inputed=="" && result=="0"){
         	$("#emailcheck").text("이메일을 입력해주세요").css("color","red");
         	

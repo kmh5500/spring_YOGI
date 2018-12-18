@@ -23,7 +23,7 @@ public class InfoController {
 	@Autowired
 	private InfoDAO infoDao;
 	
-	@RequestMapping("/info")
+	@RequestMapping("/info/list")
 	public String info(Model model,HttpServletRequest request) {
 		
 		String col = Utility.checkNull(request.getParameter("col"));
@@ -51,11 +51,25 @@ public class InfoController {
 		map.put("word", word);
 		map.put("sno", sno);
 		map.put("eno", eno);
+		
+	
 
 		List<InfoDTO> infoList=infoDao.list(map);
 		model.addAttribute("list", infoList);
 		
-		return "/info";
+		int totalRecord = infoDao.total(map);
+
+		String paging = Utility.paging3(totalRecord, nowPage, recordPerPage, col, word);
+		// 전체 레코드 개수는 col, word 필요
+		// 검색 시에도 페이징을 해줘야 하기 때문에
+
+		
+		model.addAttribute("paging", paging);
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("col", col);
+		model.addAttribute("word", word);
+		
+		return "/info/list";
 	}
 	
 	@RequestMapping(value="info/create",method=RequestMethod.GET)
@@ -67,9 +81,11 @@ public class InfoController {
 	@RequestMapping(value="/info/create",method=RequestMethod.POST)
 	public String create(InfoDTO infoDto,Model model,HttpServletRequest request) {
 		
+		
+
 		boolean flag = infoDao.create(infoDto);
 		if(flag) {
-			return "redirect:/info";
+			return "redirect:/info/list";
 		}else {
 			
 		}
@@ -78,8 +94,10 @@ public class InfoController {
 	}
 	@RequestMapping("/info/read")
 	public String read(int informnum,HttpServletRequest request,Model model) {
+		
 		InfoDTO  infoDto = (InfoDTO) infoDao.read(informnum);
 		infoDto.setContent(infoDto.getContent().replaceAll("\r\n","<br>"));
+		infoDao.upViewcnt(infoDto.getInformnum());
 		model.addAttribute("dto", infoDto);
 		
 		return "/info/read";
@@ -95,6 +113,8 @@ public class InfoController {
 	
 	@RequestMapping(value="/info/update",method=RequestMethod.POST)
 	public String update(InfoDTO infoDto,Model model,HttpServletRequest request) {
+		
+		
 		boolean flag = infoDao.update(infoDto);
 		if(flag) {
 			model.addAttribute("informnum", infoDto.getInformnum());

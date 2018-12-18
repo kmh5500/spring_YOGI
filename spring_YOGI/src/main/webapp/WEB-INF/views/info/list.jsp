@@ -12,7 +12,7 @@
 
 <script type="text/javascript">
 function infoRead(informnum){
-	var url = "info/read";
+	var url = "./read";
 	url = url + "?informnum="+ informnum;
 	url = url + "&col=${col}";
 	url = url + "&word=${word}";
@@ -28,7 +28,7 @@ function infoRead(informnum){
 
 	<!-- *********************************************** -->
 
-
+<div class="container">
 	<div class="search">
 
 		<form name="frm" method="post" action="./list">
@@ -46,13 +46,13 @@ function infoRead(informnum){
 
 			<button>검색</button>
 			<c:if test="${sessionScope.grade=='Y' }">
-			<button type="button" onclick="location.href='./info/create'">등록</button>
+			<button type="button" onclick="location.href='./create'">등록</button>
 			</c:if>
 		</form>
 
 	</div>
 
-	<div class="container">
+	
 
 		<h2>
 			<span class="glyphicon glyphicon-th-list"></span> 게시판 목록
@@ -106,6 +106,7 @@ function infoRead(informnum){
 		<DIV class='bottom'></DIV>
 
 	</div>
+<DIV class='bottom'>${paging}</DIV>
 
 </body>
 </html>

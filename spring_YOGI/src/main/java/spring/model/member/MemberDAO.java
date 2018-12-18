@@ -77,6 +77,18 @@ public class MemberDAO implements IMemberDAO{
 		return flag;
 		
 	}
+	
+	@Override
+	public boolean updatenewPass(Map map) {
+		// TODO Auto-generated method stub
+		boolean flag = false;
+		int cnt  =  mysql.insert("member.updatenewPass", map);
+		if(cnt > 0 ) { 
+			flag = true;
+		}
+		return flag;
+	}
+
 
 	@Override
 	public int passCheck(Map map) {
@@ -145,5 +157,29 @@ public class MemberDAO implements IMemberDAO{
 		// TODO Auto-generated method stub
 		return mysql.selectOne("member.findpass", email);
 	}
+	
+	public int idEmailCheck(Map map) {
+		// TODO Auto-generated method stub
+		return mysql.selectOne("member.idemailcheck", map);
+	}
+	
+	@Override
+	public String getRamdomPassword(int len) { 
+		char[] charSet = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 
+				'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+				'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+	    int idx = 0; 
+	    StringBuffer sb = new StringBuffer();
+	    //System.out.println("charSet.length :::: "+charSet.length); 
+		        for (int i = 0; i < len; i++) { 
+		        	idx = (int) (charSet.length * Math.random()); // 36 * 생성된 난수를 Int로 추출 (소숫점제거)
+		        	//System.out.println("idx :::: "+idx);
+		        	sb.append(charSet[idx]); 
+		        	} 
+		        return sb.toString(); 
+	}
 
+	
+
+	
 }

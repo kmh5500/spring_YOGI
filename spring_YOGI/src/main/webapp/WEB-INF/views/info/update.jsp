@@ -45,7 +45,7 @@ function blist() {
 
 <FORM name='frm' method='POST' action='./update' onsubmit="return bcheck(this)"
 	  enctype="multipart/form-data">
-<div class="w3-container" style="width:100%">
+<div class="container" style="width:50%">
 	<div class=" w3-bar w3-panel w3-pale-red w3-leftbar w3-border-red">
 	  <p>글 작성</p>
 	  <input type="hidden"  name ="informnum" value="${dto.informnum}">         

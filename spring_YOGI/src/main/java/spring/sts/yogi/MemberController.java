@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import spring.model.member.MemberDAO;
 import spring.model.member.MemberDTO;
+import spring.model.member.MemberService;
 import spring.utility.yogi.Utility;
 
 @Controller
@@ -29,6 +30,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberDAO memberdao;
+	
+	@Autowired
+	private MemberService memebersv;
 	
 	@Autowired 
 	private JavaMailSenderImpl mailSender;
@@ -48,7 +52,11 @@ public class MemberController {
 		String findId = memberdao.findid(email);
 		final StringBuffer sb = new StringBuffer();
 		if(findId!=null) {
-			sb.append("당신의 아이디는 "+findId+"입니다.");
+			sb.append("<div align='center' style='border:1px solid black; font-family:verdana'>");
+			sb.append("<h3 style='color: blue;'>");
+			sb.append("귀하의 아이디 찾기 결과입니다.</h3>");
+			sb.append("<p>아이디는 : "+findId);
+			sb.append("</p></div>");
 			final MimeMessagePreparator preparator = new MimeMessagePreparator() {
 				@Override public void prepare(MimeMessage mimeMessage) throws Exception { 
 					final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
@@ -75,19 +83,29 @@ public class MemberController {
 	@RequestMapping(value="/member/pass")
 	public String sendpass(final String email, Model model) {
 		boolean flag = false;
+		String newpass = memberdao.getRamdomPassword(8);
+		Map map = new HashMap();
+	//	map.put("id", id);
+		map.put("email", email);
+		map.put("newpass", newpass);
 		
 		//이메일 발송 부분
 		
 		String findPass = memberdao.findpass(email);
 		final StringBuffer sb = new StringBuffer();
-		if(findPass!=null) {
-			sb.append("당신의 비밀번호는 "+findPass+"입니다.");
+		if(memberdao.updatenewPass(map)) {
+			
+			sb.append("<div align='center' style='border:1px solid black; font-family:verdana'>");
+			sb.append("<h3 style='color: blue;'>");
+			sb.append("님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>");
+			sb.append("<p>임시 비밀번호 : "+newpass);
+			sb.append("</p></div>");
 			final MimeMessagePreparator preparator = new MimeMessagePreparator() {
 				@Override public void prepare(MimeMessage mimeMessage) throws Exception { 
 					final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 					helper.setFrom("soldeskyogi@gmail.com"); 
 					helper.setTo(email);
-					helper.setSubject("테스트 메일입니다");
+					helper.setSubject("yogi 임시 비밀번호 발급입니다.");
 					helper.setText(sb.toString(), true);
 				} 
 			}; 
@@ -277,6 +295,77 @@ public class MemberController {
 				
 	}
 	
+	@RequestMapping(value="/member/update",method = RequestMethod.POST)
+	public String update(MemberDTO memberdto, HttpSession session, Model model) throws Exception {
+		
+		
+		String id=(String)session.getAttribute("id");
+		memberdto.setId(id);
+		if(memberdao.update(memberdto)) {
+			model.addAttribute("id", id);
+			return "redirect:/member/read";
+		}else {
+		return "/member/choice";
+		}
+	}
+	
+	@RequestMapping(value="/member/updatepass",method = RequestMethod.GET)
+	public String updatepass(HttpSession session, Model model) throws Exception {
+		
+		
+		String id=(String)session.getAttribute("id");
+		if(id==null) {
+		return "/error/error";	
+		}else {
+			model.addAttribute("id", id);
+			return "/member/updatepass";
+		}
+		
+	}
+	@RequestMapping(value="/member/updatepass",method = RequestMethod.POST)
+	public String updatepass(String newpass,String oldpass, HttpSession session, Model model) throws Exception {
+		
+		
+		String id=(String)session.getAttribute("id");
+		Map map = new HashMap();
+		map.put("oldpass", oldpass);
+		map.put("id",id);
+		map.put("newpass", newpass);
+		if(memberdao.updatePass(map)) {
+			
+			session.invalidate();
+			return "/member/passcom";
+		}else {
+			return "/error/passwdError";
+		}
+	}
+	
+	@RequestMapping(value="/member/delete",method = RequestMethod.GET)
+	public String delete(HttpSession session, Model model) {
+		String id=(String)session.getAttribute("id");
+		if(id!=null) {
+			model.addAttribute("id", id);
+			return "/member/del";
+		}else {
+		
+		return "/error/delete";
+		}
+	}
+	
+	@RequestMapping(value="/member/delete",method = RequestMethod.POST)
+	public String delete(HttpSession session) {
+		String id=(String)session.getAttribute("id");
+		if(id!=null) {
+			if(memebersv.allDelete(id)) {
+				session.invalidate();
+				return "/member/delete";
+			}return "/error/delete";
+		}else {
+			
+			return "/error/delete";
+		}
+	}
+	
 	
 	@ResponseBody
 	@RequestMapping(value="/member/idCheck", method=RequestMethod.GET)
@@ -298,6 +387,22 @@ public class MemberController {
 		String check = "0"; //중복이 아니면 문자열 0을 리턴
 		if(memberdao.emailCheck(email)==1) {
 			check="1"; //중복이면 문자열 1을 리턴
+		}
+		System.out.println(check);
+		return check;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/member/idEmailCheck", method=RequestMethod.GET)
+	public String idEmailCheck(String email,String id) {
+		System.out.println(email);
+		System.out.println(memberdao);
+		String check = "0"; //중복이 아니면 문자열 0을 리턴
+		Map map = new HashMap();
+		map.put("id", id);
+		map.put("email", email);
+		if(memberdao.idEmailCheck(map)==1) {
+			check="1"; //id 와  email이 일치하면 문자열 1을 리턴
 		}
 		System.out.println(check);
 		return check;

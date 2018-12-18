@@ -62,11 +62,13 @@ function checkEmail() {
 }
 </script>
 <body>
+<div class="container">
 <form action="./pass" id="findForm" method="post">
     <fieldset>
 
         <legend class="screen_out">비밀번호 찾기 폼</legend>
- 
+ 		
+ 	                                                          
         <div class="">
             <label>이메일</label>
 	        <input type="email" class="form-control email" name="email"  
@@ -83,7 +85,7 @@ function checkEmail() {
     </fieldset>
 </form>
 
-
+</div>
 
 
 </body>

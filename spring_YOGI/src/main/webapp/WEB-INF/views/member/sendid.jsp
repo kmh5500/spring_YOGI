@@ -10,10 +10,16 @@
 <body>
 <c:choose>
 	<c:when test="${flag }">
-	ID를 발송하였습니다.이메일을 확인하세요
+	<div align='center' style='border:1px solid black; font-family:verdana'>
+<h3 style='color: blue;'> </h3>                                               
+<p>ID를 발송하였습니다.이메일을 확인하세요</p></div> 
+	
 	</c:when>
 	<c:otherwise>
-	해당 email은 가입되어있지 않습니다.
+	<div align='center' style='border:1px solid black; font-family:verdana'>
+<h3 style='color: blue;'> </h3>                                               
+<p>해당 email은 가입되어있지 않습니다.</p></div> 
+	
 	</c:otherwise>
 </c:choose>
 </body>

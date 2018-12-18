@@ -36,7 +36,7 @@
 				<li class="propClone"><a href="checkout.html">예약내역</a></li>
 				<li class="propClone"><a href="contact.html">게시판</a>
 						<ul>
-					     <li><a href="${root}/info">공지사항</a></li>
+					     <li><a href="${root}/info/list">공지사항</a></li>
 					     <li><a href="#">Galleries</a></li>
 					     <li><a href="#">Apps</a></li>
 					     <li><a href="#">Extensions</a></li>

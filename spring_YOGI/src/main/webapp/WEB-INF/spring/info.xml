@@ -20,7 +20,7 @@
         <put-attribute name="title" value=" info조회" ></put-attribute> 
         <put-attribute name="body" value="/WEB-INF/views/info/read.jsp" /> 
     </definition>   
-      <definition name="/info" extends="main"> 
+      <definition name="/info/list" extends="main"> 
         <put-attribute name="title" value="info 목록" ></put-attribute> 
         <put-attribute name="body" value="/WEB-INF/views/info/list.jsp" /> 
     </definition> 

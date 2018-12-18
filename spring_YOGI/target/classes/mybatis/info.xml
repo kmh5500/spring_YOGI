@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="update" parameterType="infoDTO" >
 	update info 
     set title=#{title}, 
-		content= #{content}         
+		content= #{content},  
 		wname= #{wname}  
 		
 		where informnum= #{informnum}                             
@@ -59,7 +59,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="list" resultType="InfoDTO" parameterType="Map">
-        select informnum, content,wname,wdate,title,viewcnt r
+        select informnum, content,wname,wdate,title,viewcnt, r
         from (select informnum, content, wname,wdate, title,viewcnt,rownum  r 
          from (select informnum, content, wname,wdate, title,viewcnt 
          from info 

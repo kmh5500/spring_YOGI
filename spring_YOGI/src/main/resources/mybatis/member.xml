@@ -28,8 +28,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<update id="update" parameterType="MemberDTO" >
 	update MEMBER set
+		name=#{name}, 
         phone=#{phone}, 
-		eamil= #{eamil}           
+		email= #{email}           
 		where id= #{id}                             
 
 	</update>
@@ -135,6 +136,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where email = #{email}
 	
 	</select>
+	
+	<select id="idemailcheck" parameterType="Map" resultType="int">
+	
+	
+	select  count(*) from member
+	where email = #{email} and id = #{id} 
+	
+	</select>
+	
+	<update id="updatenewPass" parameterType="Map">
+	 
+	
+	 update member set
+	 pass= #{newpass}
+	 where  email = #{email}
+	   
+	 
+	</update>
 	
 	
 	<select id="loginCheck" parameterType="Map" resultType="int">

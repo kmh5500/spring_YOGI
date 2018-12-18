@@ -13,10 +13,10 @@ public class MemberService {
 		boolean flag = false;
 		
 		try {
-			dao.bdrDelete(id);
-			dao.brDelete(id);
-			dao.baDelete(id);
-			dao.cDelete(id);
+			dao.bdrDelete(id); //booked_room
+			dao.brDelete(id);  //booking_room
+			dao.baDelete(id);  //booking_affiliation
+			dao.cDelete(id);   //coupon
 			flag = dao.delete(id);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

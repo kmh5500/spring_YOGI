@@ -62,6 +62,7 @@ function checkEmail() {
 }
 </script>
 <body>
+<div class="container">
 <form action="./id" id="findForm" method="post">
     <fieldset>
         <legend class="screen_out">아이디 찾기 폼</legend>
@@ -82,7 +83,7 @@ function checkEmail() {
 
 </form>
 
-
+</div>
 
 </body>
 </html>
