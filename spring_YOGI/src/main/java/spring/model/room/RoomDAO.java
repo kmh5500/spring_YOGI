@@ -61,4 +61,9 @@ public class RoomDAO implements IRoomDAO {
 		return session.selectList("room.rlist", map);
 	}
 
+	@Override
+	public int rtotal(Map map) throws Exception {
+		return session.selectOne("room.rtotal", map);
+	}
+
 }

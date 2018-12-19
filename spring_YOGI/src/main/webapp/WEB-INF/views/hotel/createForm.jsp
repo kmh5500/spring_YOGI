@@ -63,7 +63,7 @@ function inputCheck(f){
 		f.hphone.focus();
 		return false;
 	}
-	if(f.hmail.value==""){
+	if(f.hemail.value==""){
 		alert("이메일을 입력해 주세요");
 		f.hemail.focus();
 		return false;
@@ -83,9 +83,9 @@ function inputCheck(f){
 		f.haddress2.focus();
 		return false;
 	}
-	if(f.hfname.value==""){
+	if(f.fnameMF.value==""){
 		alert("사진을 등록해 주세요");
-		f.hfname.focus();
+		f.fnameMF.focus();
 		return false;
 	}
 	if(f.hcheckin.value==""){
@@ -99,9 +99,9 @@ function inputCheck(f){
 		return false;
 	}
 	
-	if (CKEDITOR.instances['rinfo'].getData() == '') {
+	if (CKEDITOR.instances['hinfo'].getData() == '') {
 	      window.alert('내용을 입력해 주세요.');
-	      CKEDITOR.instances['rinfo'].focus();
+	      CKEDITOR.instances['hinfo'].focus();
 	      return false;
 	    }
 }

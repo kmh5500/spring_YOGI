@@ -1,6 +1,11 @@
 package spring.sts.yogi;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +24,22 @@ public class HotelController {
 	@Autowired
 	private HotelDAO dao;
 	
+	
+	@RequestMapping("/hotel/read")
+	public String read(int hnum, Model model, HttpServletRequest request) throws Exception {
+		
+		
+		HotelDTO dto = (HotelDTO)dao.read(hnum);
+		
+		String hinfo = dto.getHinfo();
+		hinfo = hinfo.replaceAll("\r\n", "<br>");
+		
+		dto.setHinfo(hinfo);
+		
+		model.addAttribute("dto", dto);
+		
+		return "/hotel/read";
+	}
 	
 	@ResponseBody
 	@RequestMapping(value="/hotel/hemailCheck", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
@@ -65,12 +86,13 @@ public class HotelController {
 	}
 	
 	@RequestMapping("/hotel/createProc")
-	public String create(HotelDTO dto, Model model, HttpServletRequest request) throws Exception{
+	public String create(HotelDTO dto, Model model, HttpServletRequest request, HttpSession session) throws Exception{
 		
 		String str = null;
 		String url = "/hotel/pcreate";
 		int hstar = 0;
-		String hid = "user1";
+		//String hid = (String)session.getAttribute("id");
+		String hid = "user3";
 			if(dao.duplicateHname(dto.getHname())){
 				str = "중복된 호텔명입니다. 호텔명 중복확인을 하세요";
 				model.addAttribute("str", str);
@@ -92,6 +114,7 @@ public class HotelController {
 				boolean flag;
 				
 					flag = dao.create(dto);
+					model.addAttribute("dto", dto);
 					model.addAttribute("flag", flag);
 					
 					url = "/hotel/createProc";

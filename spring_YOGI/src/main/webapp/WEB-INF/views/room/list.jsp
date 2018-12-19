@@ -61,6 +61,14 @@
     $( "#price" ).html(  $( "#slider-range" ).slider( "values", 0 ) +
      "원 ~ " + $( "#slider-range" ).slider( "values", 1 ) + "원");
   });
+  
+  function read(hnum){
+		var url = "read";
+		url = url+"?hnum="+hnum;
+		url = url +"&rnum=${rnum}";
+		url = url +"&nowPage=${nowPage}";
+		location.href = url;
+	}
   </script>
 <body>
 <div class="clearfix">
@@ -135,14 +143,16 @@
 		<c:otherwise>
 			<c:forEach var="dto" items="${list }">
 				<div>
+				<a href="javascript:read('${dto.hnum}')">
 					<img src='${root }/room/storage/${dto.rfname}' width="200px" heigh = "200px">
+					<p>${dto.hnum }</p>
 					<p>${dto.rtype }</p>
-					<p>${dto.rprice }</p>
-					<p>${dto.rrate }</p>
-					<p>${dto.rfname }</p>
+					<p><strike>${dto.rprice }원</strike></p>
+					<p>${Math.round(dto.rrate*100) }%</p>
+					<p>${Math.round(dto.rprice*(1-dto.rrate)) }원</p>
 					<p>${dto.hdto.hname }</p>
 					<p>${dto.hdto.hstar }</p>
-					
+					</a>
 				</div>
 			
 			</c:forEach>

@@ -30,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{haddress1}, #{haddress2}, #{hfname}, #{hinfo}, #{hcheckin}, #{hcheckout}, #{hstar}, #{hid})
 	</insert>
 
-	<select id="read" parameterType="HotelDTO">
+	<select id="read" parameterType="int" resultType="HotelDTO">
 		select hnum, hname, hphone,
 		hemail, hzipcode, haddress1, haddress2, hfname, hinfo
 		from hotel
@@ -52,10 +52,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where hnum = #{hnum}
 	</update>
 
-	<delete id="delete">
-		delete from hotel
-		where hnum = #{hnum}
-	</delete>
 	
 	<select id="list" resultType="HotelDTO" parameterType="Map">
 		select hnum, hname, hfname, r

@@ -45,11 +45,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 
 	<select id="list" resultMap="roomMap" parameterType="Map">
-		select rty, rpr, rra, rfn, hna, hst, rn
+		select rty, rpr, rra, rfn, hna, hst, hnum, rn
 		from(
-			select rty, rpr, rra, rfn, hna, hst, rownum as rn
+			select rty, rpr, rra, rfn, hna, hst, hnum, rownum as rn
 			from (
-				select r.rtype as rty, r.rprice as rpr, r.rrate as rra, r.rfname as rfn, h.hname as hna, h.hstar as hst
+				select r.rtype as rty, r.rprice as rpr, r.rrate as rra, r.rfname as rfn, h.hname as hna, h.hstar as hst, r.hnum as hnum
 				from room r, hotel h
 				<where> r.hnum=h.hnum
 		        and r.rnum not in(
@@ -122,7 +122,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			from (
 				select r.rtype as rty, r.rprice as rpr, r.rrate as rra, r.rfname as rfn, h.hname as hna, h.hstar as hst
 				from room r, hotel h
-				where r.hnum=h.hnum
+				where r.hnum=h.hnum and h.hid = #{hid}
 		        
 			ORDER BY r.rnum DESC
 			)
@@ -193,6 +193,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
            		</where>
 	</select>
 
+	<select id="rtotal" parameterType="Map" resultType="int">
+		select count(*) cnt from room r, hotel h
+		where r.hnum=h.hnum and h.hid = #{hid}
+	</select>
 
 </mapper>
 
