@@ -35,10 +35,10 @@
 				<li class="propClone"><a href="${root}/alliance/create">제휴관련</a>
 					<ul>
 						
-					<li class="propClone"><a href="/views/alliance/createForm.jsp">제휴등록</a></li>
-					<li class="propClone"><a href="/views/alliance/list.jsp">제휴목록</a></li>
+					<li class="propClone"><a href="${root}/alliance/create">제휴등록</a></li>
+					<li class="propClone"><a href="${root}/alliance/list">제휴목록</a></li>
 					
-					
+						
 					
 					
 					</ul>

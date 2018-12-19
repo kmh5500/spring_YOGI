@@ -14,6 +14,8 @@
  </script>
 <body>
 <h2>제휴등록</h2>
+<FORM name='frm' method='POST' action='./create'
+	  enctype="multipart/form-data" onsubmit="return inputCheck(this)">
 <table>
 	
 	
@@ -42,8 +44,11 @@
 	
 </table>
 
-<div >
-	<input type="button" name="submit" value="등록"/>
-</div>
+<DIV class='bottom'>
+    <input type='submit' value='등록'>
+    <input type='reset' value='취소'>
+    <input type='button' value='뒤로가기' onclick="history.back()">
+  </DIV>
+</FORM>
 </body>
 </html>
