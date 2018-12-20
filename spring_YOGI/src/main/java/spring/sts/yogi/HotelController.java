@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import spring.model.hotel.HotelDAO;
 import spring.model.hotel.HotelDTO;
@@ -24,6 +25,39 @@ public class HotelController {
 	@Autowired
 	private HotelDAO dao;
 	
+	@RequestMapping(value="/hotel/update", method=RequestMethod.POST)
+	public String update(HotelDTO dto, int hnum, Model model, HttpServletRequest request, String oldfile, MultipartFile fnameMF) throws Exception {
+		
+		
+		String basePath = request.getRealPath("/hotel/storage");
+		
+		if(dto.getHfname() == null || dto.getHfname() == "") {
+			String hfname = oldfile;
+			dto.setHfname(hfname);
+		}
+		dto.setHfname(Utility.saveFileSpring(dto.getFnameMF(), basePath));
+		
+		boolean flag = false;
+			flag = dao.update(dto);
+			if(flag) {
+				if(dto.getHfname() != oldfile) {
+					Utility.deleteFile(basePath, oldfile);
+				}
+			}
+
+		model.addAttribute("hnum", hnum);	
+		model.addAttribute("dto", dto);
+		return "redirect:/hotel/read";
+	}
+	
+	@RequestMapping(value="/hotel/update", method=RequestMethod.GET)
+	public String update(int hnum, Model model) throws Exception {
+		
+		HotelDTO dto = (HotelDTO) dao.read(hnum);
+		model.addAttribute("dto", dto);
+		
+		return "/hotel/update";
+	}
 	
 	@RequestMapping("/hotel/read")
 	public String read(int hnum, Model model, HttpServletRequest request) throws Exception {
@@ -92,7 +126,7 @@ public class HotelController {
 		String url = "/hotel/pcreate";
 		int hstar = 0;
 		//String hid = (String)session.getAttribute("id");
-		String hid = "user3";
+		String hid = "user8";
 			if(dao.duplicateHname(dto.getHname())){
 				str = "중복된 호텔명입니다. 호텔명 중복확인을 하세요";
 				model.addAttribute("str", str);
@@ -114,6 +148,10 @@ public class HotelController {
 				boolean flag;
 				
 					flag = dao.create(dto);
+					
+					//String hid = (String)session.getAttribute("id");
+					int hnum = dao.checkHnum(hid);
+					dto.setHnum(hnum);
 					model.addAttribute("dto", dto);
 					model.addAttribute("flag", flag);
 					

@@ -19,8 +19,6 @@ function read(hnum){
  
 <div class="container">
 <h2>호텔 등록처리</h2>
-<p>${dto.hnum }</p>
-<p>${param.hnum }</p>
 
 <c:choose>
 	<c:when test="${flag }">호텔등록이 완료되었습니다.<br><br>

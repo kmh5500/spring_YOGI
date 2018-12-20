@@ -32,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="read" parameterType="int" resultType="HotelDTO">
 		select hnum, hname, hphone,
-		hemail, hzipcode, haddress1, haddress2, hfname, hinfo
+		hemail, hzipcode, haddress1, haddress2, hfname, hcheckin, hcheckout, hinfo
 		from hotel
 		where
 		hnum = #{hnum}

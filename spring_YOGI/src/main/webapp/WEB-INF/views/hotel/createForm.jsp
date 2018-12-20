@@ -257,7 +257,7 @@ function hemailCheck(hemail){
     	<td colspan=2><input type="text" name="hcheckout" size="15" placeholder="ex)14:00">
     </tr>
     <TR>
-      <TH>방 정보</TH>
+      <TH>호텔 정보</TH>
       <TD colspan=2><textarea rows="10" cols="45" name="hinfo"></textarea></TD>
     </TR>
   </TABLE>
