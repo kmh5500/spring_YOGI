@@ -145,7 +145,7 @@ hr{
   </div>
   </c:forEach>
   <div class="acreate">
-  <form name="rform" action="./create" method="post" onsubmit="return input(this)">
+  <form name="rform" action="./acreate" method="post" onsubmit="return input(this)">
   <textarea rows="3" cols="28" name="content" onclick="acheck(this)"></textarea>
   <input type="submit" name="asubmit" value="등록">
   

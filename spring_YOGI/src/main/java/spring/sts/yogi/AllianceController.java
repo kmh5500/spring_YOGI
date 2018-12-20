@@ -1,6 +1,7 @@
 package spring.sts.yogi;
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import spring.model.alliance.AllianceDAO;
 import spring.model.alliance.AllianceDTO;
+
 import spring.utility.yogi.Utility;
 
 @Controller
@@ -25,7 +27,25 @@ public class AllianceController {
 	
 	@RequestMapping(value="/alliance/create", method=RequestMethod.POST)
 	public String create(AllianceDTO dto, HttpServletRequest request) throws Exception {
-		String upDir = request.getRealPath("/storage");
+		
+		String upDir = request.getRealPath("/alliance/storage");
+		
+		int filesize = (int)dto.getFnameMF().getSize();
+		String filename ="";
+		if(filesize>0) {
+			filename =Utility.saveFileSpring(dto.getFnameMF(),upDir);
+		}
+		dto.setFname(filename);
+		System.out.println(filename);
+		
+		int size = (int)dto.getSnameMF().getSize();
+		String sizename ="";
+		if(size>0) {
+			sizename =Utility.saveFileSpring(dto.getSnameMF(),upDir);
+		}
+		dto.setSname(sizename);
+		
+		
 		
 		
 		
@@ -44,6 +64,7 @@ public class AllianceController {
 		
 		return "/alliance/create";
 	}
+	
 	@RequestMapping("/alliance/list")
 	public String list(HttpServletRequest request) throws Exception {
 		
@@ -57,7 +78,7 @@ public class AllianceController {
 		}
 			
 		int nowPage = 1;
-		int recordPerPage = 5;
+		int recordPerPage =4;
 			// paging 관련 처리
 			
 		if (request.getParameter("nowPage") != null) {	
@@ -96,19 +117,37 @@ public class AllianceController {
 	}
 	
 	@RequestMapping("/alliance/read")
-	public String read(HttpServletRequest request,int anum) throws Exception {
+	public String read(HttpServletRequest request,int anum, Object list, Object paging) throws Exception {
 		
 		
 		Object dto = dao.read(anum);
 		
-		request.setAttribute("dto", dto);
-	
+		request.setAttribute("dto",dto);
+		/* 댓글 관련  시작 */
+		String url = "read";
+		int nPage= 1; //시작 페이지 번호는 1부터 
+		 
+		if (request.getParameter("nPage") != null) { 
+		nPage= Integer.parseInt(request.getParameter("nPage"));  
+		}
+		int recordPerPage = 4; // 한페이지당 출력할 레코드 갯수
+		 
+		int sno = ((nPage-1) * recordPerPage) + 1; // 
+		int eno = nPage * recordPerPage;
+		 
+		Map map = new HashMap();
+		map.put("sno", sno);
+		map.put("eno", eno);
+		map.put("anum", anum);
 		
-		
-		
-		
+		 
+		request.setAttribute("list",list);
+		request.setAttribute("paging",paging);
+		request.setAttribute("nPage",nPage);
+		 
+		/* 댓글 관련 끝 */ 
+
 		return "/alliance/read";
-		
 	}
 	@RequestMapping(value="/alliance/update", method=RequestMethod.POST)
 	public String update(AllianceDTO dto, Model model) throws Exception {

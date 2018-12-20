@@ -1,5 +1,7 @@
 package spring.model.alliance;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class AllianceDTO {
 
 	
@@ -8,11 +10,10 @@ public class AllianceDTO {
 	private String aname;
 	private String fname;
 	private String sname;
+	private MultipartFile FnameMF;
+	private MultipartFile SnameMF;
 	private String hname;
 	public int getAnum() {
-		
-		
-		
 		return anum;
 	}
 	public void setAnum(int anum) {
@@ -42,6 +43,18 @@ public class AllianceDTO {
 	public void setSname(String sname) {
 		this.sname = sname;
 	}
+	public MultipartFile getFnameMF() {
+		return FnameMF;
+	}
+	public void setFnameMF(MultipartFile fnameMF) {
+		FnameMF = fnameMF;
+	}
+	public MultipartFile getSnameMF() {
+		return SnameMF;
+	}
+	public void setSnameMF(MultipartFile snameMF) {
+		SnameMF = snameMF;
+	}
 	public String getHname() {
 		return hname;
 	}
@@ -52,4 +65,9 @@ public class AllianceDTO {
 	
 	
 	
+	
+	
+	
+	
 }
+	

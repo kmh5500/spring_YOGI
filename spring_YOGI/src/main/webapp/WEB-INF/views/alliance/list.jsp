@@ -146,15 +146,14 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
 
 				<c:otherwise>
 					<c:forEach var="dto" items="${list}" varStatus="status">
-
+	
+	
     <div class="w3-quarter">
-      <img src="${root }/images/hotel20.jpg" alt="hotel20" style="width:100%">
+      <img src="${root }/alliance/storage/${dto.fname}"  style="width:100%">
       <h3>${dto.aname}</h3>
-      <p><h3>${dto.content}</h3></p>
+      <p>${dto.content}</p>
     </div>
-   
-
-						
+    		
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>

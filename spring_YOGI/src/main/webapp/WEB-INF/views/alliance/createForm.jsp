@@ -31,11 +31,11 @@
 
 	<tr>
 		<th>대표사진</th>
-		<td><input type="file" name="fname" accept=".jpg,.png,.gif"></td>
+		<td><input type="file" name="FnameMF" accept=".jpg,.png,.gif"></td>
 	</tr>
 	<tr>
 		<th>상세사진</th>
-		<td><input type="file" name="sname" accept=".jpg,.png,.gif"></td>
+		<td><input type="file" name="SnameMF" accept=".jpg,.png,.gif"></td>
 	</tr>
 	<tr>
 		<th>호텔이름</th>
