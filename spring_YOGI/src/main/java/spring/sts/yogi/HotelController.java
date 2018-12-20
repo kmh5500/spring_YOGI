@@ -34,8 +34,9 @@ public class HotelController {
 		if(dto.getHfname() == null || dto.getHfname() == "") {
 			String hfname = oldfile;
 			dto.setHfname(hfname);
-		}
+		}else{
 		dto.setHfname(Utility.saveFileSpring(dto.getFnameMF(), basePath));
+		}
 		
 		boolean flag = false;
 			flag = dao.update(dto);
