@@ -75,11 +75,11 @@
    
     <definition name="/member/login" extends="main"> 
         <put-attribute name="title" value="Login" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/login.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/member/warninglogin.jsp" /> 
     </definition>   
-    <definition name="/member/loginProc" extends="main"> 
+    <definition name="/member/warninglogin" extends="main"> 
         <put-attribute name="title" value="Login 처리" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/loginProc.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/member/warninglogin.jsp" /> 
     </definition>   
     <definition name="/member/logout" extends="main"> 
         <put-attribute name="title" value="Logout " ></put-attribute> 

@@ -183,6 +183,7 @@ $(function(){
 				<!-- 폼전송시 전달되는 data target element -->
 				<div class="" >
 					
+					<input type="hidden" name="id"  value="${dto.id }" />
 					<input type="hidden" name="name"  value="${dto.name }" />
 					<input type="hidden"  name="phone" value="${dto.phone }" />
 					
@@ -230,6 +231,7 @@ $(function(){
 			 onsubmit="return nameCheck(this)">
 				<!-- 폼전송시 전달되는 data target element -->
 				<div class="mypageForm__form-inputs-wrap" >
+					<input type="hidden" name="id"  value="${dto.id }" />
 					<input type="hidden" name="email"  value="${dto.email }" />
 					<input type="hidden"  name="phone" value="${dto.phone }" />
 				</div>
@@ -266,6 +268,7 @@ $(function(){
 				<section>
 					<!-- 폼전송시 전달되는 data target element -->
 					<div class="mypageForm__form-inputs-wrap">
+					<input type="hidden" name="id"  value="${dto.id }" />
 					<input type="hidden" name="email"  value="${dto.email }" />
 					<input type="hidden" name="name"  value="${dto.name }" />
 					</div>

@@ -33,19 +33,36 @@ public class MemberLoginCheckFilter implements Filter {
         
         if (session != null) { // session 객체가 생성되어 있는지 확인
             // 로그인을 했으면서 관리자인지 확인합니다.
-        	String id = request.getParameter("id");
+        	
+        	
+        	String id = "";
+        	if( request.getParameter("id") != null) {
+        		id=request.getParameter("id");
+        	}
+        		
         	String sid= (String)session.getAttribute("id");
-            if (sid != null 
-                    && sid.equals("admin")) {
-                login = true;  // 관리자라면
-            }else if(id != null ) {
-            	if(sid!=null && sid.equals(id)) {
-            	login = true;  // 관리자라면 	
-            	}
-            }else if(sid!=null) {
-            	login = true;  // 관리자라면 	
-            	
-            }
+        	String grade= (String)session.getAttribute("grade");
+//            if (sid != null 
+//                    && sid.equals("admin")) {
+//                login = true;  // 관리자라면
+//            }else if(id != null ) {
+//            	if(sid!=null && sid.equals(id)) {
+//            	login = true;  // 관리자라면 	
+//            	}
+//            }else if(sid!=null) {
+//            	login = true;  // 관리자라면 	
+//            	
+//            }
+        	if(grade.equals("Y")) {
+        		login = true;
+        	}
+        	else if(sid.equals(id)) {
+        		login = true;
+        	}else if(id.equals("")) {
+        		
+        		login = true;
+        		
+        	}
         }
         
         // 정상적으로 로그인이 되었다면 요청 페이지로 이동합니다.

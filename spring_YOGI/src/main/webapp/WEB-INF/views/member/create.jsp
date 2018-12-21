@@ -304,12 +304,12 @@ function checkPwd() {
       <TH>*이메일</TH>
    	  <TD>
    	  <input type="email" class="form-control email" name="email"  
-   	  	  placeholder="비밀번호 찾기에 이용합니다"
+   	  	  placeholder="비밀번호 찾기에 이용됩니다"
       	  oninput="checkEmail()" >
            <div id="emailcheck"></div>
       </TD>
       
-      <td>이메일을 적어 주세요.<br>비밀번호 찾기시 이용됩니다. 정확하게 적어주세요</td>
+      <td style="color: red" >이메일을 적어 주세요.<br>비밀번호 찾기시 이용됩니다. 정확하게 적어주세요</td>
     </TR>
 
     

@@ -101,9 +101,11 @@ $(function(){
   <DIV class='bottom'>
  
 <!--     <input type='submit' value='로그인'> -->
-<button id="modalSubmit" type="button" class="btn btn-seccess">Login </button>
-   
+<!-- <button id="modalSubmit"  class="btn btn-seccess w3-padding-16 " >Login </button> -->
+<input type="button" id="modalSubmit" value="Login" style="height:75px; width: 100%;">   
   </DIV>
+  
+  <br>
 <!--       </form> -->
 
       <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">

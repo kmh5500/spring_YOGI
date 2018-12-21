@@ -163,14 +163,15 @@ public class MemberController {
 		
 		String url = "/error/passwdError";
 		
-		// 회원등급
+		
 		if (flag==1) {// 회원인경우
+			// 회원등급
 			String grade = memberdao.getGrade(id);
 			
 			request.getSession().setAttribute("id", id);
 			
 			request.getSession().setAttribute("grade", grade);
-
+			System.out.println(grade);
 			// ----------------------------------------------
 			// Cookie 저장, Checkbox는 선택하지 않으면 null 임
 			// ----------------------------------------------
@@ -309,9 +310,12 @@ public class MemberController {
 		
 		
 		String id=(String)session.getAttribute("id");
+		//String grade=(String)session.getAttribute("grade");
+		if(id==memberdto.getId()) {
 		memberdto.setId(id);
+		}
 		if(memberdao.update(memberdto)) {
-			model.addAttribute("id", id);
+			model.addAttribute("id", memberdto.getId());
 			return "redirect:/member/read";
 		}else {
 		return "/member/choice";

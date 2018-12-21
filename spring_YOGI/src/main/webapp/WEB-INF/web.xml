@@ -122,6 +122,10 @@
   	<filter-name>adminLogin</filter-name>
   	<url-pattern>/admin/*</url-pattern>
   </filter-mapping>
+  <filter-mapping>
+  	<filter-name>adminLogin</filter-name>
+  	<url-pattern>/info/create</url-pattern>
+  </filter-mapping>
   
   <filter-mapping>
   	<filter-name>adminLogin</filter-name>
