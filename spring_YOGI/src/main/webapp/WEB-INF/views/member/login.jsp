@@ -6,9 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript">
+  ocument.getElementById('id').scrollIntoView(true);
+
+
+</script>
 </head>
 <body>
-<div class="container">
+<div class="container" id="mainwiew">
 <!-- *********************************************** -->
 <h2>로그인</h2>
  
@@ -16,7 +23,7 @@
   <TABLE>
     <TR>
       <TH>아이디</TH>
-      <TD><input type="text" name="id"  value='${c_id_val}'>
+      <TD><input type="text"  name="id"  value='${c_id_val}'>
       
      	<c:choose>
      		<c:when test="${c_id=='Y' }">
@@ -42,8 +49,7 @@
   <input type="button" value='ID 찾기' onclick="location.href='./findid'">
   <input type="button" value='/Passwd 찾기' onclick="location.href='./findpass'">
     <input type='submit' value='로그인'>
-    <input type='button' value='회원가입' 
-    onclick="location.href='/member/agree'">
+   
   </DIV>
   
 </FORM>

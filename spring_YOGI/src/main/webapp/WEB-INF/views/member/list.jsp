@@ -41,21 +41,24 @@ function read(id) {
  <div class="search">
 <FORM name='frm' method='POST' action='./list' >
   <select name="col">
-  	<option value="id">아이디
+  
+  	<option value="id"
   	<c:if test="${col=='id'}">selected</c:if>
-  	</option>
-  	<option value="email">이메일
+  	>아이디</option>
+  	<option value="email"
   	<c:if test="${col=='email' }">selected</c:if>
-  	</option>
-  	<option value="mname">성명
+  	>이메일</option>
+  	<option value="name"
   	<c:if test="${col=='name' }">selected</c:if>
-  </option>
-  	<option value="total">전체출력</option>
+    >성명</option>
+  	<option value="total"
+  	<c:if test="${col=='total' }">selected</c:if>
+  	>전체출력</option>
   </select>
   <input type="text" name ="word" value= "${word}">
   <button>검색</button>
-  <button onclick="location.href='./create.do'">회원가입</button>
   </FORM>
+
   </div>
   
   <div class="container">
@@ -87,7 +90,8 @@ function read(id) {
       <TD>${dto.name}</TD>
       <TD>${dto.phone}</TD>
       <TD>${dto.email}</TD>
-      <TD>${dto.grade}</TD>
+      <TD>${dto.grade}
+      (${util:MemberGrade(dto.grade)})</TD>
     </TR>
      
      

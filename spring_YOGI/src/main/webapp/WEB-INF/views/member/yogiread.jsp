@@ -10,6 +10,101 @@
 <script type="text/javascript"
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script type="text/javascript">
+var emailresult;
+function emailCheck(f){
+	
+	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	
+	if(emailresult == '1'){
+		alert("이메일 중복을 확인해주세요");
+		 
+		f.email.value = "";
+		f.email.focus();
+		return false;
+		 	
+	}
+	if(f.email.value==""){
+		alert("이메일을 입력해 주세요");
+		f.email.focus();
+		return false;
+	}
+	if (!re.test(f.email.value)) {
+	alert("올바른 이메일 주소를 입력하세요");
+	f.email.focus();
+	return false;
+	}
+	
+}
+function nameCheck(f){
+	if(f.name.value==""){
+		alert("이름을 입력해 주세요");
+		f.name.focus();
+		return false;
+	}
+}
+
+function phonecheck(f){
+	var numcheck=/^[0-9]{9,11}$/;
+	if(f.phone.value==""){
+		alert("핸드폰 번호를 입력해 주세요");
+		f.phone.focus();
+		return false;
+	}
+	if(!numcheck.test(f.phone.value)){
+		alert("올바른 핸드폰 번호가 아닙니다");
+		
+		f.phone.focus();
+	
+		return false;
+		
+	}
+}
+
+
+function checkEmail() {
+    var inputed = $('.email').val();
+    console.log(inputed);
+ 
+
+    var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    if (!filter.test(inputed)) {
+    	$("#emailcheck").text("올바른 이메일 형식이 아닙니다").css("color","red");
+
+    }
+    else {
+
+    $.ajax({
+    	
+        data : {
+            email : inputed
+        },
+        url : "emailCheck",
+        success : function(result) {
+        	emailresult = result;
+        	if(inputed=="" && result=="0"){
+        	$("#emailcheck").text("이메일을 입력해주세요").css("color","red");
+        	
+        	}else if(result=="1"){
+        	$("#emailcheck").text("중복된 이메일 입니다.").css("color","red");
+        	
+        	}else if(result=="0"){
+        	$("#emailcheck").text("사용 가능합니다").css("color","blue");
+        	
+        	}else{
+        		
+        	$("#emailcheck").text("오류").css("color","red");
+        	
+        	}
+        },  error:function(request,status,error){
+            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        }
+
+
+    });
+	}
+}
+
+
 
 $(function(){
 	$(".sec-1").hide();
@@ -73,8 +168,8 @@ $(function(){
 	});
 
 
-
 </script>
+
 </head>
 
 
@@ -83,7 +178,8 @@ $(function(){
 <div>
  <div class="container">
         <div class="">
-			<form name="form1" action="./update"  method="post" >
+			<form name="form1" action="./update"  method="post"
+			onsubmit="return emailCheck(this)" >
 				<!-- 폼전송시 전달되는 data target element -->
 				<div class="" >
 					
@@ -108,15 +204,16 @@ $(function(){
 						</div>
                         <section class="">
                             <p class="sec-1">
-                                <input type="text" name="email"
+                            
+                                <input type="text" name="email" class="email"
                                        placeholder="체크인시 필요한 정보입니다."
 									   data-input="unick"
-									   data-msg-required="닉네임을 입력하세요."
-                                       data-rule-minlength="2"
-                                       data-rule-spaceChar="true"
-                                       data-rule-specialChar="true" />
+									   oninput="checkEmail()"
+									  />
 
-                            </p>
+                       		 <p id="emailcheck"></p>
+                       		 </p>
+                            
                         </section>
 						<div class="bts-1">
 							<button class="edit-btn" type="button">수정</button>
@@ -128,7 +225,9 @@ $(function(){
                     </div>
 				</section>
 			</form>
-			<form name="form2" action="./update" autocomplete="off" method="post" novalidate data-form="uname">
+			<form name="form2" action="./update" autocomplete="off" method="post"
+			 novalidate data-form="uname"
+			 onsubmit="return nameCheck(this)">
 				<!-- 폼전송시 전달되는 data target element -->
 				<div class="mypageForm__form-inputs-wrap" >
 					<input type="hidden" name="email"  value="${dto.email }" />
@@ -161,7 +260,9 @@ $(function(){
 				</section>
 			</form>
 
-			<form  name="form3" action="./update" autocomplete="off" method="post" novalidate data-form="uphone">
+			<form  name="form3" action="./update" autocomplete="off" method="post" 
+			novalidate data-form="uphone"
+			onsubmit="return phonecheck(this)">
 				<section>
 					<!-- 폼전송시 전달되는 data target element -->
 					<div class="mypageForm__form-inputs-wrap">
@@ -181,11 +282,12 @@ $(function(){
 								<section>
 									<div class="sec-5">
 										<input type="tel" name="phone" 
-											   placeholder="체크인시 필요한 정보입니다."
-											   maxlength="13"
+											   placeholder="'-'없이 등록  01012341234"
+											   minlength="9"
+											   maxlength="11"
 											   data-input="uphone"
 											   data-msg-required=""
-											   data-rule-phonenumber="true"=>
+											   data-rule-phonenumber="true">
 									</div>
 
 								</section>

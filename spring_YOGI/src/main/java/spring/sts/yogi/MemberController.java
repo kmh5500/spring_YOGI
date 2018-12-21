@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import spring.model.member.MemberDAO;
@@ -147,11 +148,14 @@ public class MemberController {
 			
 	}
 	
+	@ResponseBody //모달로그인 이전 기존 로그인시 삭제바람
 	@RequestMapping(value="/member/login" , method=RequestMethod.POST)
-	public String login(HttpServletRequest request,HttpSession session,Model model,
+	public String login(String id ,String pass, HttpServletRequest request,HttpSession session,Model model,
 			HttpServletResponse response) {
-		String id = request.getParameter("id");
-		String pass = request.getParameter("pass");
+//		String id = request.getParameter("id");
+//		String pass = request.getParameter("pass");
+		System.out.println(id);
+		System.out.println(pass);
 		Map map = new HashMap();
 		map.put("id", id);
 		map.put("pass", pass);
@@ -192,10 +196,12 @@ public class MemberController {
 				cookie.setMaxAge(0);
 				response.addCookie(cookie);
 			}
-		return "home";
+		//return "home";  //모달로그인 이전 기존 로그인시 리턴주소
+		return "1";
 		}else {
 			
-			return url;
+			//return url;
+			return "0";
 		}
 
 	}
@@ -221,23 +227,26 @@ public class MemberController {
 	}
 	@RequestMapping(value="/member/create",method=RequestMethod.POST)
 	public String create(MemberDTO memberdto,Model model) {
-	
+		String phone=memberdto.getPh1()+memberdto.getPh2()+
+				memberdto.getPh3();
+		System.out.println("phone:"+memberdto.getPhone());
+		memberdto.setPhone(phone);
 		try {
 			boolean flag = memberdao.create(memberdto);
-			if(flag)return "redirect:/member/cLogin";
+			if(flag) {
+				model.addAttribute("dto", memberdto);
+				return "/member/cLogin";
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return "/member/choice";
+		return "/error/error";
 	}
 	
 	
-	@RequestMapping(value="/member/cLogin")
-	public String cLogin() {
-		return "/member/cLogin";
-	}
+	
 	
 	@RequestMapping("/member/read")
 	public String read(String id, HttpSession session, Model model) {
@@ -370,8 +379,7 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value="/member/idCheck", method=RequestMethod.GET)
 	public String idCheck(String id) {
-		System.out.println(id);
-		System.out.println(memberdao);
+		
 		String check = "0";
 		if(memberdao.idCheck(id)==1) {
 			check="1";
@@ -382,8 +390,7 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value="/member/emailCheck", method=RequestMethod.GET)
 	public String emailCheck(String email) {
-		System.out.println(email);
-		System.out.println(memberdao);
+		
 		String check = "0"; //중복이 아니면 문자열 0을 리턴
 		if(memberdao.emailCheck(email)==1) {
 			check="1"; //중복이면 문자열 1을 리턴
@@ -395,8 +402,7 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value="/member/idEmailCheck", method=RequestMethod.GET)
 	public String idEmailCheck(String email,String id) {
-		System.out.println(email);
-		System.out.println(memberdao);
+		
 		String check = "0"; //중복이 아니면 문자열 0을 리턴
 		Map map = new HashMap();
 		map.put("id", id);

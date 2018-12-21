@@ -39,6 +39,18 @@ public class Utility {
 		value=(String)codes.get(code);
 		return value;
 	}
+	public static String getGradeValue(String grade) {
+		String value= null;
+		Hashtable codes = new Hashtable();
+		codes.put("P", "일반회원");
+		codes.put("Y", "yogi 직원");
+		codes.put("H", "호텔 관리자");
+		codes.put("A", "업체 관리자");
+		
+		
+		value=(String)codes.get(grade);
+		return value;
+	}
 	
 	 public static String saveFileSpring(MultipartFile multipartFile, String basePath) { 
 	        // input form's parameter name 

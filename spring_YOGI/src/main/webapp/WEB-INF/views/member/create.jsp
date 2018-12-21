@@ -37,6 +37,12 @@ function inputCheck(f){
 		f.id.focus();
 		return false;
 	}	
+	var filter = /^[A-Za-z0-9]{4,12}$/;
+	 if(!filter.test(f.id.value)){
+		 alert("ID 는 영문숫자  4~12자리 입니다");
+		 f.id.focus();
+		 return false;
+	    }
 	
 	
 	if(f.pass.value==""){
@@ -59,6 +65,26 @@ function inputCheck(f){
 		f.name.focus();
 		return false;
 	}
+	var numcheck=/^[0-9]*$/;
+	if(f.ph2.value==""){
+		alert("핸드폰번호를 입력해 주세요");
+		f.ph2.focus();
+		return false;
+	}
+	if(f.ph3.value==""){
+		alert("핸드폰번호를 입력해 주세요");
+		f.ph3.focus();
+		return false;
+	}
+	if(!numcheck.test(f.ph2.value) ||!numcheck.test(f.ph3.value)  ){
+		alert("핸드폰 번호는 숫자만 입력가능합니다.");
+		f.ph2.value="";
+		f.ph3.value="";
+		f.ph2.focus();
+		return false;
+	}
+	
+	
 	if(f.email.value==""){
 		alert("이메일을 입력해 주세요");
 		f.email.focus();
@@ -249,13 +275,28 @@ function checkPwd() {
     </TR>
        <TR>
       <TH>*이름</TH>
-      <TD><input type="text" class="form-control" name="name" size="15" ></TD>
+      <TD><input type="text" class="form-control" name="name" size="15"
+      placeholder="체크인시 필요한 정보입니다." ></TD>
     	<td>고객실명을 적어주세요.</td>
     </TR>
     
        <TR>
       <TH>전화번호</TH>
-      <TD><input type="text" class="form-control" name="phone" size="15" ></TD>
+      <TD>
+      <select name ="ph1">
+      	<option value="010">010</option>
+      	<option value="011">011</option>
+      	<option value="016">016</option>
+      	<option value="017">017</option>
+      	<option value="019">019</option>
+      	
+      </select>
+      -<input type="text" name="ph2" size="4" maxlength="4">
+      -<input type="text" name="ph3" size="4" maxlength="4">
+      
+      
+<!--       <input type="text" class="form-control" name="phone" size="15"  -->
+<!--       placeholder="체크인시 필요한 정보입니다."></TD> -->
     	<td></td>
     </TR>
     
@@ -263,11 +304,12 @@ function checkPwd() {
       <TH>*이메일</TH>
    	  <TD>
    	  <input type="email" class="form-control email" name="email"  
+   	  	  placeholder="비밀번호 찾기에 이용합니다"
       	  oninput="checkEmail()" >
            <div id="emailcheck"></div>
       </TD>
       
-      <td>이메일을 적어 주세요.</td>
+      <td>이메일을 적어 주세요.<br>비밀번호 찾기시 이용됩니다. 정확하게 적어주세요</td>
     </TR>
 
     

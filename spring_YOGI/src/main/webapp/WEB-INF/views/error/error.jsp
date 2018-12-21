@@ -12,7 +12,7 @@
 <div class="container">
 
 에러가 발생했습니다.<bR> 잠시후 다시 확인하세요<Br>
-<button onclick="location.href='list.do'">목록</button>
+
 </div>
 
 </body>

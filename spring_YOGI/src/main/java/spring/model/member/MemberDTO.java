@@ -8,7 +8,30 @@ public class MemberDTO {
 	private String pass;
 	private String phone;
 	private int bcnt;
+	private String ph1;
+	private String ph2;
+	private String ph3;
 	
+	
+	
+	public String getPh1() {
+		return ph1;
+	}
+	public void setPh1(String ph1) {
+		this.ph1 = ph1;
+	}
+	public String getPh2() {
+		return ph2;
+	}
+	public void setPh2(String ph2) {
+		this.ph2 = ph2;
+	}
+	public String getPh3() {
+		return ph3;
+	}
+	public void setPh3(String ph3) {
+		this.ph3 = ph3;
+	}
 	public String getId() {
 		return id;
 	}

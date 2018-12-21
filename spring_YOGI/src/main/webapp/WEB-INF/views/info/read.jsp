@@ -64,7 +64,8 @@ function breply() {
 	
   <DIV class='bottom'>
     <input type='button' value='목록' onclick="blist()">
-    <c:if test="${sessionScop.grade=='y' }">
+    <c:if test="${sessionScope.grade=='Y' }">
+    
     <input type='button' value='등록' onclick="location.href='./create'">
     <button onclick="bupdate(${dto.informnum})">수정</button>
     <button onclick="bdelete(${dto.informnum})">삭제</button>
