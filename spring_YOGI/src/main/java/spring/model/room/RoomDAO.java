@@ -68,7 +68,7 @@ public class RoomDAO implements IRoomDAO {
 
 	@Override
 	public RoomDTO read(Map map) throws Exception {
-		return session.selectOne("room.read", map);
+		return session.selectOne("room.rread", map);
 	}
 
 }

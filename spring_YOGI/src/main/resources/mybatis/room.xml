@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{adperson}, #{rfname}, #{rinfo}, #{hnum})
 	</insert>
 
-	<select id="read" parameterType="Map" resultType="RoomDTO">
+	<select id="rread" parameterType="Map" resultType="RoomDTO">
 		select rnum, rtype, rprice, rrate,
 		acperson, adperson, rfname, rinfo
 		from room

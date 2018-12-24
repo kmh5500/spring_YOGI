@@ -7,23 +7,59 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-function update(){
-	var url = "booking";
-	url = url+"?rnum=${dto.rnum}";
-	url = url+"&=${}";
-	
-	location.href = url;
-}
 </script>
 </head>
 <body>
-<div class="container">
-  <h2>방정보</h2>
+<div style="float:left; width: 30%; margin-bottom: 10%; margin-left:10%;">
+  <h2>${hdto.hname }</h2>
+  <br>
+  <img src='${root }/hotel/storage/${hdto.hfname}'  width="400px" height="300px"> 
+</div>
+<div style="float:right; width: 50%; margin-bottom: 10%; margin-top:5%; margin-right:10%;">
+
+<table class="table">
+
+      <tr>
+       <th>전화번호</th>
+       <td>${hdto.hphone}</td>
+      </tr>
+      <tr>
+       <th>이메일</th>
+       <td>${hdto.hemail}</td>
+      </tr>
+      <tr>
+       <th>우편번호</th>
+       <td>${hdto.hzipcode}</td>
+      </tr>
+      <tr>
+       <th>주소</th>
+       <td>${hdto.haddress1}<br>
+       	   ${hdto.haddress2}
+       </td>
+      </tr>
+	  <tr>      
+       <th>체크인</th>
+       <td>${hdto.hcheckin}</td>
+      </tr>
+	  <tr>      
+       <th>체크아웃</th>
+       <td>${hdto.hcheckout}</td>
+      </tr>
+      <tr>
+      <th></th>
+      <td></td>
+      </tr>
+</table>
+</div>
+<div style="float:center; margin:auto; width:80%">
+<hr>
   <table class="table">
 
       <tr>
-       <th>방타입</th>
+       <th></th>
        <td>${dto.rtype}</td>
+       <td>${hdto.hinfo}</td>
+       
       </tr>
       <tr>
        <th>가격</th>
@@ -54,7 +90,7 @@ function update(){
   </table>
   <div style="text-align:center">
   <input type='button' value='홈' onclick="location.href='${root}/'">
-  <input type='button' value='수정' onclick="update()">
+  <input type='button' value='' onclick="update()">
   </div>
   </div> 
 </body>
