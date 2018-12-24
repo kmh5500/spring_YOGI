@@ -29,13 +29,6 @@ public class RoomDAO implements IRoomDAO {
 	}
 
 	@Override
-	public Object read(Object pk) throws Exception {
-		int rnum = (Integer)pk;
-		
-		return session.selectOne("room.read", rnum);
-	}
-
-	@Override
 	public boolean update(Object dto) throws Exception {
 		boolean flag = false;
 		
@@ -64,6 +57,18 @@ public class RoomDAO implements IRoomDAO {
 	@Override
 	public int rtotal(Map map) throws Exception {
 		return session.selectOne("room.rtotal", map);
+	}
+
+	@Override
+	public Object read(Object pk) throws Exception {
+		int rnum = (Integer)pk;
+		
+		return session.selectOne("room.read", rnum);
+	}
+
+	@Override
+	public RoomDTO read(Map map) throws Exception {
+		return session.selectOne("room.read", map);
 	}
 
 }

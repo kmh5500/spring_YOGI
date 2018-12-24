@@ -8,4 +8,5 @@ import spring.model.yogiinter.DAOSTDInter;
 public interface IRoomDAO extends DAOSTDInter {
 	public List rlist(Map map)throws Exception;
 	public int rtotal(Map map)throws Exception;
+	public RoomDTO read(Map map)throws Exception;
 }

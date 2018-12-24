@@ -33,11 +33,6 @@ function inputcheck(f){
 		f.adperson.focus();
 		return false;
 	}
-	if(f.fnameMF.value==""){
-		alert("사진을 등록하세요");
-		f.fnameMF.focus();
-		return false;
-	}
 	if (CKEDITOR.instances['rinfo'].getData() == '') {
 	      window.alert('내용을 입력해 주세요.');
 	      CKEDITOR.instances['rinfo'].focus();
@@ -66,9 +61,11 @@ function inputcheck(f){
 <div class="container" >
 <h2><span class="glyphicon glyphicon-pencil"></span>등록</h2>
  
-<FORM name='frm' method='POST' action='./create'
+<FORM name='frm' method='POST' action='./update'
 	onsubmit="return inputcheck(this)"
 	enctype="multipart/form-data">
+	<input type="hidden" name="rnum" value="${param.rnum}">
+	<input type="hidden" name="oldfile" value="${param.oldfile}">
   <TABLE class="table table-bordered">
     
     <TR>
@@ -76,41 +73,43 @@ function inputcheck(f){
       <TD>
       	<select name="rtype">
       		<option value = "선택">선택</option>
-      		<option value = "스탠다드룸">스탠다드룸</option>
-      		<option value = "패밀리룸">패밀리룸</option>
-      		<option value = "디럭스룸">디럭스룸</option>
-      		<option value = "스위트룸">스위트룸</option>
+      		<option value = "스탠다드룸" <c:if test="${dto.rtype=='스탠다드룸' }">selected</c:if>>스탠다드룸</option>
+      		<option value = "패밀리룸" <c:if test="${dto.rtype=='패밀리룸' }">selected</c:if>>패밀리룸</option>
+      		<option value = "디럭스룸" <c:if test="${dto.rtype=='디럭스룸' }">selected</c:if>>디럭스룸</option>
+      		<option value = "스위트룸" <c:if test="${dto.rtype=='스위트룸' }">selected</c:if>>스위트룸</option>
       	</select>
       </TD>
     </TR>
     <TR>
       <TH>방 가격</TH>
-      <TD><input type="number" min=0 step=100 name="rprice">원</TD>
+      <TD><input type="number" min=0 step=100 name="rprice" value="${dto.rprice }">원</TD>
     </TR>
     <TR>
       <TH>할인율</TH>
-      <TD><input style="width:100px" type="number" min=0 max=100 name="rrate">%</TD>
+      <TD><input style="width:100px" type="number" min=0 max=100 name="rrate" value="${Math.round(dto.rrate*100) }">%</TD>
     </TR>
     <TR>
       <TH>수용인원</TH>
-      <TD><input style="width:50px" type="number" min=0 name="acperson">명</TD>
+      <TD><input style="width:50px" type="number" min=0 name="acperson" value="${dto.acperson }">명</TD>
     </TR>
     <TR>
       <TH>추가인원</TH>
-      <TD><input style="width:50px" type="number" min=0 name="adperson">명</TD>
+      <TD><input style="width:50px" type="number" min=0 name="adperson" value="${dto.adperson }">명</TD>
     </TR>
     <TR>
       <TH>방 사진</TH>
-      <TD><input type="file" name="fnameMF" accept=".jpg,.png,.gif"></TD>
+      <td>
+      	<img src="${root }/room/storage/${param.oldfile}" width="200px" heigh="200px"><br>
+      	<input type="file" name="fnameMF" accept=".jpg,.png,.gif"></TD>
     </TR>
     <TR>
       <TH>방 정보</TH>
-      <TD><textarea rows="10" cols="45" name="rinfo"></textarea></TD>
+      <TD><textarea rows="10" cols="45" name="rinfo">${dto.rinfo }</textarea></TD>
     </TR>
   </TABLE>
   
   <DIV class='bottom'>
-    <input type='submit' value='등록'>
+    <input type='submit' value='수정'>
     <input type='button' value='취소' onclick="history.back()">
   </DIV>
 </FORM>

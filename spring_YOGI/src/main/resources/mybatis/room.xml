@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="room">
 	<resultMap type="RoomDTO" id="roomMap">
-    	<result property="rnum" column="rnum"/>
+    	<result property="rnum" column="rnm"/>
     	<result property="rtype" column="rty"/>
     	<result property="acperson" column="acperson"/>
     	<result property="adperson" column="adperson"/>
@@ -25,11 +25,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{adperson}, #{rfname}, #{rinfo}, #{hnum})
 	</insert>
 
-	<select id="read" parameterType="RoomDTO">
+	<select id="read" parameterType="Map" resultType="RoomDTO">
 		select rnum, rtype, rprice, rrate,
 		acperson, adperson, rfname, rinfo
 		from room
 		where hnum = #{hnum} and rnum = #{rnum}
+	</select>
+	
+	<select id="read" parameterType="int" resultType="RoomDTO">
+		select rnum, rtype, rprice, rrate,
+		acperson, adperson, rfname, rinfo
+		from room
+		where rnum = #{rnum}
 	</select>
 
 	<update id="update" parameterType="RoomDTO">
@@ -45,11 +52,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 
 	<select id="list" resultMap="roomMap" parameterType="Map">
-		select rty, rpr, rra, rfn, hna, hst, hnum, rn
+		select rnm, rty, rpr, rra, rfn, hna, hst, hnum, rn
 		from(
-			select rty, rpr, rra, rfn, hna, hst, hnum, rownum as rn
+			select rnm, rty, rpr, rra, rfn, hna, hst, hnum, rownum as rn
 			from (
-				select r.rtype as rty, r.rprice as rpr, r.rrate as rra, r.rfname as rfn, h.hname as hna, h.hstar as hst, r.hnum as hnum
+				select r.rnum as rnm, r.rtype as rty, r.rprice as rpr, r.rrate as rra, r.rfname as rfn, h.hname as hna, h.hstar as hst, r.hnum as hnum
 				from room r, hotel h
 				<where> r.hnum=h.hnum
 		        and r.rnum not in(
@@ -116,11 +123,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="rlist" resultMap="roomMap" parameterType="Map">
-		select rty, rpr, rra, rfn, hna, hst, rn
+		select rnm, rty, rpr, rra, rfn, hna, hst, rn
 		from(
-			select rty, rpr, rra, rfn, hna, hst, rownum as rn
+			select rnm, rty, rpr, rra, rfn, hna, hst, rownum as rn
 			from (
-				select r.rtype as rty, r.rprice as rpr, r.rrate as rra, r.rfname as rfn, h.hname as hna, h.hstar as hst
+				select r.rnum as rnm, r.rtype as rty, r.rprice as rpr, r.rrate as rra, r.rfname as rfn, h.hname as hna, h.hstar as hst
 				from room r, hotel h
 				where r.hnum=h.hnum and h.hid = #{hid}
 		        

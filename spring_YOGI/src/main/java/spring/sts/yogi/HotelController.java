@@ -1,8 +1,6 @@
 package spring.sts.yogi;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import spring.model.hotel.HotelDAO;
 import spring.model.hotel.HotelDTO;
@@ -26,16 +23,15 @@ public class HotelController {
 	private HotelDAO dao;
 	
 	@RequestMapping(value="/hotel/update", method=RequestMethod.POST)
-	public String update(HotelDTO dto, int hnum, Model model, HttpServletRequest request, String oldfile, MultipartFile fnameMF) throws Exception {
+	public String update(HotelDTO dto, int hnum, Model model, HttpServletRequest request, String oldfile) throws Exception {
 		
 		
 		String basePath = request.getRealPath("/hotel/storage");
 		
+		dto.setHfname(Utility.saveFileSpring(dto.getFnameMF(), basePath));
 		if(dto.getHfname() == null || dto.getHfname() == "") {
 			String hfname = oldfile;
 			dto.setHfname(hfname);
-		}else{
-		dto.setHfname(Utility.saveFileSpring(dto.getFnameMF(), basePath));
 		}
 		
 		boolean flag = false;
@@ -127,7 +123,7 @@ public class HotelController {
 		String url = "/hotel/pcreate";
 		int hstar = 0;
 		//String hid = (String)session.getAttribute("id");
-		String hid = "user8";
+		String hid = "user2";
 			if(dao.duplicateHname(dto.getHname())){
 				str = "중복된 호텔명입니다. 호텔명 중복확인을 하세요";
 				model.addAttribute("str", str);

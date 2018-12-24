@@ -6,7 +6,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<style>
+	div.list {position:relative; width:90%; height:300px; border: 2px solid #eee;}
+	div.content {position:absolute; display:block; left:0; bottom:0; width:100%; height:150px; background-color: rgba(0, 0, 0, 0.4); color:white }
+	div.list a {text-decoration: none}
+	h2.hname {position:absolute; left:5px; top:0px}
+	h1.type {position:absolute; left:5px; bottom:5px}
+	p.rprice {position:absolute; right:5px; bottom:100px; font-size:20px}
+	p.rrate {position:absolute; right:5px; bottom:80px; font-size:20px}
+	p.price {position:absolute; right:5px; bottom:5px; font-size:50px}
+	p.star {position:absolute; left:5px; top:60px}
+</style>
 </head>
   <link rel="stylesheet" type="text/css" href="${root }/jquery/jquery-ui.css">
   <script type="text/javascript" src="${root }/jquery/jquery.js"></script>
@@ -62,10 +72,10 @@
      "원 ~ " + $( "#slider-range" ).slider( "values", 1 ) + "원");
   });
   
-  function read(hnum){
+  function read(hnum, rnum){
 		var url = "read";
 		url = url+"?hnum="+hnum;
-		url = url +"&rnum=${rnum}";
+		url = url +"&rnum="+rnum;
 		url = url +"&nowPage=${nowPage}";
 		location.href = url;
 	}
@@ -132,9 +142,9 @@
  
 
 <div style="float: right; width: 65%; margin-bottom: 10%;">
- <div style="width: 90%; margin-left: 5%; margin-top: 10%;">
+ <div style="width: 90%; margin-left: 10%; margin-top: 9%">
  
-	<h3>방 리스트</h3>
+	<h2>방 리스트</h2>
 	
 		<c:choose>
     	<c:when test="${empty list}">
@@ -142,28 +152,28 @@
 		</c:when>
 		<c:otherwise>
 			<c:forEach var="dto" items="${list }">
-				<div>
-				<a href="javascript:read('${dto.hnum}')">
-					<img src='${root }/room/storage/${dto.rfname}' width="200px" heigh = "200px">
-					<p>${dto.hnum }</p>
-					<p>${dto.rtype }</p>
-					<p><strike>${dto.rprice }원</strike></p>
-					<p>${Math.round(dto.rrate*100) }%</p>
-					<p>${Math.round(dto.rprice*(1-dto.rrate)) }원</p>
-					<p>${dto.hdto.hname }</p>
-					<p>${dto.hdto.hstar }</p>
+				<div class="list">
+				<a href="javascript:read('${dto.hnum}','${dto.rnum }')">
+					<img src='${root }/room/storage/${dto.rfname}'  width="100%" height="300px">
+				<div class="content">
+					<input type="hidden" value="${dto.hnum }">
+					<input type="hidden" value="${dto.rnum }">
+					<h1 class="type">${dto.rtype }</h1>
+					<p class="rprice"><strike>${dto.rprice }원</strike></p>
+					<p class="rrate">${Math.round(dto.rrate*100) }%</p>
+					<p class="price">${Math.round(dto.rprice*(1-dto.rrate)) }원</p>
+					<h2 class="hname">${dto.hdto.hname }</h2>
+					<p class="star">${dto.hdto.hstar }</p>
+					</div>
 					</a>
 				</div>
 			
 			</c:forEach>
 		</c:otherwise>
 		</c:choose>
+
 	
-	
-	
-	
-	
-	<div class='bottom'>
+	<div style="margin:auto; margin-right: 10%; margin-top:20px">
     	${paging}
   	</div>
  </div>
