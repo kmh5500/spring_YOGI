@@ -16,16 +16,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 
 	<select id="list" resultType="ReviewDTO" parameterType="Map">
-		select revtitle, revcontent, revstar, revdate, r
+		select revtitle, revcontent, revstar, revdate, revid, r
 		from(
-		    select revtitle, revcontent, revstar, revdate, rownum as r
+		    select revtitle, revcontent, revstar, revdate, revid, rownum as r
 		    from(
-		        select revtitle, revcontent, revstar, revdate
+		        select revtitle, revcontent, revstar, revdate, revid
 		        from review
-		    where hnum = #{hnum}
-		    order by revnum desc
-		    )
-		)
+			    where hnum = #{hnum}
+			    order by revnum desc
+			    )
+			)
 		<![CDATA[                                                                        
 	   where r>=#{sno} and r<=#{eno}  
 	   ]]>

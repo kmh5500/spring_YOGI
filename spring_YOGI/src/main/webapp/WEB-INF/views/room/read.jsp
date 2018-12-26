@@ -99,9 +99,10 @@
     <h2>호텔 리뷰</h2>
   <c:forEach var="redto" items="${relist }">
   <div style="float:center;margin:auto; text-align:center">
-  	${redto.revid }<br>
+  	<p>${redto.revid }</p>
   	<p>${redto.revcontent }</p>
   	${redto.revdate }
+  	<p>${redto.revstar }점</p>
   	<c:if test="${sessionScope.id==redto.revid }">
   	<span style="float:right">
   		<a href="javascript:rupdate('${redto.revnum }','${rdto.revcontent}' )">수정</a>|
@@ -116,6 +117,7 @@
   	action="./recreate"
   	method="post"
   	onsubmit="return input(this)">
+  	<input type="text" name="revtitle">
   	<textarea rows="3" cols="35" name="revcontent"></textarea>
   	<input type="number" name="revstar" min=0 max=5>
   	<input type="submit" name="rbutton" value="등록">
@@ -125,7 +127,6 @@
   	<input type="hidden" name="rnum" value="${param.rnum }">
   	<input type="hidden" name="nPage" value="${nPage }">
   	<input type="hidden" name="nowPage" value="${param.nowPage }">
-  	<input type="hidden" name="revnum" value="${redto.revnum}">
   	
   	</form>
   </div> 

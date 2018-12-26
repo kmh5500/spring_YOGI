@@ -4,6 +4,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="hotel">
 
+	<update id="starupdate" parameterType="int">
+		update hotel 
+		set hstar = 
+		(select avg(revstar) from review where hnum = #{hnum})
+		where hnum = #{hnum} 
+	</update>
+
 	<select id="checkHnum" parameterType="String" resultType="int">
 		select hnum
 		from hotel

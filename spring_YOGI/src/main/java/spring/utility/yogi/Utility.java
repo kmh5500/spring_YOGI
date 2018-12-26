@@ -498,7 +498,7 @@ public class Utility {
 		    
 		   return str.toString(); 
 		 } 
-	public static String repaging(int total, int nowPage, int recordPerPage, int hnum,
+	public static String repaging(int total, int nowPage, int recordPerPage, int hnum, int rnum,
 			int nPage, String url) {
 		// TODO Auto-generated method stub
 		 int pagePerBlock = 10; // 블럭당 페이지 수 
@@ -541,7 +541,7 @@ public class Utility {
 		 
 		   int _nPage = (nowGrp-1) * pagePerBlock; // 10개 이전 페이지로 이동 
 		   if (nowGrp >= 2){ 
-		     str.append("<span class='span_box_1'><A href='./"+url+"?hnum="+hnum +"&nPage="+_nPage
+		     str.append("<span class='span_box_1'><A href='./"+url+"?hnum="+hnum +"&rnum="+rnum+"&nPage="+_nPage
 		    		 +"&nowPage="
 		    		 +nowPage+"'>이전</A></span>"); 
 		   } 
@@ -554,7 +554,7 @@ public class Utility {
 		     if (nPage == i){ 
 		       str.append("<span class='span_box_2'>"+i+"</span>"); 
 		     }else{ 
-		       str.append("<span class='span_box_1'><A href='./"+url+"&hnum="+hnum +"&nPage="+i
+		       str.append("<span class='span_box_1'><A href='./"+url+"?hnum="+hnum +"&rnum="+rnum +"&nPage="+i
 		    		   +"&nowPage="+nowPage
 		    		   +"'>"+i+"</A></span>");   
 		     } 
@@ -562,7 +562,7 @@ public class Utility {
 		    
 		   _nPage = (nowGrp * pagePerBlock)+1; // 10개 다음 페이지로 이동 
 		   if (nowGrp < totalGrp){ 
-		     str.append("<span class='span_box_1'><A href='./"+url+"?hnum="+hnum +"&nPage="+_nPage
+		     str.append("<span class='span_box_1'><A href='./"+url+"?hnum="+hnum+"&rnum="+rnum +"&nPage="+_nPage
 		    		 +"&nowPage="+nowPage+"'>다음</A></span>"); 
 		   } 
 		   str.append("</DIV>"); 

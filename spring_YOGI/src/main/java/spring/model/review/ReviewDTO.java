@@ -4,12 +4,18 @@ public class ReviewDTO {
 	private int revnum;
 	private String revcontent;
 	private String revtitle;
-	private int revdate;
+	private String revdate;
 	private String revid;
 	private double revstar;
 	private int hnum;
+
 	
-	
+	public String getRevdate() {
+		return revdate;
+	}
+	public void setRevdate(String revdate) {
+		this.revdate = revdate;
+	}
 	public int getRevnum() {
 		return revnum;
 	}
@@ -27,12 +33,6 @@ public class ReviewDTO {
 	}
 	public void setRevtitle(String revtitle) {
 		this.revtitle = revtitle;
-	}
-	public int getRevdate() {
-		return revdate;
-	}
-	public void setRevdate(int revdate) {
-		this.revdate = revdate;
 	}
 	public String getRevid() {
 		return revid;

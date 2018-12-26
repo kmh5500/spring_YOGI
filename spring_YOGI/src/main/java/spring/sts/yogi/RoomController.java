@@ -70,6 +70,9 @@ public class RoomController {
 	public String rcreate(ReviewDTO redto, Model model,
 			String nowPage, String nPage, int hnum, int rnum) throws Exception {
 		
+		//String revid = (String)session.getAttribute("id");
+		String revid = "user7";
+		redto.setRevid(revid);
 		mgr.create(redto, hnum);
 		
 		model.addAttribute("hnum", hnum);
@@ -125,7 +128,7 @@ public class RoomController {
 	
 		int nowPage = Integer.parseInt(request.getParameter("nowPage"));
 		
-		String paging = Utility.repaging(total, nowPage, recordPerPage, hnum, nPage, url);
+		String paging = Utility.repaging(total, nowPage, recordPerPage, hnum, rnum, nPage, url);
 		
 		model.addAttribute("relist", relist);
 		model.addAttribute("nPage", nPage);
