@@ -16,13 +16,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 
 	<select id="list" resultType="ReviewDTO" parameterType="Map">
-		select revtitle, revcontent, revstar, revdate
-		from review
-		where hnum = #{hnum}
-		order by revnum desc
+		select revtitle, revcontent, revstar, revdate, r
+		from(
+		    select revtitle, revcontent, revstar, revdate, rownum as r
+		    from(
+		        select revtitle, revcontent, revstar, revdate
+		        from review
+		    where hnum = #{hnum}
+		    order by revnum desc
+		    )
+		)
+		<![CDATA[                                                                        
+	   where r>=#{sno} and r<=#{eno}  
+	   ]]>
 	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete from review
+		where hnum = #{hnum} and revnum = #{revnum}
+	</delete>
 
-	<select id="total" parameterType="Map" resultType="int">
+	<select id="total" parameterType="int" resultType="int">
 		select count(*) from review where hnum = #{hnum}
 	</select>
 

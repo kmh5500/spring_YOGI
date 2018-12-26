@@ -57,7 +57,14 @@ public class ReviewDAO implements IReviewDAO {
 
 	@Override
 	public int total(Map map) throws Exception {
-		return session.selectOne("review.total", map);
+		// TODO Auto-generated method stub
+		return 0;
 	}
+
+	@Override
+	public int total(int hnum) throws Exception {
+		return session.selectOne("review.total", hnum);
+	}
+
 
 }

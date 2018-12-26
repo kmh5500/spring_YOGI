@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import spring.model.hotel.HotelDAO;
 import spring.model.hotel.HotelDTO;
+import spring.model.review.ReviewDAO;
+import spring.model.review.ReviewDTO;
+import spring.model.review.ReviewService;
 import spring.model.room.RoomDAO;
 import spring.model.room.RoomDTO;
 import spring.utility.yogi.Utility;
@@ -26,9 +29,61 @@ public class RoomController {
 	private RoomDAO dao;
 	@Autowired
 	private HotelDAO hdao;
+	@Autowired
+	private ReviewDAO redao;
+	@Autowired
+	private ReviewService mgr;
+	
+	@RequestMapping("/room/redelete")
+	public String rdelete(int revnum, int rnum, int hnum, String nowPage, 
+			int nPage, Model model) throws Exception{
+		
+		int total = redao.total(hnum);
+		int totalPage = (int)Math.ceil((double)total/3);
+		int pk = revnum;
+		mgr.delete(pk, hnum);
+			if(nPage!=1 && nPage==totalPage && total%3==1) nPage = nPage - 1;
+			model.addAttribute("hnum", hnum);
+			model.addAttribute("rnum", rnum);
+			model.addAttribute("nowPage", nowPage);
+			model.addAttribute("nPage", nPage);
+			
+			return "redirect:/room/read";
+		
+	}
+	
+	@RequestMapping("/room/reupdate")
+	public String rupdate(ReviewDTO redto, Model model,
+			String nowPage, int hnum, int rnum, String nPage) throws Exception {
+		mgr.update(redto, hnum);
+		model.addAttribute("hnum", hnum);
+		model.addAttribute("rnum", rnum);
+		model.addAttribute("nPage", nPage);
+		model.addAttribute("nowPage", nowPage);
+		
+		return "redirect:/room/read";
+		
+	}
+	
+	
+	@RequestMapping("/room/recreate")
+	public String rcreate(ReviewDTO redto, Model model,
+			String nowPage, String nPage, int hnum, int rnum) throws Exception {
+		
+		mgr.create(redto, hnum);
+		
+		model.addAttribute("hnum", hnum);
+		model.addAttribute("rnum", rnum);
+		model.addAttribute("nPage", nPage);
+		model.addAttribute("nowPage", nowPage);
+		
+		return "redirect:/room/read";
+		
+	}
+	
 	
 	@RequestMapping("room/read")
-	public String read(int rnum, int hnum, Model model) throws Exception {
+	public String read(int rnum, int hnum, Model model, HttpServletRequest request) throws Exception {
 		
 		RoomDTO dto = (RoomDTO) dao.read(rnum);
 		
@@ -47,12 +102,44 @@ public class RoomController {
 		model.addAttribute("dto", dto);
 		model.addAttribute("hdto", hdto);
 		
+/*		댓글 처리 */
+		
+		String url = "read";//댓글페이지에 매개변수
+		int nPage = 1;
+		
+		if(request.getParameter("nPage")!=null) {
+			nPage = Integer.parseInt(request.getParameter("nPage"));
+		}
+		
+		int recordPerPage = 3;
+		int sno = ((nPage-1) * recordPerPage) + 1;
+		int eno = nPage * recordPerPage;
+		
+		Map map = new HashMap();
+		map.put("sno", sno);
+		map.put("eno", eno);
+		map.put("hnum", hnum);
+		
+		List<ReviewDTO> relist = redao.list(map);
+		int total = redao.total(hnum);
+	
+		int nowPage = Integer.parseInt(request.getParameter("nowPage"));
+		
+		String paging = Utility.repaging(total, nowPage, recordPerPage, hnum, nPage, url);
+		
+		model.addAttribute("relist", relist);
+		model.addAttribute("nPage", nPage);
+		model.addAttribute("paging", paging);
+
+		//댓글 처리 end
+		
 		return "/room/read";
 	}
 	
 	@RequestMapping(value="/room/update", method=RequestMethod.POST)
 	public String update(RoomDTO dto, int rnum, Model model, HttpServletRequest request, String oldfile) throws Exception {
 		
+		//String hid = (String)session.getAttribute("id");
 		String hid = "user2";
 		
 		int hnum = hdao.checkHnum(hid);

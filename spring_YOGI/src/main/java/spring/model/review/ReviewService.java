@@ -17,8 +17,8 @@ public class ReviewService {
 	@Autowired
 	private HotelDAO hdao;
 	
-	public void create(int revnum, int hnum) throws Exception {
-		dao.create(revnum);
+	public void create(ReviewDTO dto, int hnum) throws Exception {
+		dao.create(dto);
 		hdao.starupdate(hnum);
 	}
 	

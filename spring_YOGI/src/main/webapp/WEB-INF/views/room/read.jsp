@@ -90,8 +90,45 @@
   </table>
   <div style="text-align:center">
   <input type='button' value='홈' onclick="location.href='${root}/'">
-  <input type='button' value='' onclick="update()">
   </div>
+  </div>
+  
+  <div style="float:center; margin:auto; width:80%">
+    <hr>
+    
+    <h2>호텔 리뷰</h2>
+  <c:forEach var="redto" items="${relist }">
+  <div style="float:center;margin:auto; text-align:center">
+  	${redto.revid }<br>
+  	<p>${redto.revcontent }</p>
+  	${redto.revdate }
+  	<c:if test="${sessionScope.id==redto.revid }">
+  	<span style="float:right">
+  		<a href="javascript:rupdate('${redto.revnum }','${rdto.revcontent}' )">수정</a>|
+  		<a href="javascript:rdelete('${redto.revnum }')">삭제</a>
+  	</span>
+  	</c:if>
+  </div>
+  </c:forEach>
+  <span style="text-align:center">${paging }</span>
+  <div style="float:center;margin:auto; text-align:center">
+  	<form name="rform"
+  	action="./recreate"
+  	method="post"
+  	onsubmit="return input(this)">
+  	<textarea rows="3" cols="35" name="revcontent"></textarea>
+  	<input type="number" name="revstar" min=0 max=5>
+  	<input type="submit" name="rbutton" value="등록">
+<%--   	<input type="hidden" name="revid" value="${sessionScope.id }"> --%>
+  	<input type="hidden" name="revid" value="user7">
+  	<input type="hidden" name="hnum" value="${param.hnum }">
+  	<input type="hidden" name="rnum" value="${param.rnum }">
+  	<input type="hidden" name="nPage" value="${nPage }">
+  	<input type="hidden" name="nowPage" value="${param.nowPage }">
+  	<input type="hidden" name="revnum" value="${redto.revnum}">
+  	
+  	</form>
   </div> 
+  </div>
 </body>
 </html>
