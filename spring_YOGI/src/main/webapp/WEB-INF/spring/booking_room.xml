@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE  tiles-definitions PUBLIC 
+    "-//Aapche Software Foundation//DTD Tiles Configuration 2.0//EN" 
+    "http://tiles.apache.org/dtds/tiles-config_2_0.dtd"> 
+
+<tiles-definitions>   
+    <definition name="/booking_room/create" extends="main"> 
+        <put-attribute name="title" value="booking_room 생성"></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/booking_room/createForm.jsp" /> 
+    </definition>   
+    <definition name="/booking_room/read" extends="main"> 
+        <put-attribute name="title" value="booking_room 조회"></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/booking_room/read.jsp" /> 
+    </definition>   
+    <definition name="/booking_room/list" extends="main"> 
+        <put-attribute name="title" value="booking_room 목록"></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/booking_room/list.jsp" /> 
+    </definition> 
+    <definition name="/booking_room/update" extends="main"> 
+        <put-attribute name="title" value="booking_room 수정"></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/booking_room/updateForm.jsp" /> 
+    </definition>
+    <definition name="/booking_room/delete" extends="main"> 
+        <put-attribute name="title" value="booking_room 삭제"></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/booking_room/deleteForm.jsp" /> 
+    </definition>
+</tiles-definitions> 
+     
