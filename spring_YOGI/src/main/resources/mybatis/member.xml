@@ -4,6 +4,201 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="member">
+	
+	<insert id="create" parameterType="MemberDTO">
+	         
+    INSERT INTO member(id, name, email, grade, pass, phone) 
+    VALUES (#{id},#{name,jdbcType=VARCHAR} , #{email}, #{grade} , #{pass} , #{phone} )
+
+	                                       
+     </insert> 
+     
+     <select id="read" resultType="MemberDTO" parameterType="String">
+	
+		select id,name,email,phone from member
+		where id = #{id}
+	</select>  
+
+	<delete id="delete" parameterType="String">
+	 delete from member
+	 where id = #{id} 
+	</delete>
+
+	
+
+	<update id="update" parameterType="MemberDTO" >
+	update MEMBER set
+		name=#{name}, 
+        phone=#{phone}, 
+		email= #{email}           
+		where id= #{id}                             
+
+	</update>
+	
+	<select id="list" resultType="MemberDTO" parameterType="Map">
+		select id,name,phone,email,grade,r  
+
+        from (select id, name, phone, email,grade,rownum r 
+                from(
+                select id,name,phone, email,grade 
+                from member
+            
+		<where>
+			<choose>
+				<when test="col=='name'">
+					name like '%'||#{word}||'%'
+				</when>
+				<when test="col=='id'">
+					id like '%'||#{word}||'%'
+				</when>
+				<when test="col=='phone'">
+					phone like '%'||#{word}||'%'
+				</when>
+				<otherwise>
+					id like '%'||#{word}||'%'
+					or
+					phone like '%'||#{word}||'%'
+				</otherwise>
+			</choose>
+		</where>
+		ORDER BY name DESC
+
+		)
+		)                                                                            
+   <![CDATA[                                                                        
+   where r>=#{sno} and r<=#{eno}  
+   ]]>
+	</select>
+	
+	<select id="total" parameterType="Map" resultType="int">
+	Select Count(*) from member
+		<where>
+			<choose>
+				<when test="col=='name'">
+					name like '%'||#{word}||'%'
+				</when>
+				<when test="col=='id'">
+					id like '%'||#{word}||'%'
+				</when>
+				<when test="col=='phone'">
+					phone like '%'||#{word}||'%'
+				</when>
+				<otherwise>
+					name like '%'||#{word}||'%'
+					or
+					phone like '%'||#{word}||'%'
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+	
+	
+	
+    <update id="updatePass" parameterType="Map" >
+    update member set
+    pass= #{newpass}
+    where id=#{id} and pass=#{oldpass} 
+
+
+    </update>
+	<select id="passCheck" parameterType="Map" resultType="int">
+	
+	select count(*) from member 
+	where id = #{id} 
+	and pass= #{pass}   
+	</select>
+
+	<select id="idCheck" parameterType="String" resultType="int">
+	
+	select count(*) from member
+	where id = #{id}
+	</select>
+	               
+
+	<select id="emailCheck" parameterType="String" resultType="int">
+	
+	select count(*) from member
+	where email = #{email}
+	</select>
+	
+	<select id="findid" parameterType="String" resultType="String">
+	
+	
+	select id from member
+	where email = #{email}
+	
+	</select>
+	
+	<select id="findpass" parameterType="String" resultType="String">
+	
+	
+	select pass from member
+	where email = #{email}
+	
+	</select>
+	
+	<select id="idemailcheck" parameterType="Map" resultType="int">
+	
+	
+	select  count(*) from member
+	where email = #{email} and id = #{id} 
+	
+	</select>
+	
+	<update id="updatenewPass" parameterType="Map">
+	 
+	
+	 update member set
+	 pass= #{newpass}
+	 where  email = #{email}
+	   
+	 
+	</update>
+	
+	
+	<select id="loginCheck" parameterType="Map" resultType="int">
+	
+	select count(*) from member 
+	where id = #{id} 
+	and pass= #{pass} 
+	</select>
+	
+	<select id="getGrade" parameterType="String" resultType="String">
+	
+	select grade from member
+	where id = #{id}
+	
+	</select>
+	
+
+	<delete id="bdrdelete" parameterType="String">
+	delete from booked_room
+	where id_FK = #{id}
+	</delete>
+
+	<delete id="brdelete" parameterType="String">
+	delete from booking_room
+	where id_FK = #{id}
+	</delete>
+	
+	<delete id="badelete" parameterType="String">
+	delete from booking_affiliation
+	where b_id = #{id}
+	</delete>
+	
+	<delete id="cdelete" parameterType="String">
+	delete from coupon
+	where id_FK = #{id}
+	</delete>
+
+<!-- 	<select id="bookread" resultType="MemberBookDTO" parameterType="String"> -->
+<!-- 	select h.hname,r.rtype,b.startDate,b.endDate,r.rprice -->
+<!-- 	from hotel h,room r,booking_room b -->
+<!-- 	where (b.id_FK = #{id})and(b.rnum_FK=r.rnum)and(r.hnum=h.hnum) -->
+<!-- 	</select> -->
+
+
+
 
   
   

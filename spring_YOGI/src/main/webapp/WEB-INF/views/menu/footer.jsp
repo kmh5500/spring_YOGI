@@ -12,13 +12,13 @@
 					<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
 					<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
 				</ul>
-				
+
 				<br />
             <p>
                 <b>고객행복센터 1670-6250</b>
                 오전 9시30분 - 오후 6시30분, 점심시간: 오후 1시30분 - 오후 2시30분
             </p>
-            
+
             <address>
                 <span>(주) 요기이노베이션</span>
                 주소 : 서울특별시 종로구 관철동 종로코아빌딩 5층<br/>
@@ -27,7 +27,7 @@
                 전자우편주소 : yogi@gmail.com<br/>
                 Copyright YOGIINNOVATION Corp. All rights reserved.
             </address>
-			
+
 			</div>
 		</div>
 	</div>
@@ -37,7 +37,7 @@
 	<script src="${root }/resources/js/bootstrap.min.js"></script>
 	<script src="${root }/resources/js/anim.js"></script>
 	<script>
-		//----HOVER CAPTION---//	  
+		//----HOVER CAPTION---//
 		jQuery(document).ready(function($) {
 			$('.fadeshop').hover(function() {
 				$(this).find('.captionshop').fadeIn(150);

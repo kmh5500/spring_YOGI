@@ -27,6 +27,13 @@
     	<function-signature>java.lang.String getCodeValue(java.lang.String)</function-signature>
     
     </function>
+     <function>
+    	<description>회원 분류</description>
+    	<name>MemberGrade</name>
+    	<function-class>spring.utility.yogi.Utility</function-class>
+    	<function-signature>java.lang.String getGradeValue(java.lang.String)</function-signature>
+    
+    </function>
     
     
         <function>  

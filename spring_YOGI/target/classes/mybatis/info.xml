@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="info">
+
+
+	<delete id="delete" parameterType="int">
+	 delete from info 
+	 where informnum = #{informnum} 
+	</delete>
+
+	
+
+	
+
+	<update id="update" parameterType="infoDTO" >
+	update info 
+    set title=#{title}, 
+		content= #{content},  
+		wname= #{wname}  
+		
+		where informnum= #{informnum}                             
+
+	</update>
+	
+
+	<update id="viewcnt" parameterType="int">
+	
+			update info set 
+            viewcnt = viewcnt+1
+			where informnum= #{informnum}
+	</update>
+
+	<insert id="create" parameterType="infoDTO">
+    
+    INSERT INTO info(informnum,content,wname, wdate,title) 
+    VALUES ((select nvl(max(informnum),0)+1 as informnum from info),
+    #{content},#{wname},sysdate,#{title})	                                       
+     </insert>                  
+
+	<select id="total" parameterType="Map" resultType="int">
+	Select Count(*) from info
+		<where>
+			<choose>
+				<when test="col=='title'">
+					title like '%'||#{word}||'%'
+				</when>
+		        <when test="col=='content'">
+					content like '%'||#{word}||'%'
+				</when>
+				<otherwise>
+					title like '%'||#{word}||'%'
+					or
+					content like '%'||#{word}||'%'
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+
+	<select id="list" resultType="InfoDTO" parameterType="Map">
+        select informnum, content,wname,wdate,title,viewcnt, r
+        from (select informnum, content, wname,wdate, title,viewcnt,rownum  r 
+         from (select informnum, content, wname,wdate, title,viewcnt 
+         from info 
+       
+		<where>
+			<choose>
+				<when test="col=='title'">
+					title like '%'||#{word}||'%'
+				</when>
+			
+				<when test="col=='content'">
+					content like '%'||#{word}||'%'
+				</when>
+				<otherwise>
+					title like '%'||#{word}||'%'
+					or
+					content like '%'||#{word}||'%'
+				</otherwise>
+			</choose>
+		</where>
+		ORDER BY informnum DESC
+
+		)
+		)                                                                            
+   <![CDATA[                                                                        
+   where r>=#{sno} and r<=#{eno}  
+   ]]>
+	</select>
+
+
+	<select id="read" resultType="infoDTO" parameterType="int">
+	select informnum, content,wname,wdate,title,viewcnt  
+    from info where informnum = #{informnum}
+	</select>
+
+
+
+     
+</mapper>
+

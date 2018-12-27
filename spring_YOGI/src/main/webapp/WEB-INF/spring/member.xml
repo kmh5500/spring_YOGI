@@ -11,44 +11,83 @@
     </definition>   
     <definition name="/member/create" extends="main"> 
         <put-attribute name="title" value="회원 가입" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/createForm.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/member/create.jsp" /> 
     </definition>   
-    <definition name="/member/pcreate" extends="main"> 
-        <put-attribute name="title" value="중복 확인" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/pcreateProc.jsp" /> 
+    <definition name="/member/choice" extends="main"> 
+        <put-attribute name="title" value="가입 유형 선택" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/member/choice.jsp" /> 
     </definition>   
-    <definition name="/member/createProc" extends="main"> 
-        <put-attribute name="title" value="중복 확인" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/createProc.jsp" /> 
+    <definition name="/member/cLogin" extends="main"> 
+        <put-attribute name="title" value="가입 완료" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/member/cLogin.jsp" /> 
     </definition>   
+    <definition name="/member/read" extends="main"> 
+        <put-attribute name="title" value=" member조회" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/member/yogiread.jsp" /> 
+    </definition> 
+    <definition name="/member/findid" extends="main"> 
+        <put-attribute name="title" value=" id찾기" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/member/findid.jsp" /> 
+    </definition> 
+    <definition name="/member/sendid" extends="main"> 
+        <put-attribute name="title" value=" id찾기" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/member/sendid.jsp" /> 
+    </definition> 
+    <definition name="/member/findpass" extends="main"> 
+        <put-attribute name="title" value=" 비밀번호 찾기" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/member/findpass.jsp" /> 
+    </definition> 
+    <definition name="/member/sendpass" extends="main"> 
+        <put-attribute name="title" value=" 비밀번호 찾기" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/member/sendpass.jsp" /> 
+    </definition> 
+     <definition name="/member/list" extends="main"> 
+        <put-attribute name="title" value="admin/회원 목록" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/member/list.jsp" /> 
+    </definition>
+    <definition name="/member/updatepass" extends="main"> 
+        <put-attribute name="title" value="비밀번호 변경" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/member/updatepass.jsp" /> 
+    </definition>  
+      <definition name="/member/passcom" extends="main"> 
+        <put-attribute name="title" value="비밀번호 성공" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/member/passcom.jsp" /> 
+    </definition>  
+     <definition name="/error/error" extends="main"> 
+        <put-attribute name="title" value="에러페이지" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/error/error.jsp" /> 
+    </definition>
+    <definition name="/error/passwdError" extends="main"> 
+        <put-attribute name="title" value="에러페이지" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/error/passwdError.jsp" /> 
+    </definition>  
+    <definition name="/member/del" extends="main"> 
+        <put-attribute name="title" value="탈퇴" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/member/del.jsp" /> 
+    </definition>  
+    <definition name="/member/delete" extends="main"> 
+        <put-attribute name="title" value="탈퇴 처리" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/member/delete.jsp" /> 
+    </definition>  
+    
+    
+    
+   
     <definition name="/member/login" extends="main"> 
         <put-attribute name="title" value="Login" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/member/warninglogin.jsp" /> 
     </definition>   
-    <definition name="/member/loginProc" extends="main"> 
+    <definition name="/member/warninglogin" extends="main"> 
         <put-attribute name="title" value="Login 처리" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/loginProc.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/member/warninglogin.jsp" /> 
     </definition>   
     <definition name="/member/logout" extends="main"> 
         <put-attribute name="title" value="Logout " ></put-attribute> 
         <put-attribute name="body" value="/WEB-INF/views/member/logout.jsp" /> 
     </definition>   
-    <definition name="/member/read" extends="main"> 
-        <put-attribute name="title" value=" member조회" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/read.jsp" /> 
-    </definition>   
-      <definition name="/member/list" extends="main"> 
-        <put-attribute name="title" value="admin/회원 목록" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/list.jsp" /> 
-    </definition> 
-      <definition name="/member/updatePw" extends="main"> 
-        <put-attribute name="title" value="패스워드 변경" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/updatePwForm.jsp" /> 
-    </definition> 
-      <definition name="/member/updatePwProc" extends="main"> 
-        <put-attribute name="title" value="패스워드 변경처리" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/updatePwProc.jsp" /> 
-    </definition> 
+      
+     
+    
   
       <definition name="/member/idpwfind" extends="main"> 
         <put-attribute name="title" value="아이디/패스워드 찾기" ></put-attribute> 
@@ -57,28 +96,14 @@
      
     
     
-      <definition name="/member/delete" extends="main"> 
-        <put-attribute name="title" value="member 수정" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/deleteForm.jsp" /> 
-    </definition> 
+      
     
       <definition name="/member/update" extends="main"> 
         <put-attribute name="title" value="member 수정" ></put-attribute> 
         <put-attribute name="body" value="/WEB-INF/views/member/updateForm.jsp" /> 
     </definition> 
-      <definition name="/member/updateFile" extends="main"> 
-        <put-attribute name="title" value="사진 수정" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/updateFileForm.jsp" /> 
-    </definition> 
-        <definition name="/member/reply" extends="main"> 
-        <put-attribute name="title" value="member 답변" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/replyForm.jsp" /> 
-    </definition> 
-        <definition name="/member/delete" extends="main"> 
-        <put-attribute name="title" value="member 삭제" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/deleteForm.jsp" /> 
-    </definition> 
-    
+     
+     
     
     <definition name="/create" extends="main"> 
         <put-attribute name="title" value=" member 생성" ></put-attribute> 
@@ -88,21 +113,7 @@
         <put-attribute name="title" value="member 수정" ></put-attribute> 
         <put-attribute name="body" value="/WEB-INF/views/updateForm.jsp" /> 
     </definition> 
-    
-<!--     <definition name="/delete" extends="main">  -->
-<!--         <put-attribute name="title" value="board 삭제" ></put-attribute>  -->
-<!--         <put-attribute name="body" value="/WEB-INF/views/deleteForm.jsp" />  -->
-<!--     </definition>  -->
-<!--     <definition name="/reply" extends="main">  -->
-<!--         <put-attribute name="title" value="board 답변" ></put-attribute>  -->
-<!--         <put-attribute name="body" value="/WEB-INF/views/replyForm.jsp" />  -->
-<!--     </definition>  -->
   
-    
-<!--     <definition name="read" extends="main">  -->
-<!--         <put-attribute name="title" value="board 조회" ></put-attribute>  -->
-<!--         <put-attribute name="body" value="/WEB-INF/views/read.jsp" />  -->
-<!--     </definition>  -->
     
     </tiles-definitions> 
      
