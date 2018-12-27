@@ -11,6 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="update" parameterType="ReviewDTO">
 		set revtitle = #{revtitle},
 		    revcontent = #{revcontent},
+		    revdate = to_char(sysdate, 'yyyy-mm-dd'),
 		    revstar = #{revstar}
 		where hnum = #{hnum} and revnum = #{revnum}
 	</update>
