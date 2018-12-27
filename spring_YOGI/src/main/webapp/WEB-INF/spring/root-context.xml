@@ -83,6 +83,7 @@
             	<value>/WEB-INF/spring/member.xml</value> 
                 <value>/WEB-INF/spring/info.xml</value> 
                 <value>/WEB-INF/spring/hotel.xml</value>             
+                <value>/WEB-INF/spring/question.xml</value>             
             </list> 
         </property> 
     </bean>  
@@ -90,7 +91,7 @@
     
     
     
-    <!-- 데이터베이스 접속 설정 
+<!--     데이터베이스 접속 설정  -->
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource"
 		p:driverClassName="oracle.jdbc.driver.OracleDriver"
@@ -98,14 +99,14 @@
 		p:username="yogi"
 		p:password="1234" p:maxActive="2" p:maxIdle="1"
 		p:defaultAutoCommit="true" />
-		-->
-	<bean id="dataSource"
-		class="org.apache.commons.dbcp.BasicDataSource"
-		p:driverClassName="oracle.jdbc.driver.OracleDriver"
-		p:url="jdbc:oracle:thin:@localhost:1521:XE" 
-		p:username="sol"
-		p:password="1234" p:maxActive="2" p:maxIdle="1"
-		p:defaultAutoCommit="true" />
+
+<!-- 	<bean id="dataSource" -->
+<!-- 		class="org.apache.commons.dbcp.BasicDataSource" -->
+<!-- 		p:driverClassName="oracle.jdbc.driver.OracleDriver" -->
+<!-- 		p:url="jdbc:oracle:thin:@localhost:1521:XE"  -->
+<!-- 		p:username="sol" -->
+<!-- 		p:password="1234" p:maxActive="2" p:maxIdle="1" -->
+<!-- 		p:defaultAutoCommit="true" /> -->
 
 
 	<!-- MyBatis SQL 실행 클래스 -->

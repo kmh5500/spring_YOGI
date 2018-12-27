@@ -136,7 +136,7 @@ $(function(){
 		<div id="navbar-collapse-02" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
 				<li class="propClone"><a href="/views/home.jsp">Home</a></li>
-				<li class="propClone"><a href="#">호텔예약</a></li>
+				<li class="propClone"><a href="${root}/room/list">호텔예약</a></li>
 				<li class="propClone"><a href="#">제휴 보기</a></li>
 				<li class="propClone"><a href="#">게시판</a>
 						<ul style="list-style-type: none;">
@@ -165,7 +165,8 @@ $(function(){
 					     <li><a href="${root }/member/read">내정보</a></li>
 <!-- 					     	호텔 관리자 목록 -->
 					     <c:if test="${sessionScope.grade=='H' }">
-					     <li><a href="#">호텔등록</a></li>
+					     <li><a href="${root}/hotel/create">호텔등록</a></li>
+					     <li><a href="${root}/room/create">방등록</a></li>
 					     <li><a href="#">내 호텔 정보</a></li>
 					     <li><a href="#">호텔 예약 정보</a></li>
 					     </c:if>

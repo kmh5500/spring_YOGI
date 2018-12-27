@@ -7,29 +7,29 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-// function input(f){
-// 	if('${sessionScope.id}'==''){
-// 		if(confirm("로그인이 필요합니다.")){
-// 			var url = "../member/login"
-// 			url += "?hnum=${dto.hnum}";
-// 			url += "&rnum=${dto.rnum}";
-// 			url += "&nPage=${nPage}";
-// 			url += "&nowPage=${param.nowPage}";
-// 			url += "&flag=../yogi/read";
+function input(f){
+	if('${sessionScope.id}'==''){
+		if(confirm("로그인이 필요합니다.")){
+			var url = "../member/login"
+			url += "?hnum=${dto.hnum}";
+			url += "&rnum=${dto.rnum}";
+			url += "&nPage=${nPage}";
+			url += "&nowPage=${param.nowPage}";
+			url += "&flag=../yogi/read";
 			
-// 			location.href = url;
+			location.href = url;
 			
-// 			return false;
-// 		}else{
-// 			return false;
-// 		}
+			return false;
+		}else{
+			return false;
+		}
 		
-// 	}else if(f.revcontent.value==''){
-// 		alert("댓글내용을 입력하세요.");
-// 		f.revcontent.focus();
-// 		return false;
-// 	}
-// }
+	}else if(f.revcontent.value==''){
+		alert("댓글내용을 입력하세요.");
+		f.revcontent.focus();
+		return false;
+	}
+}
 
 function reupdate(hnum, revcontent){
 	var f = document.rform;
@@ -160,8 +160,7 @@ function redelete(revnum){
   	action="./recreate"
   	method="post"
   	onsubmit="return input(this)">
-<%--   	<input type="hidden" name="revid" value="${sessionScope.id }"> --%>
-  	<input type="hidden" name="revid" value="user7">
+  	<input type="hidden" name="revid" value="${sessionScope.id }">
   	<input type="hidden" name="hnum" value="${param.hnum }">
   	<input type="hidden" name="rnum" value="${param.rnum }">
   	<input type="hidden" name="nPage" value="${nPage }">

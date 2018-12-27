@@ -67,11 +67,10 @@ public class RoomController {
 	
 	
 	@RequestMapping("/room/recreate")
-	public String rcreate(ReviewDTO redto, Model model,
+	public String rcreate(ReviewDTO redto, HttpSession session, Model model,
 			String nowPage, String nPage, int hnum, int rnum) throws Exception {
 		
-		//String revid = (String)session.getAttribute("id");
-		String revid = "user7";
+		String revid = (String)session.getAttribute("id");
 		redto.setRevid(revid);
 		mgr.create(redto, hnum);
 		
@@ -140,10 +139,9 @@ public class RoomController {
 	}
 	
 	@RequestMapping(value="/room/update", method=RequestMethod.POST)
-	public String update(RoomDTO dto, int rnum, Model model, HttpServletRequest request, String oldfile) throws Exception {
+	public String update(RoomDTO dto, int rnum, Model model, HttpSession session, HttpServletRequest request, String oldfile) throws Exception {
 		
-		//String hid = (String)session.getAttribute("id");
-		String hid = "user2";
+		String hid = (String)session.getAttribute("id");
 		
 		int hnum = hdao.checkHnum(hid);
 		double rrate = dto.getRrate()/100;
@@ -175,10 +173,9 @@ public class RoomController {
 	}
 	
 	@RequestMapping(value="/room/update", method=RequestMethod.GET)
-	public String update(int rnum, Model model) throws Exception {
+	public String update(int rnum, HttpSession session, Model model) throws Exception {
 		
-		//String hid = (String)session.getAttribute("id");
-		String hid = "user2";
+		String hid = (String)session.getAttribute("id");
 		
 		int hnum = hdao.checkHnum(hid);
 		
@@ -193,10 +190,9 @@ public class RoomController {
 	}
 	
 	@RequestMapping("room/rread")
-	public String rread(int rnum, Model model) throws Exception {
+	public String rread(int rnum, HttpSession session, Model model) throws Exception {
 		
-		//String hid = (String)session.getAttribute("id");
-		String hid = "user2";
+		String hid = (String)session.getAttribute("id");
 		
 		int hnum = hdao.checkHnum(hid);
 		Map map = new HashMap();
@@ -218,8 +214,7 @@ public class RoomController {
 	@RequestMapping(value="/room/create", method=RequestMethod.POST)
 	public String create(RoomDTO dto, HttpServletRequest request, HttpSession session) throws Exception {
 		
-		//String hid = (String)session.getAttribute("id");
-		String hid = "user2";
+		String hid = (String)session.getAttribute("id");
 		
 		int hnum = hdao.checkHnum(hid);
 		double rrate = dto.getRrate()/100;
@@ -323,8 +318,7 @@ public class RoomController {
 	@RequestMapping("/room/rlist")
 	public String rlist(HttpServletRequest request, Model model, HttpSession session) throws Exception {
 		
-		//String hid = (String)session.getAttribute("id");
-		String hid = "user2";
+		String hid = (String)session.getAttribute("id");
 		
 		
 		//paging관련

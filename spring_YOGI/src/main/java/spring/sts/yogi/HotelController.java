@@ -122,8 +122,7 @@ public class HotelController {
 		String str = null;
 		String url = "/hotel/pcreate";
 		int hstar = 0;
-		//String hid = (String)session.getAttribute("id");
-		String hid = "user2";
+		String hid = (String)session.getAttribute("id");
 			if(dao.duplicateHname(dto.getHname())){
 				str = "중복된 호텔명입니다. 호텔명 중복확인을 하세요";
 				model.addAttribute("str", str);
