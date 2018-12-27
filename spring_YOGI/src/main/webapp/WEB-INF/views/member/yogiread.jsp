@@ -119,6 +119,8 @@ $(function(){
 	 
 	
 	 $(".cancel-btn").click(function(){
+		 	
+			$(".sec-1").value="";
 			$(".sec-1").hide();
 			$(".bts-2").hide();
 			 $(".bts-1").show();
@@ -159,6 +161,7 @@ $(function(){
 	 
 	
 	 $(".cancel-btn5").click(function(){
+		 
 			$(".sec-5").hide();
 			$(".bts-6").hide();
 			 $(".bts-5").show();
@@ -173,7 +176,7 @@ $(function(){
 </head>
 
 
-<body>
+<body>   
 
 <div>
  <div class="container">
@@ -244,7 +247,7 @@ $(function(){
 						<section class="modifying-section">
 							<p class="sec-3">
 								<input type="text" name="name"
-									   
+									   class="name"
 									   placeholder="체크인시 필요한 정보입니다."
 									   data-input="uname"
 									   data-rule-spaceChar="true"
@@ -285,6 +288,7 @@ $(function(){
 								<section>
 									<div class="sec-5">
 										<input type="tel" name="phone" 
+										       class="phone"
 											   placeholder="'-'없이 등록  01012341234"
 											   minlength="9"
 											   maxlength="11"

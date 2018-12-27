@@ -36,7 +36,7 @@ function read(id) {
 <body>
 
 <!-- *********************************************** -->
- 
+   <div class="container">
 <DIV class="title">회원목록</DIV>
  <div class="search">
 <FORM name='frm' method='POST' action='./list' >
@@ -61,7 +61,7 @@ function read(id) {
 
   </div>
   
-  <div class="container">
+
   <h2><span class="glyphicon glyhicon-th-list"></span>
   회원 목록
   </h2>
@@ -101,7 +101,7 @@ function read(id) {
 
   <DIV class='bottom'>
   ${paging}
-    <input type='submit' value=''>
+  
   </DIV>
 
 </div>

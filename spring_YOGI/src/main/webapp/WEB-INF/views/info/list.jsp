@@ -24,7 +24,6 @@ function infoRead(informnum){
 
 </script>
 <body>
-리스트
 
 	<!-- *********************************************** -->
 

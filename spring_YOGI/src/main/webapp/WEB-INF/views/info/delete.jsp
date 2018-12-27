@@ -8,6 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-삭제
+<div align='center' style='border:1px solid black; font-family:verdana'>
+<h3 style='color: blue;'> </h3>                                               
+<p>공지사항 게시글 삭제가 완료되었습니다. </p>
+</div> 
 </body>
 </html>

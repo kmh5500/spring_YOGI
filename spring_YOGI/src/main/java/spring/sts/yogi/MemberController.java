@@ -44,6 +44,7 @@ public class MemberController {
 		return "/member/findid";
 	}
 	
+	//ID 찾기 이메일 발송
 	@RequestMapping(value="/member/id")
 	public String sendid(final String email, Model model) {
 		boolean flag = false;
@@ -63,7 +64,7 @@ public class MemberController {
 					final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 					helper.setFrom("soldeskyogi@gmail.com"); 
 					helper.setTo(email);
-					helper.setSubject("테스트 메일입니다");
+					helper.setSubject("yogi 찾으시는 ID입니다.");
 					helper.setText(sb.toString(), true);
 				} 
 			}; 
@@ -81,6 +82,7 @@ public class MemberController {
 		return "/member/findpass";
 	}
 	
+	//임시 비밀번호 발급 발송
 	@RequestMapping(value="/member/pass")
 	public String sendpass(final String email, Model model) {
 		boolean flag = false;
@@ -98,7 +100,7 @@ public class MemberController {
 			
 			sb.append("<div align='center' style='border:1px solid black; font-family:verdana'>");
 			sb.append("<h3 style='color: blue;'>");
-			sb.append("님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>");
+			sb.append("요기어때  임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>");
 			sb.append("<p>임시 비밀번호 : "+newpass);
 			sb.append("</p></div>");
 			final MimeMessagePreparator preparator = new MimeMessagePreparator() {
