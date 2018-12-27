@@ -58,7 +58,7 @@
             <list> 
             	<value>/WEB-INF/spring/member.xml</value> 
                 <value>/WEB-INF/spring/info.xml</value> 
-                <value>/WEB-INF/spring/question.xml</value> 
+                <value>/WEB-INF/spring/hotel.xml</value>             
             </list> 
         </property> 
     </bean>  

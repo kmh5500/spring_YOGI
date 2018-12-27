@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="review">
+	<insert id="create" parameterType="ReviewDTO">
+		insert into review(revnum, revtitle, revcontent, revstar, revdate, hnum, revid)
+		values(seq_revnum.nextval, #{revtitle}, #{revcontent}, #{revstar}, to_char(sysdate,'yyyy-mm-dd'), #{hnum}, #{revid}) 
+	</insert>
+
+	<update id="update" parameterType="ReviewDTO">
+		set revtitle = #{revtitle},
+		    revcontent = #{revcontent},
+		    revdate = to_char(sysdate, 'yyyy-mm-dd'),
+		    revstar = #{revstar}
+		where hnum = #{hnum} and revnum = #{revnum}
+	</update>
+
+	<select id="list" resultType="ReviewDTO" parameterType="Map">
+		select revtitle, revcontent, revstar, revdate, revid, r
+		from(
+		    select revtitle, revcontent, revstar, revdate, revid, rownum as r
+		    from(
+		        select revtitle, revcontent, revstar, revdate, revid
+		        from review
+			    where hnum = #{hnum}
+			    order by revnum desc
+			    )
+			)
+		<![CDATA[                                                                        
+	   where r>=#{sno} and r<=#{eno}  
+	   ]]>
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete from review
+		where hnum = #{hnum} and revnum = #{revnum}
+	</delete>
+
+	<select id="total" parameterType="int" resultType="int">
+		select count(*) from review where hnum = #{hnum}
+	</select>
+
+
+</mapper>
+
