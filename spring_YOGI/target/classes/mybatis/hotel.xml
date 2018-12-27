@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hotel">
+
+	<update id="starupdate" parameterType="int">
+		update hotel 
+		set hstar = 
+		(select avg(revstar) from review where hnum = #{hnum})
+		where hnum = #{hnum} 
+	</update>
+
+	<select id="checkHnum" parameterType="String" resultType="int">
+		select hnum
+		from hotel
+		where hid = #{hid}
+	</select>
+
+	<select id="duplicateHname" parameterType="String" resultType="int">
+		select count(hname)
+		from hotel
+		where hname = #{hname} 
+	</select>
+	
+	<select id="duplicateHemail" parameterType="String" resultType="int">
+		select count(hemail)
+		from hotel  
+		where hemail = #{hemail} 
+	</select>
+
+	<insert id="create" parameterType="HotelDTO">
+		insert into hotel(hnum, hname,
+		hphone, hemail, hzipcode, haddress1, haddress2, hfname, hinfo, hcheckin, hcheckout, hstar, hid)
+		values(seq_hnum.nextval, #{hname},
+		#{hphone}, #{hemail}, #{hzipcode},
+		#{haddress1}, #{haddress2}, #{hfname}, #{hinfo}, #{hcheckin}, #{hcheckout}, #{hstar}, #{hid})
+	</insert>
+
+	<select id="read" parameterType="int" resultType="HotelDTO">
+		select hnum, hname, hphone,
+		hemail, hzipcode, haddress1, haddress2, hfname, hcheckin, hcheckout, hinfo
+		from hotel
+		where
+		hnum = #{hnum}
+	</select>
+
+	<update id="update" parameterType="HotelDTO">
+		update hotel
+		set hphone = #{hphone},
+		hemail = #{hemail},
+		hzipcode = #{hzipcode},
+		haddress1 = #{haddress1},
+		haddress2 = #{haddress2},
+		hfname = #{hfname},
+		hinfo = #{hinfo},
+		hcheckin = #{hcheckin},
+		hcheckout = #{hcheckout}
+		where hnum = #{hnum}
+	</update>
+
+	
+	<select id="list" resultType="HotelDTO" parameterType="Map">
+		select hnum, hname, hfname, r
+		from(
+			select hnum, hname, hfname, rownum as r
+			from(
+				select hnum, hname, hfname
+				from hotel
+				<where>
+					<choose>
+						<when test="col=='hname'">
+							name like '%'||#{word}||'%'
+						</when>
+					</choose>
+				</where>
+		ORDER BY hnum DESC
+				)	
+			)                                                                            
+   <![CDATA[                                                                        
+   where r>=#{sno} and r<=#{eno}  
+   ]]>
+	</select>	
+	
+	
+	<select id="total" parameterType="Map" resultType="int">
+		select count(*) cnt from hotel
+		<where>
+			<choose>
+				<when test="col=='name'">
+					name like '%'||#{word}||'%'
+				</when>
+				<when test="col=='subject'">
+					subject like '%'||#{word}||'%'
+				</when>
+				<when test="col=='content'">
+					content like '%'||#{word}||'%'
+				</when>
+				<otherwise>
+					subject like '%'||#{word}||'%'
+					or
+					content like '%'||#{word}||'%'
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+		
+	
+</mapper>
+

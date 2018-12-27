@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="question">
+    
+ <insert id="create" parameterType="QuestionDTO">
+    insert into question(questionNum, questionType, wname, title, content, 
+    					phone, passwd, wdate)
+	values((select nvl(max(questionNum),0)+1 from question), #{questionType}, #{wname}, #{title}, #{content}, 
+    		#{phone, jdbcType=VARCHAR}, #{passwd}, sysdate)	
+ </insert>
+
+ <select id="read" parameterType="int" resultType="QuestionDTO">
+	select questionNum, questionType, wname, title, content, phone, wdate
+	from question
+	where questionNum = #{questionNum}
+ </select>
+ 
+ <update id="update" parameterType="QuestionDTO">
+	update question
+	set title = #{title},
+	    content = #{content}, 
+	    phone = #{phone, jdbcType=VARCHAR}
+	where questionNum = #{questionNum}
+ </update>
+ 
+ <delete id="delete" parameterType="int">
+	delete from question
+	where questionNum = #{questionNum}
+ </delete>
+ 
+ <select id="list" parameterType="Map" resultType="QuestionDTO">
+	select questionNum, questionType, wname, title, wdate, r
+	from (
+	        select questionNum, questionType, wname, title, wdate, rownum as r
+	        from(
+	            select questionNum, questionType, wname, title, to_char(wdate, 'yyyy-mm-dd') as wdate
+	            from question
+	            <where>
+	             <choose>
+	              <when test="col=='questionType'">
+	             	questionType like '%'||#{word}||'%'
+	              </when>
+	              <when test="col=='wname'">
+	             	wname like '%'||#{word}||'%'
+	              </when>
+	              <when test="col=='title'">
+	             	title like '%'||#{word}||'%'
+	              </when>
+	              <when test="col=='content'">
+	             	content like '%'||#{word}||'%'
+	              </when>
+	              <otherwise>
+	             	title like '%'||#{word}||'%'
+	             	or
+	             	content like '%'||#{word}||'%' 
+	              </otherwise>	             
+	             </choose>
+	            </where>
+	            order by questionNum desc
+	        )
+	)
+	<![CDATA[
+	where r >= #{sno} and r <= #{eno}
+	]]>
+ </select>
+ 
+ <select id="total" parameterType="Map" resultType="int">
+	select count(*) from question
+    <where>
+     <choose>
+      <when test="col=='questionType'">
+     	questionType like '%'||#{word}||'%'
+      </when>
+      <when test="col=='wname'">
+     	wname like '%'||#{word}||'%'
+      </when>
+      <when test="col=='title'">
+     	title like '%'||#{word}||'%'
+      </when>
+      <when test="col=='content'">
+     	content like '%'||#{word}||'%'
+      </when>
+      <otherwise>
+     	title like '%'||#{word}||'%'
+     	or
+     	content like '%'||#{word}||'%' 
+      </otherwise>	             
+     </choose>
+    </where>
+ </select>
+ 
+ <select id="checkPasswd" parameterType="Map" resultType="int">
+	select count(*) from question
+	where questionNum = #{questionNum} 
+	and passwd = #{passwd}
+ </select>
+
+</mapper>
+

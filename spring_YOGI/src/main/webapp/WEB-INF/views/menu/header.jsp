@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="">
 <style type="text/css">
- #navbar-collapse-02 ul ul {display: none} 
+ #navbar-collapse-02 ul ul {display: none}
 </style>
 <link href="${root }/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script type="text/javascript"
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-	
+
 <script type="text/javascript">
 $(function(){
 	$("#navbar-collapse-02 ul li").hover(function(){
@@ -26,22 +26,22 @@ $(function(){
 	},function(){
 	  $(this).children("ul").hide();
 	});
-	
-	
-	
+
+
+
 	$("modallogin").click(function(){
 		$("#id01").modal();
-		
+
 	})
-	
+
 	$("#modalSubmit").click(function(){
 		var data = {
 				"id" : $("#id").val(),
 				"pass": $("#pass").val()
 		};
-		
 
-		
+
+
 		$.ajax({
 			url : "${root}/member/login",
 			type : "POST",
@@ -55,12 +55,12 @@ $(function(){
 				}
 			}
 		})
-		
-		
+
+
 	});
-	
-	
-	
+
+
+
 });
 
 
@@ -80,7 +80,7 @@ $(function(){
 
       <div class="w3-center"><br>
         <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
-       
+
       </div>
 
 <!--       <form class="w3-container" action="./member/login" method="POST"> -->
@@ -88,7 +88,7 @@ $(function(){
     <TR>
       <TH>아이디</TH>
       <TD><input type="text"  name="id" id="id" value='${c_id_val}'>
-      
+
       </TD>
     </TR>
     <TR>
@@ -96,23 +96,23 @@ $(function(){
       <TD><input type="password" name="pass" id="pass"></TD>
     </TR>
   </TABLE>
-  
-  
+
+
   <DIV class='bottom'>
- 
+
 <!--     <input type='submit' value='로그인'> -->
 <!-- <button id="modalSubmit"  class="btn btn-seccess w3-padding-16 " >Login </button> -->
-<input type="button" id="modalSubmit" value="Login" style="height:75px; width: 100%;">   
+<input type="button" id="modalSubmit" value="Login" style="height:75px; width: 100%;">
   </DIV>
-  
+
   <br>
 <!--       </form> -->
 
       <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
         <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
-        <input class="w3-right w3-padding w3-hide-small" 
+        <input class="w3-right w3-padding w3-hide-small"
         type="button" value='ID 찾기' onclick="location.href='${root}/member/findid'">
-  		<input class="w3-right w3-padding w3-hide-small" 
+  		<input class="w3-right w3-padding w3-hide-small"
   		type="button" value='Passwd 찾기' onclick="location.href='${root}/member/findpass'">
 <!--         <span class="w3-right w3-padding w3-hide-small">Forgot <a href="#">password?</a></span> -->
       </div>
@@ -120,7 +120,7 @@ $(function(){
     </div>
   </div>
 </div>
-            
+
 <!-- HEADER =============================-->
 <header class="item header margin-top-0">
 <div class="wrapper">
@@ -142,23 +142,23 @@ $(function(){
 						<ul style="list-style-type: none;">
 					     <li><a href="${root}/info/list">공지사항</a></li>
 					     <li><a href="#">문의 게시판</a></li>
-					   </ul>								
+					   </ul>
 				</li>
-				
-				
+
+
 				<c:choose>
 					<c:when test="${empty sessionScope.id }">
 <%-- 					<li class="propClone"><a href="${root }/member/login" style="color:gold">로그인</a></li> --%>
 					<li class="propClone"><a onclick="document.getElementById('id01').style.display='block'" style="color:gold" >로그인</a></li>
 					<li class="propClone"><a href="${root }/member/choice" style="color:gold">회원가입</a></li>
-					
-					
-	
+
+
+
 					</c:when>
 					<c:otherwise>
-					
-					
-					
+
+
+
 
 					<li class="propClone"><a href="#" style="color:gold">마이페이지</a>
 						<ul style="list-style-type: none;">
@@ -171,24 +171,24 @@ $(function(){
 					     </c:if>
 <!-- 					  		업체관리자 목록 -->
 					     <c:if test="${sessionScope.grade=='A' }">
-					     
+
 					     <li><a href="#">업체 등록</a></li>
 					     <li><a href="#">내 업체 정보</a></li>
 					     <li><a href="#">업체 예약 정보</a></li>
-					     
+
 					     </c:if>
 					   	<c:if test="${sessionScope.grade=='P' }">
 					     <li><a href="#">예약 현황</a></li>
 					     <li><a href="#">내 쿠폰함</a></li>
 					     <li><a href="#">내 문의현황</a></li>
-					   	
+
 					   	</c:if>
-					    
+
 					   </ul>
 					</li>
 					<c:if test="${sessionScope.grade=='Y' }">
 					<li class="propClone"><a href="${root }/admin/list" style="color:gold">회원목록</a>
-					
+
 					</c:if>
 					<li class="propClone"><a href="${root }/member/logout" style="color:gold">로그아웃</a></li>
 					</c:otherwise>
